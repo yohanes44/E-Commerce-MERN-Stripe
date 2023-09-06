@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "scss": "^0.2.4",
+    "styled-components": "^6.0.7"
+  }
+}
