@@ -4,6 +4,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import {KeyboardArrowDownIcon} from "@mui/icons-material"
+
+
 import "./navbar.scss";
 
 export default function Navbar() {
@@ -11,11 +14,18 @@ export default function Navbar() {
     <div className="navbar">
       <div className="navbarContainer">
         <div className="left">
+          
+          {/* <div className="item">
+            <img src="" alt="itemImg" /> 
+            <KeyboardArrowDown/> 
+          </div> */}
+
           <span>EN</span>
           <div className="searchContainer">
             <input type="text" className="searchInput"></input>
             <SearchIcon  className="searchIcon"/>
           </div>
+
         </div>
         <div className="center">
           <div className="logo">ቱባዉ E-Commerce</div>
