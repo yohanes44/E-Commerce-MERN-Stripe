@@ -1,0 +1,57 @@
+
+
+.loginContainer{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5) 
+        ) url("https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k") center;
+
+    background-color: rgba(0, 128, 128, 0.623);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .wrapper{
+        width: 25%;
+        padding: 20px;
+        background-color: white;
+
+        .title{
+            font-size: 24px;
+            font-weight: 300;
+
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+
+            input{
+                flex: 1;
+                min-width: 40%;
+                margin: 10px 0;
+                padding: 10px;
+            }
+
+            button{
+                width: 40%;
+                border: none;
+                padding: 15px 20px;
+                background-color: teal;
+                color: white;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+
+            a{
+                margin: 5px 0px;
+                font-size: 12px;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
