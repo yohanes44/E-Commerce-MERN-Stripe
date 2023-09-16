@@ -1,6 +1,40 @@
 {
   "dependencies": {
+    "@prisma/client": "^5.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.5.1",
+    "mysql": "^2.18.1",
     "scss": "^0.2.4",
     "styled-components": "^6.0.7"
+  },
+  "name": "e_co0mm",
+  "description": "e-commerce site using MERN stack with Stripe payment gateway.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yohanes44/E-Commerce-MERN-Stripe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yohanes44/E-Commerce-MERN-Stripe/issues"
+  },
+  "homepage": "https://github.com/yohanes44/E-Commerce-MERN-Stripe#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.6.1",
+    "prisma": "^5.3.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
   }
 }
