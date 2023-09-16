@@ -1,26 +1,23 @@
-import express from "express";
+import express, {Request, Response} from "express";
 
-import mysql from "mysql";
 
-import {PrismaClient} from "@prisma/client"
+import Configuration from "./configuration/projectDependencies"
+
+import CartRouter from "./infrastructure/routes/cart"
+
+const { port, database, validation } = new Configuration().getConfiguration();
+
 
 const app = express();
 
 
-async function tester(){
-    const prisma = new PrismaClient();
-    const users = await prisma.user.findMany();
-    console.log(users);
-    return users
-}
+app.use(express.json());
+app.use("/cart", new CartRouter({ port, database, validation } ).routes());
 
 
-tester()
-
-
-
-
-const port = 3002;
+app.use((req: Request, res: Response)=>{
+    return res.json(`Page Not Found ${req.originalUrl}`)
+})
 
 app.listen(port, ()=>{
     console.log(`server listening on port ${port}`);
