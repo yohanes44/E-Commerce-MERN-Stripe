@@ -9,11 +9,18 @@ export default class Configuration{
     public database: any;
     public validation: any;
 
+    public appKey: any;
+    public appAddress: any;
+
     constructor(){
         this.port = 3005;
         this.database = orm;
-        this.validation = new Validator()
+        this.validation = new Validator(),
+
+        this.appKey = "eCommerceKey4466"
+        this.appAddress = `http://localhost:${this.port}`
     }
+
 
     getConfiguration(){
         return {
@@ -22,4 +29,13 @@ export default class Configuration{
             validation: this.validation 
         }
     }
+
+    getApplicationConfiguration(){
+        return {
+           appKey: this.appKey, 
+           appAddress: this.appAddress
+        }
+    }
+    
+
 }
