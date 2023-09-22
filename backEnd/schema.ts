@@ -65,7 +65,7 @@ const ProductType = new GraphQLObjectType({
         color: { type: GraphQLString },
         size: { type: GraphQLString },
         price: { type: GraphQLInt },
-        isActive: { type: GraphQLString },
+        isActive: { type: GraphQLBoolean },
         quantity: { type: GraphQLInt },
         category: { type: GraphQLString }
     })
@@ -175,7 +175,25 @@ const Mutation = new GraphQLObjectType({
                isActive: {type: GraphQLBoolean},
                quantity: {type: GraphQLInt},
                category: {type: GraphQLString},
-            }       
+            },
+            async resolve(parent, args){
+                const product = await orm.product.create({
+                    data: {
+                      name: args.name,
+                      desc: args.desc,
+                      img: args.img,
+                      brand: args.brand,
+                      color: args.color,
+                      size: args.size,
+                      price: args.price,
+                      isActive: args.isActive,
+                      quantity: args.quantity,
+                      category: args.category,
+                    },
+                  })
+                
+                return product;
+            }         
         },
         addOrder: {
             type: OrderType,
@@ -257,19 +275,62 @@ const RootQuery = new GraphQLObjectType({
                 
                 return userRole;
             }
+        },
+        product: {
+            type: ProductType,
+            args: { id: {type: GraphQLInt} },
+            async resolve(parent, args){
+                const product = await orm.product.findUnique({
+                    where: {
+                      id: args.id
+                    },
+                  })
+                
+                return product;
+            }
+        },
+
+        allProducts: {
+            type: new GraphQLList(ProductType),
+            async resolve(parent, args){
+                return await orm.product.findMany()
+            }
         }
     }
 })
 
 
-// example 1
+// example mutation
     // mutation example
+        // User
         // mutation{
         // 	addUser(firstName:  "yonas", lastName: "Debe", email: "yonas@g.com", password: "yonas123"){
         //   	password
         // 	}
         // }
 
+        //Peoduct 
+        // mutation{
+        //     addProduct(name: "winning11", desc:"test desc", img: "test img", brand: "sony", color: "red", size: "24", price: 120, isActive: false, quantity: 4, category: "game"){
+        //           name
+        //   }
+        // }
+
+
+// example query
+    // withOut argument product
+    // {
+    //     allProducts{
+    //           name
+    //   }
+    // }
+
+     // with argument product
+    //  {
+    //     product(id: 1){
+    //           name
+    //   }
+    // }
 
 export default new GraphQLSchema({
     query: RootQuery,

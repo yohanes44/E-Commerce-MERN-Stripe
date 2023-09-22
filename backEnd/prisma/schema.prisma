@@ -28,16 +28,16 @@ model Role {
   id        Int         @id @default(autoincrement())
   name      String      @db.VarChar(255)
   User_role User_role[]
-}
+} 
 
-model User_role {
-  id     Int @id @default(autoincrement())
-  userId Int
-  roleId Int
+  model User_role {
+    id     Int @id @default(autoincrement())
+    userId Int
+    roleId Int
 
-  user User @relation(fields: [userId], references: [id])
-  role Role @relation(fields: [roleId], references: [id])
-}
+    user User @relation(fields: [userId], references: [id])
+    role Role @relation(fields: [roleId], references: [id])
+  }
 
 model Product {
   id       Int     @id @default(autoincrement())
@@ -50,7 +50,7 @@ model Product {
   price    Int
   isActive Boolean @default(true)
   quantity Int
-  category Int
+  category String  @db.VarChar(255)
   Cart     Cart[]
 }
 
