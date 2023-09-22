@@ -1,106 +1,60 @@
 
+import orm from "./infrastructure/persistance/orm"
+
+
 import  graphql, {
     GraphQLObjectType, 
     GraphQLSchema, 
     GraphQLString,
     GraphQLID,
     GraphQLInt,
+    GraphQLBoolean,
     GraphQLList
 } from "graphql";
 
 
-const users = [
-    {
-        id: 1,
-        name: "john",
-        email: "john@gmail.com",
-        username: "dd",
-        password: "john4466"
-    },
-    {
-        id: 2,
-        name: "samuel",
-        email: "sanuel@gmail.com",
-        username: "dd",
-        password: "samuel4466"
-    },
-    {
-        id: 3,
-        name: "abeni",
-        email: "abeni@gmail.com",
-        username: "dd",
-        password: "abeni4466"
-    }
-]
-
-
-const roles = [
-    {
-        id: 1,
-        name: "admin"
-    },
-    {
-        id: 2,
-        name: "user"
-    },
-    {
-        id: 3,
-        name: "operator"
-    }
-]
-
-const user_roles = [
-    {
-        userId: 1,
-        roleId: 2
-    },
-    {
-        userId: 2,
-        roleId: 3
-    },
-    {
-        userId: 3,
-        roleId: 1
-    },
-    {
-        userId: 2,
-        roleId: 3
-    },
-    {
-        userId: 3,
-        roleId: 1
-    }
-]
 
 
 
 
 
-const Usertype = new GraphQLObjectType({
+
+const UserType = new GraphQLObjectType({
     name: "User",
     fields: ()=> ({
         id: { type: GraphQLID },
-        name: { type: GraphQLString },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
         email: { type: GraphQLString },
-        username: { type: GraphQLString },
         password: { type: GraphQLString },
         roles: {
-            type:  new GraphQLList(Roletype),
-            resolve: (parent, args)=>{
-                const roles2: any = [];
-                user_roles.map((uRole) => {
-                    if(uRole.userId == parent.id){
-                        const role = roles.find((role) => role.id == uRole.roleId);
-                        roles2.push(role); 
-                    } 
-                });
-                return roles2;
+            type:  new GraphQLList(RoleType),
+            resolve: async (parent, args)=>{
+             
+                const userRoles = await orm.user_role.findMany({
+                    where: {
+                        userId: parent.id,
+                    },
+                  })
+
+                const roleIds = userRoles.map((userRole) => userRole.roleId);
+
+                const roles = await orm.role.findMany({
+                    where: {
+                      id: {
+                        in: roleIds,
+                      },
+                    },
+                  });
+                
+                return roles;
+
             }
         }
     })
 })
 
-const Producttype = new GraphQLObjectType({
+const ProductType = new GraphQLObjectType({
     name: "Product",
     fields: ()=> ({
         id: { type: GraphQLID },
@@ -111,13 +65,13 @@ const Producttype = new GraphQLObjectType({
         color: { type: GraphQLString },
         size: { type: GraphQLString },
         price: { type: GraphQLInt },
-        active: { type: GraphQLString },
+        isActive: { type: GraphQLString },
         quantity: { type: GraphQLInt },
         category: { type: GraphQLString }
     })
 })  
 
-const Roletype = new GraphQLObjectType({
+const RoleType = new GraphQLObjectType({
     name: "Role",
     fields: ()=> ({
         id: { type: GraphQLID },
@@ -125,7 +79,7 @@ const Roletype = new GraphQLObjectType({
     })
 })
 
-const UserRoletype = new GraphQLObjectType({
+const UserRoleType = new GraphQLObjectType({
     name: "User_role",
     fields: ()=> ({
         userId: { type: GraphQLID },
@@ -133,11 +87,11 @@ const UserRoletype = new GraphQLObjectType({
     })
 })
 
-const Carttype = new GraphQLObjectType({
+const CartType = new GraphQLObjectType({
     name: "Cart",
     fields: ()=> ({
         id: { type: GraphQLID },
-        productI: { type: GraphQLID },
+        productId: { type: GraphQLID },
         userId: { type: GraphQLID },
         orderId: { type: GraphQLID },
         state: { type: GraphQLString },
@@ -146,8 +100,8 @@ const Carttype = new GraphQLObjectType({
 })
 
 
-const Ordertype = new GraphQLObjectType({
-    name: "Cart",
+const OrderType = new GraphQLObjectType({
+    name: "Order",
     fields: ()=> ({
         id: { type: GraphQLID },
         state: { type: GraphQLString },
@@ -160,7 +114,7 @@ const Ordertype = new GraphQLObjectType({
 
 
 
-const Category = new GraphQLObjectType({
+const CategoryType = new GraphQLObjectType({
     name: "Category",
     fields: ()=> ({
         id: { type: GraphQLID },
@@ -169,6 +123,107 @@ const Category = new GraphQLObjectType({
 })
 
 
+const Mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addUser: {
+            type: UserType,
+            args: {
+               firstName: {type: GraphQLString},
+               lastName: {type: GraphQLString},
+               email: {type: GraphQLString},
+               password: {type: GraphQLString}
+            },
+            async resolve(parent, args){
+                const user = await orm.user.create({
+                    data: {
+                      firstName: args.firstName,
+                      lastName: args.firstName,
+                      email: args.email,    
+                      password: args.password
+                    },
+                  })
+                
+                return user
+            }       
+        },
+        addRole: {
+            type: RoleType,
+            args: {
+               name: {type: GraphQLString}
+            },
+            async resolve(parent, args){
+                const role = await orm.role.create({
+                    data: {
+                      name: args.name
+                    },
+                  })
+                
+                return role;
+            }        
+        },
+        addProduct: {
+            type: ProductType,
+            args: {
+               name: {type: GraphQLString},
+               desc: {type: GraphQLString},
+               img: {type: GraphQLString},
+               brand: {type: GraphQLString},
+               color: {type: GraphQLString},
+               size: {type: GraphQLString},
+               price: {type: GraphQLInt},
+               isActive: {type: GraphQLBoolean},
+               quantity: {type: GraphQLInt},
+               category: {type: GraphQLString},
+            }       
+        },
+        addOrder: {
+            type: OrderType,
+            args: {
+               state: {type: GraphQLString},
+               userId: {type: GraphQLID},
+               city: {type: GraphQLString},
+               sub_city: {type: GraphQLString},
+               phone: {type: GraphQLString},
+               total: {type: GraphQLInt},
+            }       
+        },
+        addCategory: {
+            type: CategoryType,
+            args: {
+               name: {type: GraphQLString},
+            }       
+        },
+        addCart: {
+            type: CartType,
+            args: {
+               productId: {type: GraphQLID},
+               userId: {type: GraphQLID},
+               orderId: {type: GraphQLID},
+               state: {type: GraphQLString},
+               quantity: {type: GraphQLInt},
+            }       
+        },
+        addUserRole: {
+            type: UserRoleType,
+            args: {
+               userId: {type: GraphQLInt},
+               roleId: {type: GraphQLInt},
+            },
+            async resolve(parent, args){
+                const userRole = await orm.user_role.create({
+                    data: {
+                      userId: args.userId,
+                      roleId: args.roleId,
+                    },
+                  })
+                
+                return userRole;
+            }         
+        },
+
+    }
+})
 
 
 
@@ -177,23 +232,46 @@ const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
         user: {
-            type: Usertype,
-            args: { id: {type: GraphQLID} },
-            resolve(parent, args){
-                return users.find((user) => user.id == args.id);
+            type: UserType,
+            args: { id: {type: GraphQLInt} },
+            async resolve(parent, args){
+
+                const user = await orm.user.findUnique({
+                    where: {
+                      id: args.id
+                    }
+                  })
+                
+                return user;
             }
         },
         user_role: {
-            type: UserRoletype,
-            args: { id: {type: GraphQLID} },
-            resolve(parent, args){
-                return users.find((user) => user.id == args.id);
+            type: new GraphQLList(UserRoleType),
+            args: { id: {type: GraphQLInt} },
+            async resolve(parent, args){
+                const userRole = await orm.user_role.findMany({
+                    where: {
+                      userId: args.id
+                    },
+                  })
+                
+                return userRole;
             }
         }
     }
 })
 
 
+// example 1
+    // mutation example
+        // mutation{
+        // 	addUser(firstName:  "yonas", lastName: "Debe", email: "yonas@g.com", password: "yonas123"){
+        //   	password
+        // 	}
+        // }
+
+
 export default new GraphQLSchema({
     query: RootQuery,
+    mutation: Mutation
 })
