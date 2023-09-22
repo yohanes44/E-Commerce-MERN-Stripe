@@ -13,7 +13,57 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @db.VarChar(255) @unique
-  username String @db.VarChar(255)
+  username String @db.VarChar(255) @unique
   firstName String @db.VarChar(255)
   lastName String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model role {
+  id    Int     @id @default(autoincrement())
+  name String @db.VarChar(255)
+}
+
+model user_role {
+  id    Int     @id @default(autoincrement())
+  userId String  @db.VarChar(255)
+  roleId String @db.VarChar(255)
+}
+
+model Product {
+  id    Int     @id @default(autoincrement())
+  title String  @db.VarChar(255)
+  desc String @db.VarChar(255)
+  img String @db.VarChar(255)
+  color String @db.VarChar(255)
+  price String @db.VarChar(255)
+}
+
+model Category {
+  id    Int     @id @default(autoincrement())
+  name String  @db.VarChar(255)
+}
+
+model product_category {
+  id    Int     @id @default(autoincrement())
+  productId String  @db.VarChar(255)
+
+}
+
+
+model Order {
+  id    Int     @id @default(autoincrement())
+  userId String  @db.VarChar(255)
+  product String @db.VarChar(255)
+  amount String @db.VarChar(255)
+  address String @db.VarChar(255)
+  street String @db.VarChar(255)
+  status String @db.VarChar(255)
+}
+
+model Cart {
+  id    Cart     @id @default(autoincrement())
+  userId String  @db.VarChar(255)
+  products String @db.VarChar(255)
 }
