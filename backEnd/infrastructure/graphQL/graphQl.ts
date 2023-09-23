@@ -1,5 +1,5 @@
 
-import orm from "./infrastructure/persistance/orm"
+import orm from "../persistance/orm"
 
 
 import  graphql, {
