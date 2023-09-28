@@ -1,6 +1,6 @@
 
 
-import CategoryInterface from "../application/interface/Category"
+import CategoryInterface from "../interface/Category"
 
 export default class Category{
 

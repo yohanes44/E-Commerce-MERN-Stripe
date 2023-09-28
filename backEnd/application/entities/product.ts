@@ -1,8 +1,8 @@
 
 
-import ProductInterface from "../application/interface/Product"
+import ProductInterface from "../interface/Product"
 
-export default class Order{
+export default class Product{
 
     private name;
     private desc;

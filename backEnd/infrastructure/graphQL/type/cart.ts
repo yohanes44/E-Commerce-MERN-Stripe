@@ -15,7 +15,7 @@ import  graphql, {
 
 
 
-export default new GraphQLObjectType({
+export default  new GraphQLObjectType({
     name: "Cart",
     fields: ()=> ({
         id: { type: GraphQLID },

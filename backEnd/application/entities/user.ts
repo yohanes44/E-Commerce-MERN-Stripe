@@ -1,20 +1,20 @@
 
 
-import UserInterface from "../application/interface/User"
+import UserInterface from "../interface/User"
 
-export default class Product{
+export default class User{
 
-    private firstName;
-    private lastName;
-    private email;
-    private password;
+    public firstName;
+    public lastName;
+    public email;
+    public password;
 
 
     constructor({  firstName,
                    lastName,
                    email,
                    password,
-                }: UserInterface){
+                }: UserInterface){  
             
         this.firstName = firstName;
         this.lastName = lastName;

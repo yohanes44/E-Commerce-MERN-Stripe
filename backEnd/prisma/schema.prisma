@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:@localhost:3306/ecommerceapi"
+  url      = "mysql://root:@localhost:3306/ecommerce"
 }
 
 model User {
@@ -47,16 +47,18 @@ model Product {
   brand    String  @db.VarChar(255)
   color    String  @db.VarChar(255)
   size     String  @db.VarChar(255)
+  categoryId Int
   price    Int
   isActive Boolean @default(true)
   quantity Int
-  category String  @db.VarChar(255)
+  category Category   @relation(fields: [categoryId], references: [id])
   Cart     Cart[]
 }
 
 model Category {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
+  Product     Product[]
 }
 
 model Order {
@@ -76,11 +78,11 @@ model Cart {
   id        Int    @id @default(autoincrement())
   productId Int
   userId    Int
-  orderId   Int
+  orderId   Int?
   state     String @db.VarChar(255)
   quantity  Int
 
   user    User    @relation(fields: [userId], references: [id])
-  order   Order   @relation(fields: [orderId], references: [id])
+  order   Order?   @relation(fields: [orderId], references: [id])
   product Product @relation(fields: [productId], references: [id])
 }

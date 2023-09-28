@@ -1,6 +1,6 @@
 
 
-import OrderInterface from "../application/interface/Order"
+import OrderInterface from "../interface/Order"
 
 export default class Order{
 

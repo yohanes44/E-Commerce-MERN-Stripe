@@ -1,7 +1,6 @@
 
 
 export default interface Product {
-        id: number,
         name: string,
         desc: string,
         img: string,
@@ -11,5 +10,5 @@ export default interface Product {
         price: number,
         isActive: boolean,
         quantity: number,
-        category: number
+        categoryId: any
 }  

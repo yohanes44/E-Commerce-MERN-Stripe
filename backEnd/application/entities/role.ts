@@ -1,6 +1,6 @@
 
 
-import RoleInterface from "../application/interface/Role"
+import RoleInterface from "../interface/Role"
 
 export default class Order{
 

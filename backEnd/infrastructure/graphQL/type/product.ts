@@ -1,6 +1,9 @@
 import orm from "../../persistance/orm"
 
 
+import CategoryType from "./category"
+
+
 import  graphql, {
     GraphQLObjectType, 
     GraphQLSchema, 
@@ -26,6 +29,16 @@ export default new GraphQLObjectType({
         price: { type: GraphQLInt },
         isActive: { type: GraphQLBoolean },
         quantity: { type: GraphQLInt },
-        category: { type: GraphQLString }
+        categoryId: { type: GraphQLInt },
+        category: {
+            type:  CategoryType,
+            resolve: async (parent, args)=>{
+                return await orm.category.findUnique({
+                    where: {
+                        id: parent.categoryId,
+                    },
+                  })
+            }
+        }
     })
 })  

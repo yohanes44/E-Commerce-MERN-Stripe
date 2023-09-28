@@ -1,10 +1,16 @@
 
 
 export default interface Cart{
-        id:  number,
         productId: number,
         userId: number,
-        orderId: number,
         state: string,
         quantity: number
+
+
+
+        // productId Int
+        // userId    Int
+        // // orderId   Int?
+        // state    String @db.VarChar(255)
+        // quantity  Int
 }

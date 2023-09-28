@@ -1,6 +1,6 @@
 
 
-import CartInterface from "../application/interface/Cart"
+import CartInterface from "../interface/Cart"
 
 export default class Cart{
 

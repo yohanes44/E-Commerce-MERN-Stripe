@@ -14,7 +14,7 @@ import  graphql, {
 } from "graphql";
 
 
-const OrderType = new GraphQLObjectType({
+export default new GraphQLObjectType({
     name: "Order",
     fields: ()=> ({
         id: { type: GraphQLID },
