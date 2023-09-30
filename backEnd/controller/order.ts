@@ -82,9 +82,40 @@ export default class OrderController{
 
     async create(data : OrderInterfce){
         try{
+          
+
+            const activeCartItems = await db.cart.findMany({
+                where: {
+                    userId: data.userId,
+                    state: "inCart"
+                }
+            })
+
+            const products: any = activeCartItems.map((cartItem: any) => {
+                return {
+                    productId: cartItem.productId,
+                    quantity: cartItem.quantity
+                }
+            });
+
+            const productPrices = await db.product.findMany({
+                where: {
+                  id: {
+                    in: products.productId,
+                  },
+                },
+              });
+            
+
+            // console.log(activeCartItems);
+            // console.log(products);
+
+
             return await db.order.create({
                 data
             })
+
+
         }
         catch(err: any){
             console.log(err);

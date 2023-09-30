@@ -151,9 +151,21 @@ export default class Resolvers{
                     type: UserType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: UserInputType}
+                        input: { type: UserInputType},
+                        lang: { type: GraphQLString }
                     },
-                   resolve: UserResolver.updateUser    
+                   resolve: UserResolver.updateUser
+         
+                },
+                changePassword: {
+                    type: UserType,
+                    args: {
+                        id: { type: new GraphQLNonNull(GraphQLInt) },
+                        newpassword: { type: GraphQLString },
+                        oldpassword: { type: GraphQLString },
+                        lang: { type: GraphQLString }
+                    },
+                   resolve: UserResolver.changeUserPassword
          
                 },
                 deleteUser: {

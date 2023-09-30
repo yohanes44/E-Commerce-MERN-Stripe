@@ -128,7 +128,4 @@ export default class CartController{
 
     }
 
-
-
-
 }

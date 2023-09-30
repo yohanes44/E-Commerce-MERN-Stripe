@@ -27,6 +27,11 @@ class UserResolver {
         return await context.controller.UserController.update(id, input);
     }
 
+    async changeUserPassword(parent: any, args: any, context: any) {
+        const { id, newpassword, oldpassword } = args;
+        return await context.controller.UserController.changePassword(id, newpassword, oldpassword);
+    }
+
     async deleteUser(parent: any, args: any, context: any) {
         const { id } = args;
         return await context.controller.UserController.delete(id);
