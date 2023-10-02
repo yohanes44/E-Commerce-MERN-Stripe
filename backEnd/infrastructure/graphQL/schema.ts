@@ -218,7 +218,7 @@ export default class Resolvers{
                     args: {
                         name: {type: GraphQLString},
                         desc: {type: GraphQLString},
-                        img: {type: GraphQLString},
+                        img: {type: GraphQLString },
                         brand: {type: GraphQLString},
                         color: {type: GraphQLString},
                         size: {type: GraphQLString},
@@ -244,15 +244,60 @@ export default class Resolvers{
                     },
                     resolve: ProductResolver.delete     
                 },
+                addCartItem: {
+                    type: CartType,
+                    args: {
+                        productId: {type: GraphQLInt},
+                        userId: {type: GraphQLInt},
+                        // state: {type: GraphQLString},
+                        quantity: {type: GraphQLInt},
+                    },
+                    resolve: CartResolver.addCartItem       
+                },
+                updateCartItemQuantity: {
+                    type: CartType,
+                    args: {
+                        id: {type: GraphQLInt},
+                        quantity: {type: GraphQLInt},
+                    },
+                    resolve: CartResolver.updateCartItemQuantity       
+                },
+               deleteCartItem: {
+                    type: CartType,
+                    args: {
+                        id: { type: new GraphQLNonNull(GraphQLInt) }
+                    },
+                    resolve: CartResolver.deleteCartItem     
+                },
+                clearCart: {
+                    type:  CartType,
+                    args: {
+                        userId: { type: new GraphQLNonNull(GraphQLInt) },
+                    },
+                    resolve: CartResolver.clearCart     
+                },
+                login: {
+                    type: new GraphQLObjectType({
+                        name: "Login",
+                        fields: ()=> ({
+                            token: { type: GraphQLString }
+                        })
+                    }),
+                    args: {
+                        email: {type: GraphQLString},
+                        password: {type: GraphQLString}
+                    },
+                    resolve: LoginResolver.login
+                },
                 addOrder: {
                     type: OrderType,
                     args: {
-                        state: {type: GraphQLString},
-                        userId: {type: GraphQLID},
-                        city: {type: GraphQLString},
-                        sub_city: {type: GraphQLString},
-                        phone: {type: GraphQLString},
-                        total: {type: GraphQLInt},
+                        // state: {type: GraphQLString},
+                        userId: {type: GraphQLInt},
+                        // city: {type: GraphQLString},
+                        // sub_city: {type: GraphQLString},
+                        // phone: {type: GraphQLString},
+                        // total: {type: GraphQLInt},
                     },  
                     resolve: OrderResolver.create     
                 },
@@ -292,51 +337,6 @@ export default class Resolvers{
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
                     resolve: CategoryResolver.delete     
-                },
-                addCartItem: {
-                    type: CartType,
-                    args: {
-                        productId: {type: GraphQLInt},
-                        userId: {type: GraphQLInt},
-                        state: {type: GraphQLString},
-                        quantity: {type: GraphQLInt},
-                    },
-                    resolve: CartResolver.addCartItem       
-                },
-                updateCartItemQuantity: {
-                    type: CartType,
-                    args: {
-                        id: {type: GraphQLInt},
-                        quantity: {type: GraphQLInt},
-                    },
-                    resolve: CartResolver.updateCartItemQuantity       
-                },
-               deleteCartItem: {
-                    type: CartType,
-                    args: {
-                        id: { type: new GraphQLNonNull(GraphQLInt) }
-                    },
-                    resolve: CartResolver.deleteCartItem     
-                },
-                clearCart: {
-                    type:  CartType,
-                    args: {
-                        userId: { type: new GraphQLNonNull(GraphQLInt) },
-                    },
-                    resolve: CartResolver.clearCart     
-                },
-                login: {
-                    type: new GraphQLObjectType({
-                        name: "Login",
-                        fields: ()=> ({
-                            token: { type: GraphQLString }
-                        })
-                    }),
-                    args: {
-                        email: {type: GraphQLString},
-                        password: {type: GraphQLString}
-                    },
-                    resolve: LoginResolver.login
                 }
         
             }

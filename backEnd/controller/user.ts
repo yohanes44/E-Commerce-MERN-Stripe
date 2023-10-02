@@ -13,23 +13,34 @@ const db = new PrismaClient();
 export default class UserController {
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any) {
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
 
     async getUser(id: any) {
+     
         try {
-            return await db.user.findUnique({
+            const user = await db.user.findUnique({
                 where: {
                     id: id
                 }
             })
+            if(!user){
+                throw new this.exception("user0001");
+            }  
+            return user
         }
         catch (err: any) {
-            console.log(err);
-        }
+            if (err instanceof this.exception) {
+                throw err;
+            } else {
+                throw new this.exception("db0001");
+            }
+      }
     }
 
     async getUsers() {
@@ -37,7 +48,7 @@ export default class UserController {
             return await db.user.findMany()
         }
         catch (err: any) {
-            console.log(err);
+            throw new this.exception("db0001");
         }
     }
 
@@ -52,17 +63,11 @@ export default class UserController {
             })
 
             if (userExistance) {
-                throw Error("User already exists with this email");
+                throw new this.exception("user0002");
             }
 
-            // console.log(this.dependencies)
-
-            // console.log("testtt 1")
-
             const hashedPassword = await this.dependencies.get("encryption").hash(password);
-            // console.log("testtt 2")
 
-            // console.log({hashedPassword})
             const userInstance = new UserClass({ firstName, lastName, email, password });
 
             const user = await db.user.create({
@@ -77,7 +82,11 @@ export default class UserController {
             return user
         }
         catch (err: any) {
-            console.log(err);
+            if (err instanceof this.exception) {
+                throw err;
+            } else {
+                throw new this.exception("db0001");
+            }
         }
 
     }
@@ -103,18 +112,26 @@ export default class UserController {
     }
 
     async changePassword(id: any, newPassword: string, oldPassword: string) {
-
-        let user = await this.getUser(id);
-        if (!user) {
-            throw new JoException("auth0001");
+        try{
+            let user = await this.getUser(id);
+            if (!user) {
+                throw new JoException("auth0001");
+            }
+            if(!(await this.dependencies.get("encryption").compare(user.password, oldPassword))){
+                throw new JoException("auth0002");
+            }
+    
+            user.password = await this.dependencies.get("encryption").hash(newPassword)
+    
+            return await this.update(id, user);
         }
-        if(!(await this.dependencies.get("encryption").compare(user.password, oldPassword))){
-            throw new JoException("auth0002");
+        catch(err: any){
+            if (err instanceof this.exception) {
+                throw err;
+            } else {
+                throw new this.exception("db0001");
+            }
         }
-
-        user.password = await this.dependencies.get("encryption").hash(newPassword)
-
-        return await this.update(id, user);
 
     }
 
@@ -128,7 +145,11 @@ export default class UserController {
             return deletedUser;
         }
         catch (err: any) {
-            console.log(err);
+            if (err instanceof this.exception) {
+                throw err;
+            } else {
+                throw new this.exception("db0001");
+            }
         }
 
     }

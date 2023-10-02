@@ -12,9 +12,11 @@ const db = new PrismaClient();
 export default class CategoryController{
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
     async getCategory (id: number){

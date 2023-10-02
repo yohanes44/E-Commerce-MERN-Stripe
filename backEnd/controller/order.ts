@@ -12,9 +12,11 @@ const db = new PrismaClient();
 export default class OrderController{
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
 
@@ -84,37 +86,45 @@ export default class OrderController{
         try{
           
 
-            const activeCartItems = await db.cart.findMany({
+            const cartItems = await db.cart.findMany({
                 where: {
                     userId: data.userId,
                     state: "inCart"
+                },
+                include: {
+                   product: true,
+                   user: true
                 }
             })
 
-            const products: any = activeCartItems.map((cartItem: any) => {
-                return {
-                    productId: cartItem.productId,
-                    quantity: cartItem.quantity
-                }
-            });
+            if (!cartItems || cartItems.length === 0) {
+                throw new Error('Cart is empty. Cannot create an order.');
+            }
 
-            const productPrices = await db.product.findMany({
-                where: {
-                  id: {
-                    in: products.productId,
-                  },
+            const totalPrice = cartItems.reduce(
+                (total, cartItem) => total + cartItem.product.price * cartItem.quantity,
+                0
+            );
+
+            const createdOrder = await db.order.create({
+                data: {
+                  userId: data.userId,
+                  total: totalPrice,
+                  state: "ordered",
+                  city: "Addis Ababa",
+                  sub_city: "Bole",
+                  phone: "+251967584032"
                 },
               });
-            
 
-            // console.log(activeCartItems);
-            // console.log(products);
-
-
-            return await db.order.create({
-                data
-            })
-
+              await db.cart.deleteMany({
+                where: { 
+                    userId: data.userId,
+                    state: "inCart" 
+                },
+              });
+      
+              return createdOrder;
 
         }
         catch(err: any){

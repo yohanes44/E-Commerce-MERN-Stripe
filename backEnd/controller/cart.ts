@@ -12,9 +12,11 @@ const db = new PrismaClient();
 export default class CartController{
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
     async getCartItem(id: number){
@@ -67,7 +69,12 @@ export default class CartController{
             }
 
             return await db.cart.create({
-                data: data
+                data: {
+                    productId: data.productId,
+                    userId: data.userId,
+                    state: "inCart",
+                    quantity: data.quantity
+                }
             })
             
         }

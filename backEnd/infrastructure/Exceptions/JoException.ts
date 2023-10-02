@@ -2,7 +2,7 @@ import ErrorMessage from "../../configuration/ErrorMessages";
 
 export default class JoException extends Error {
 
-    private static language: string = "amh";
+    private static language: string = "eng";
 
     private static allMessages: any = {
         auth0001: {
@@ -16,6 +16,14 @@ export default class JoException extends Error {
         db0001: {
             eng: "Unkown error! we are working on it.",
             amh: "የማይታወቅ ችግር ተፈጥሯል። በመፈታት ላይ ይገኛል።"
+        },
+        user0001: {
+            eng: "Unknown userId",
+            amh: "የማይታወቅ ተጠቃሚ መለያ አስገብተዋል"
+        },
+        user0002: {
+            eng: "User already exist with same email address, please insert another",
+            amh: "ተጠቃሚ ቀድሞውንም ተመሳሳይ የኢሜይል አድራሻ አለው፣ እባክዎ ሌላ ያስገቡ"
         }
 
     };
@@ -23,4 +31,10 @@ export default class JoException extends Error {
     constructor(exception_id: string) {
         super(JoException.allMessages[exception_id][JoException.language]);
     }
+
+    public static changeLanguage(lang: string){
+        JoException.language = lang;
+    }
+
+
 }

@@ -22,7 +22,7 @@ export default  new GraphQLObjectType({
         productId: { type: GraphQLID },
         userId: { type: GraphQLID },
         orderId: { type: GraphQLID },
-        state: { type: GraphQLString },
+        // state: { type: GraphQLString },
         quantity: { type: GraphQLInt }
     })
 })

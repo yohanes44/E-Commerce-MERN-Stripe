@@ -16,9 +16,11 @@ const tokenGenerator = new TokenGeneratorService();
 export default class AuthController{
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
     async login({ email, password } : LoginInterfce){

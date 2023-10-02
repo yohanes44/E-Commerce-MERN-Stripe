@@ -29,10 +29,11 @@ export default class AuthMiddleware {
 
             }
             catch (err: any) {  
-                console.log(err)
+                console.log(err);
+                
             }
     
-            req.next();
+            next();
     
         }
     }

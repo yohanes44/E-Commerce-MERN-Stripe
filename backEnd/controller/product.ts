@@ -7,14 +7,18 @@ import {PrismaClient} from "@prisma/client"
 
 const db = new PrismaClient();
 
+// const { GraphQLUpload } = require('graphql-upload');
+
 
 
 export default class ProductController{
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
 
@@ -41,6 +45,7 @@ export default class ProductController{
 
     async create(data : ProductInterfce){
         try{
+            // const { createReadStream, filename } = await data.img;
             return await db.product.create({
                 data
             })

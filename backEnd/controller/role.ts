@@ -13,9 +13,11 @@ export default class RoleController{
 
 
     private dependencies;
+    private exception;
 
-    constructor(deps: any){
+    constructor(deps: any, exception: any){
         this.dependencies = deps;
+        this.exception = exception;
     }
 
     async getRole(id: any){

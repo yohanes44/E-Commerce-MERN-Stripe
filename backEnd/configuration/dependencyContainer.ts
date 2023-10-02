@@ -1,5 +1,6 @@
 
 import orm from "../infrastructure/persistance/orm"
+// import Error from "../infrastructure/persistance/orm"
 
 
 
@@ -10,7 +11,8 @@ export default class DependencyContainer{
     constructor(){
         this.dependencyList = {                
             port:  3005,
-            appSecretKey: "eCommerceKey4466"
+            appSecretKey: "eCommerceKey4466",
+            STRIPE_KEY: "sk_test_51LwXhNFGqQ7awyAKHlhFIarqvyWNUzPV1XRxdbsUZD0wyHgabXdRGPvWG1dhVvI7LpqAAdwzx4inFB1cOviCUL1a00K1WT2stM"
         };
     }
 
