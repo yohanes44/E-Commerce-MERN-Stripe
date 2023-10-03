@@ -30,11 +30,9 @@ export default class CategoryController{
         return await db.category.findMany()
     }
 
-    async create ({name}: CategoryInterfce){
+    async create (data: CategoryInterfce){
         return await db.category.create({
-            data: {
-                name: name
-            },
+            data: data
         })    
     }
 

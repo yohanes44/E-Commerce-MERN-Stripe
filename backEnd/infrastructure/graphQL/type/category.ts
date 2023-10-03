@@ -19,6 +19,7 @@ export default new GraphQLObjectType({
     name: "Category",
     fields: ()=> ({
         id: { type: GraphQLID },
-        name: { type: GraphQLString }
+        name: { type: GraphQLString },
+        img: { type: GraphQLString },
     })
 })

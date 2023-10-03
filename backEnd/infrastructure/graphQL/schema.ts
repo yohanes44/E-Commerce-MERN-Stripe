@@ -77,6 +77,9 @@ export default class Resolvers{
                 },
                 products: {
                     type: new GraphQLList(ProductType),
+                    args: {
+                        category: { type: GraphQLString }, // Make categoryId optional
+                    },
                     resolve: ProductResolver.getProducts
                 },
                 order: {

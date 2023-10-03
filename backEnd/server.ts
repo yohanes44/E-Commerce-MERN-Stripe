@@ -3,6 +3,8 @@ import express, {Request, Response} from "express";
 
 import  formidable from 'formidable';
 
+import cors from "cors"
+
 import path from "path"
 import fs from "fs"
 
@@ -22,6 +24,7 @@ import TokenGeneratorService from "./infrastructure/service/authentication/token
 import ValidationService from "./infrastructure/service/validation/validation"
 import ExceptionHandlingService from "./infrastructure/Exceptions/JoException"
 
+import ImageController from "./controller/image"
 
 
 import AuthControllerClass from "./controller/auth"
@@ -42,7 +45,7 @@ const dependency = new DependencyContainer();
 dependency.register("encryption", EncryptionService);
 dependency.register("tokenGeneration", TokenGeneratorService);
 dependency.register("database", ValidationService);
-// dependency.register("exception", ExceptionHandlingService);
+dependency.register("imageController", ImageController);
 
 
 
@@ -66,13 +69,15 @@ const authenticate = new AuthMiddleware(dependency.get("appSecretKey")).authenti
 
 const app = express();
 
-
+app.use(cors())
 app.use(fileUpload())
 app.use(express.json());
 
 
+  
 
-app.use("/graphql", authenticate, graphqlHTTP( async (req: any) => {
+
+app.use("/api/graphql", graphqlHTTP( async (req: any) => {
 
     ExceptionHandlingService.changeLanguage("amh");
 
@@ -96,39 +101,11 @@ app.use("/graphql", authenticate, graphqlHTTP( async (req: any) => {
         }   
     }));
 
-app.post("/registerPicture", authenticate, (req: any, res: any) => {
-
-    const {picture} = req.files;
-
-    const imagePath = path.join(__dirname, 'application/images/product', picture.name); // Adjust the file path and extension
-
-    picture?.mv(imagePath, (err: any) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ message: 'Error saving image.' });
-        }
-        
-        const imageUrl = `${req.protocol}://${req.hostname}:${req.socket.localPort}/images/${picture.name}`;
-
-        return res.json({ imageUrl: imageUrl });
-      }) 
     
-    //  return res.json(imagePath);
-});
+app.post("/api/image/:type/register", authenticate, dependency.get("imageController").register);
 
-app.get("/images/:imageId", authenticate, (req, res) => {
-        const {imageId} = req.params;
-        const imagePath = path.join(__dirname, 'application/images/product', imageId); // Adjust the file path and extension
 
-        fs.readFile(imagePath, (err, data) => {
-            if (err) {
-              console.error('Error reading the image file:', err);
-              return res.status(500).send('Error reading image file');
-            }
-            res.contentType('image/jpeg'); // Adjust the content type as needed for your image format (e.g., image/png)
-            res.send(data);
-          });
-});
+app.get("/api/image/:type/:imageId", authenticate, dependency.get("imageController").get);
 
 // let fileData = Buffer.alloc(0);
 
@@ -161,7 +138,7 @@ app.get("/images/:imageId", authenticate, (req, res) => {
 //   });
 
 app.use((req: Request, res: Response)=>{
-    return res.json(`URL Not Found ${req.originalUrl}`)
+    return res.json(`URL Not Found man ${req.originalUrl}`)
 })
 
 app.listen(port, ()=>{

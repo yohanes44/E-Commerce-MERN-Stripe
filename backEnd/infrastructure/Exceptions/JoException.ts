@@ -24,7 +24,15 @@ export default class JoException extends Error {
         user0002: {
             eng: "User already exist with same email address, please insert another",
             amh: "ተጠቃሚ ቀድሞውንም ተመሳሳይ የኢሜይል አድራሻ አለው፣ እባክዎ ሌላ ያስገቡ"
-        }
+        },
+        img0001: {
+            eng: "Error saving image",
+            amh: "ምስል ማስቀመጥ ላይ ስህተት ተፈጥሯል"
+        },
+        img0002: {
+            eng: "Error reading the image file",
+            amh: "የምስሉን ፋይል በማንበብ ላይ ስህተት ተፈጥሯል"
+        },
 
     };
 
