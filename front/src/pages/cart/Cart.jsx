@@ -1,5 +1,10 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { request, gql } from 'graphql-request'; // Import necessary functions and objects
+
+import  backEndGraphQLURL from '../../utility/http';
 
 import "./cart.scss"
 import Navbar from '../../components/Navbar/Navbar'
@@ -7,8 +12,95 @@ import Announcement from '../../components/announcements/Announcement'
 import Footer from '../../components/footer/Footer'
 import { Add, Remove } from '@mui/icons-material'
 
+import { useAuth } from "../../utility/context/auth";
+import { useCart } from "../../utility/context/cart";
+
+
 export default function Cart() {
-  return (
+
+
+
+    // const [cartItems, setCartItems] = useState([]);
+
+    const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
+    const {cartItems, setCartItems, findCartItems} = useCart();
+
+
+  
+
+    const navigate = useNavigate();
+
+
+
+    if(isAuthenticated === false){
+      navigate('/login');
+    }
+    
+  
+
+    useEffect(() => {
+
+      console.log("Cart, user");
+      console.log(user);
+
+      
+      const userId = parseInt(user.id);
+
+        const fetchData = async () => {
+          try {
+            const productQuery = gql`
+              query GetCartItems($userId: Int!) {
+                cartItems(userId: $userId) {
+                  id
+                  userId
+                  productId
+                  state
+                  quantity
+                  product{
+                    id
+                    name
+                    img
+                    color
+                    quantity
+                    price
+                  }
+                }
+              }
+            `;
+    
+            const variables = { userId: userId }; // Define your variable object
+    
+            let responseProduct = await request(
+              backEndGraphQLURL,
+              productQuery,
+              variables
+            );
+  
+            setCartItems(responseProduct.cartItems);
+    
+            console.log("responseProduct.cartItems", responseProduct.cartItems);
+    
+            // setLoading(false);
+    
+            //jo
+    
+            //jo
+          } catch (err) {
+            console.log(err);
+            // setError(err);
+            // setLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, [user.id]);
+
+      const handleChangeQuantity = (operation) =>{
+
+      }
+    
+    return (
+        
     <div className='cartContainer'>
         <Navbar />
         <Announcement />
@@ -24,45 +116,38 @@ export default function Cart() {
             </div>
             <div className="bottom">
                 <div className="info">
-                    <div className="product">
+                  {
+                    cartItems.map((cartItem)=>{
+                        return (
+                            
+                            <div>
+                                  <hr />
+                        <div className="product">
                         <div className="productDetail">
-                            <img src="https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k" alt="" />
+                            <img src={cartItem.product.img} alt="" />
                             <div className="details">
-                                <span className="productName"><b>Product:</b> JESSIE THUNDER SHOES</span>
-                                <span className="productId"><b>ID:</b> 32434222324342234423</span>
+                                <span className="productName"><b>Product:</b>  {cartItem.product.name}</span>
+                                <span className="productId"><b>ID:</b>  {cartItem.product.id}</span>
                                 <span className="productColor"></span>
-                                <span className="productSize"><b>Size:</b> 37.5</span>
+                                <span className="productSize"><b>Size:</b> </span>
                             </div>
                         </div>
                         <div className="priceDetail">
                             <div className="productAmountContainer">
-                                <Add />
-                                <div className="productAmount">2</div>
-                                <Remove />
+                                <Add onClick={ (e)=>handleChangeQuantity("add") }/>
+                                <div className="productAmount"> {cartItem.quantity}</div>
+                                <Remove onClick={ (e)=>handleChangeQuantity("minus") }/>
                             </div>
-                            <div className="productPrice">$ 30</div>
+                            <div className="productPrice">$  {cartItem.quantity * cartItem.product.price}</div>
                         </div>
                     </div>
-                    <hr />
-                    <div className="product">
-                        <div className="productDetail">
-                            <img src="https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k" alt="" />
-                            <div className="details">
-                                <span className="productName"><b>Product:</b> JESSIE THUNDER SHOES</span>
-                                <span className="productId"><b>ID:</b> 32434222324342234423</span>
-                                <span className="productColor"></span>
-                                <span className="productSize"><b>Size:</b> 37.5</span>
+                  
+      
                             </div>
-                        </div>
-                        <div className="priceDetail">
-                            <div className="productAmountContainer">
-                                <Add />
-                                <div className="productAmount">2</div>
-                                <Remove />
-                            </div>
-                            <div className="productPrice">$ 30</div>
-                        </div>
-                    </div>
+                        )
+                    })
+                  }
+                  
                 </div>
                 <div className="summary">
                     <h1 className="summaryTitle">ORDER SUMMARY</h1>

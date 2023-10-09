@@ -1,0 +1,146 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: auto;
+    overflow-y: auto;
+    
+    // border: 2px solid green;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 10px;
+
+    width: fit-content;
+    border-radius: 10px;
+    background-color: #333b42;
+    // border: 2px solid red;
+
+
+    .top {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        width: 100%;
+        //  border: 2px solid red;
+        color: #f4cd1c;
+        margin: 5px;
+
+        .title{
+            font-size: 30px;
+            font-weight: 800;
+            justify-self: center;
+            
+        }
+
+        .backIcon{
+            
+        }
+
+        .submitIcon{
+            // border: 2px solid white;
+        }
+
+        .submitButton {
+
+            // border: 1.3px solid #D4AD00;
+            background-color: #d4ad00;;
+            color: #000000;
+
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 5px;
+            border: none;
+            
+        }
+
+        .cancelButton{
+            background-color: red;;
+            color:  white;
+
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 5px;
+            border: none;
+        }
+
+    }
+
+    .center {
+        padding: 10px;
+        // margin: 10px;
+        display: flex;
+
+        form {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .formInputContainer {
+
+                display: grid;
+                gap: 20px;
+
+                .formInput {
+                    margin: 5px;
+                    display: flex;
+                    // flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 3px;
+                    
+
+                    label {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        width: 200px;
+
+                        display: flex;
+                        justify-content: end;
+                        margin: 5px;
+                        font-size: 15px;
+                        color: #f4cd1c;
+                        // border: 2px solid red;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 5px;
+                        border: none;
+                        outline: none;
+                        border-radius: 5px;
+                        // border: 3px solid #f4cc1c59;
+                        // background-color: #111111;
+                        
+                        background-color: #333b42;
+                        border: 1px solid  #f4cd1c;
+                        color:#f4cd1c;
+                        // &:focus {
+                        //     border: 3px solid #f4cc1c59;
+
+                        // }
+                    }
+                }
+
+            }
+
+
+            
+
+
+        }
+
+    }
+}

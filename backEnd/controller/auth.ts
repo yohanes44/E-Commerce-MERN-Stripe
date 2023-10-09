@@ -15,6 +15,7 @@ const tokenGenerator = new TokenGeneratorService();
 
 export default class AuthController{
 
+
     private dependencies;
     private exception;
 
@@ -24,6 +25,10 @@ export default class AuthController{
     }
 
     async login({ email, password } : LoginInterfce){
+
+        // console.log("args");
+        // console.log({email, password});
+
         
         try{
             
@@ -35,13 +40,13 @@ export default class AuthController{
             
 
            if(!user){
-            throw Error("User not found!");
+            throw new this.exception("auth0001");
            }
 
-           const verifyPassword = await encryption.compare(user.password, password);
+           const verifyPassword = await this.dependencies.get("encryption").compare(user.password, password);
 
            if(!verifyPassword){
-            throw Error("Password does not match!");
+                throw new this.exception("auth0003");
            }
 
            const userRoles = await db.user_role.findMany({
@@ -62,15 +67,25 @@ export default class AuthController{
 
             const roles = roleCollection.map((role: any) => role.name);
 
-            const payload = {roles, firstName: user.firstName, lastName: user.lastName, email: user.email};
+            const payload = {roles, firstName: user.firstName, lastName: user.lastName, email: user.email, id: user.id};
 
 
-            const token = tokenGenerator.generate(payload, this.dependencies.appSecretKey);            
-            
-            return token;        
+            const token =  tokenGenerator.generate(payload, this.dependencies.get("appSecretKey"));
+    
+            return {
+                token,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            }
         }
         catch(err: any){
             console.log(err);
+            if (err instanceof this.exception) {
+                throw err;
+            } else {
+                throw new this.exception("db0001");
+            }
         }
 
     }

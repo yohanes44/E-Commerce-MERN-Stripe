@@ -1,8 +1,5 @@
 
 
-import AuthController from "../../../controller/auth"
-
-
 class AuthResolver{
 
     constructor(){
@@ -10,7 +7,9 @@ class AuthResolver{
     }
 
     async login(parent: any, args: any, context: any){
-          return await context.controller.AuthController.login(args); 
+
+          const user = await context.controller.AuthController.login(args);
+          return user; 
      }
 
 

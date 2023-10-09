@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:@localhost:3306/ecommerce"
+  url      = "mysql://root:@localhost:3306/ecommerceapi"
 }
 
 model User {
@@ -45,7 +45,7 @@ model Product {
   desc     String  @db.VarChar(255)
   img      String  @db.VarChar(255)
   brand    String  @db.VarChar(255)
-  color    String  @db.VarChar(255)
+  color  Json[] 
   size     String  @db.VarChar(255)
   categoryId Int
   price    Int

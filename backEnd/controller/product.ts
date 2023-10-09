@@ -65,6 +65,12 @@ export default class ProductController {
 
     async update(id: any, input: any) {
 
+        
+        if(input.color){
+            // input.color = JSON.parse(input.color)
+
+        }
+        
         try {
             return await db.product.update({
                 where: {

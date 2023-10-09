@@ -38,7 +38,10 @@ export default class CartController{
                 where: {
                     userId,
                     state: "inCart"
-                }
+                },
+                include: {
+                    product: true
+                 }
             })
         }
         catch(err: any){

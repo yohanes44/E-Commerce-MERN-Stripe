@@ -5,8 +5,6 @@ import bcrypt from "bcrypt";
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 
 
-const SECRET_ID = "userMgmtKey4466";
-
 export default class TokenGenerator {
     
     constructor(){
@@ -16,5 +14,10 @@ export default class TokenGenerator {
      generate(payload: any, secretId: any){
         const token = jwt.sign(payload, secretId);
         return token;
+    }
+
+    verify(token: any, secretId: any){
+        const data = jwt.verify(token, secretId);
+        return data;
     }
 }  

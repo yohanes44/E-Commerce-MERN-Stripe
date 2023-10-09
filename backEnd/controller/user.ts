@@ -10,6 +10,8 @@ const db = new PrismaClient();
 
 
 
+
+
 export default class UserController {
 
     private dependencies;

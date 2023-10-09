@@ -13,6 +13,7 @@ import  graphql, {
     GraphQLNonNull
 } from "graphql";
 
+import ProductType from "./product"
 
 
 export default  new GraphQLObjectType({
@@ -22,7 +23,20 @@ export default  new GraphQLObjectType({
         productId: { type: GraphQLID },
         userId: { type: GraphQLID },
         orderId: { type: GraphQLID },
-        // state: { type: GraphQLString },
-        quantity: { type: GraphQLInt }
+        state: { type: GraphQLString },
+        quantity: { type: GraphQLInt },
+        product: {
+            type:  ProductType,
+            resolve: async (parent, args)=>{
+             
+                const userProducts = await orm.product.findUnique({
+                    where: {
+                        id: parent.productId,
+                    },
+                  })
+                
+                return userProducts;
+            }
+        }
     })
 })

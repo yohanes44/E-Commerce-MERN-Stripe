@@ -1,5 +1,14 @@
-import React from 'react'
 
+
+import React, {useState, useEffect} from 'react'
+
+import { useLocation } from 'react-router-dom';
+
+import { request, gql } from 'graphql-request'; // Import necessary functions and objects
+
+
+
+import  backEndGraphQLURL from '../../utility/http';
 
 import "./productList.scss"
 import Navbar from '../../components/Navbar/Navbar'
@@ -9,11 +18,21 @@ import NewsLetter from '../../components/newsLetter/NewsLetter'
 import Footer from '../../components/footer/Footer'
 
 export default function ProductList() {
+
+    const location = useLocation();
+    const category = location.pathname.split("/")[2]
+  
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+   
+
   return (
     <div className='productListContainer'>
         <Navbar />
         <Announcement />
-        <h1 className="title">Dresses</h1>
+        <h1 className="title">{category}</h1>
         <div className="filterContainer">
             <div className="filter">
                 <span className="filterText">Filter Products:</span>
@@ -44,7 +63,7 @@ export default function ProductList() {
                 </select>
             </div>
         </div>
-        <Products />
+        <Products/>
         <NewsLetter />
         <Footer />
     </div>

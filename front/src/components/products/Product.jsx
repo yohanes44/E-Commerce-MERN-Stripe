@@ -2,13 +2,13 @@ import { Circle, FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } 
 import React from 'react'
 
 import "./product.scss"
+import { Link } from 'react-router-dom'
 
 export default function Product({item}) {
   return (
     <div className='productContainer'>
-        <div className="circle">
-            
-        </div>
+            <Link to={`/product/${item.id}`}>
+      
         <img src={item.img} alt="itemImg" />
         <div className="info">
             <div className="icon">
@@ -20,7 +20,9 @@ export default function Product({item}) {
             <div className="icon">
                 <FavoriteBorderOutlined />
             </div>
+            
         </div>
+            </Link>
     </div>
   )
 }

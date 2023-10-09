@@ -1,7 +1,9 @@
 import orm from "../../persistance/orm"
 
+import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 
 import CategoryType from "./category"
+
 
 
 import  graphql, {
@@ -12,7 +14,7 @@ import  graphql, {
     GraphQLInt,
     GraphQLBoolean,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
 } from "graphql";
 
 
@@ -24,7 +26,7 @@ export default new GraphQLObjectType({
         desc: { type: GraphQLString },
         img: { type: GraphQLString },
         brand: { type: GraphQLString },
-        color: { type: GraphQLString },
+        color: { type: GraphQLJSON },
         size: { type: GraphQLString },
         price: { type: GraphQLInt },
         isActive: { type: GraphQLBoolean },

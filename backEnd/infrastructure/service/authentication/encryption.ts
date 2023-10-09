@@ -14,10 +14,14 @@ export default class Encryption {
     }
 
     async compare (hashedPassword: any, password: any){
-        const userHash = await bcrypt.compare(hashedPassword, password);
-        if(!userHash)
-            return false
-        return true;
+        const userHash = await bcrypt.compare(password, hashedPassword);
+        // console.log("hash Service result ", userHash);
+        if(userHash){
+            return true;
+        }
+        if(!userHash){
+            return false;
+        }
     }
 
 

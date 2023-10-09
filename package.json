@@ -8,7 +8,8 @@
     "mongoose": "^7.5.1",
     "mysql": "^2.18.1",
     "scss": "^0.2.4",
-    "styled-components": "^6.0.7"
+    "styled-components": "^6.0.7",
+    "telebirr-node": "^1.1.1"
   },
   "name": "e_co0mm",
   "description": "e-commerce site using MERN stack with Stripe payment gateway.",

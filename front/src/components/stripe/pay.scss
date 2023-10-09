@@ -1,0 +1,22 @@
+
+
+
+
+
+.payContainer{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button{
+        border: none;
+        width: 120;
+        border-radius: 5;
+        padding: 20px;
+        background-color: black;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}

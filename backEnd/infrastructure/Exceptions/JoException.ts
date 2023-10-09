@@ -7,11 +7,15 @@ export default class JoException extends Error {
     private static allMessages: any = {
         auth0001: {
             eng: "user not found",
-            amh: "መለያው አልተገኘም።"
+            amh: "ተጠቃሚው አልተገኘም።"
         },
         auth0002: {
             eng: "old password does not match",
             amh: "የበፊት ይለፍ ቃል ትክክል አይደለም።"
+        },
+        auth0003: {
+            eng: "password does not match",
+            amh: "የይለፍ ቃል ትክክል አይደለም።"
         },
         db0001: {
             eng: "Unkown error! we are working on it.",

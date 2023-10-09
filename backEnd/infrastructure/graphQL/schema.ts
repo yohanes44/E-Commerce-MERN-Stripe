@@ -1,7 +1,7 @@
 
-import  graphql, {
-    GraphQLObjectType, 
-    GraphQLSchema, 
+import graphql, {
+    GraphQLObjectType,
+    GraphQLSchema,
     GraphQLString,
     GraphQLID,
     GraphQLInt,
@@ -10,6 +10,8 @@ import  graphql, {
     GraphQLNonNull,
     GraphQLInputObjectType
 } from "graphql";
+
+import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 
 
 
@@ -36,20 +38,21 @@ import CartResolver from "./resolver/cart"
 import CategoryResolver from "./resolver/category"
 import LoginResolver from "./resolver/auth"
 
+import LoginType from "./type/login"
 
 
 
-export default class Resolvers{
+export default class Resolvers {
 
-    
-    getSchema(){
-    
-        const RootQuery  = new GraphQLObjectType({
+
+    getSchema() {
+
+        const RootQuery = new GraphQLObjectType({
             name: "RootQueryType",
             fields: {
                 user: {
                     type: UserType,
-                    args: { id: {type: GraphQLInt} },
+                    args: { id: { type: GraphQLInt } },
                     resolve: UserResolver.getUser
                 },
                 users: {
@@ -58,7 +61,7 @@ export default class Resolvers{
                 },
                 role: {
                     type: RoleType,
-                    args: { id: {type: GraphQLInt} },
+                    args: { id: { type: GraphQLInt } },
                     resolve: RoleResolver.getRole
                 },
                 roles: {
@@ -67,12 +70,12 @@ export default class Resolvers{
                 },
                 userRole: {
                     type: new GraphQLList(UserRoleType),
-                    args: { userId: {type: GraphQLInt} },
+                    args: { userId: { type: GraphQLInt } },
                     resolve: RoleResolver.getUserRole
                 },
                 product: {
                     type: ProductType,
-                    args: { id: {type: GraphQLInt} },
+                    args: { id: { type: GraphQLInt } },
                     resolve: ProductResolver.getProduct
                 },
                 products: {
@@ -84,40 +87,40 @@ export default class Resolvers{
                 },
                 order: {
                     type: OrderType,
-                    args: { id: {type: GraphQLInt} },
+                    args: { id: { type: GraphQLInt } },
                     resolve: OrderResolver.getOrder
                 },
                 orders: {
-                    type:  new GraphQLList(OrderType),
-                    args: { id: {type: GraphQLInt} },
+                    type: new GraphQLList(OrderType),
+                    args: { id: { type: GraphQLInt } },
                     resolve: OrderResolver.getOrders
                 },
                 ordersByState: {
-                    type:  new GraphQLList(OrderType),
-                    args: { id: {type: GraphQLInt} },
+                    type: new GraphQLList(OrderType),
+                    args: { id: { type: GraphQLInt } },
                     resolve: OrderResolver.getOrdersByState
                 },
                 getOrders: {
-                    type:  new GraphQLList(OrderType),
-                    args: { id: {type: GraphQLInt} },
+                    type: new GraphQLList(OrderType),
+                    args: { id: { type: GraphQLInt } },
                     resolve: OrderResolver.getOrders
                 },
                 userOrder: {
                     type: OrderType,
-                    args: { userId: {type: GraphQLInt} },
+                    args: { userId: { type: GraphQLInt } },
                     resolve: OrderResolver.getUserOrders
                 },
                 userOrdersByState: {
-                    type:  new GraphQLList(OrderType),
-                    args: { 
-                        userId: {type: GraphQLInt},
-                        state: {type: GraphQLString},
+                    type: new GraphQLList(OrderType),
+                    args: {
+                        userId: { type: GraphQLInt },
+                        state: { type: GraphQLString },
                     },
                     resolve: OrderResolver.getUserOrdersByState
                 },
                 category: {
                     type: CategoryType,
-                    args: { id: {type: GraphQLInt} },
+                    args: { id: { type: GraphQLInt } },
                     resolve: CategoryResolver.getCategory
                 },
                 categories: {
@@ -125,17 +128,17 @@ export default class Resolvers{
                     resolve: CategoryResolver.getCategories
                 },
                 cartItem: {
-                    type:  CartType,
-                    args: { id: {type: GraphQLInt} },
+                    type: CartType,
+                    args: { id: { type: GraphQLInt } },
                     resolve: CartResolver.getCartItem
                 },
                 cartItems: {
-                    type:  new GraphQLList(CartType),
-                    args: { userId: {type: GraphQLInt} },
+                    type: new GraphQLList(CartType),
+                    args: { userId: { type: GraphQLInt } },
                     resolve: CartResolver.getCartItems
                 }
             }
-         })
+        })
 
         const Mutation = new GraphQLObjectType({
             name: "Mutation",
@@ -143,22 +146,22 @@ export default class Resolvers{
                 addUser: {
                     type: UserType,
                     args: {
-                    firstName: {type: new GraphQLNonNull(GraphQLString)},
-                    lastName: {type: new GraphQLNonNull(GraphQLString)},
-                    email: {type: new GraphQLNonNull(GraphQLString)},
-                    password: {type: new GraphQLNonNull(GraphQLString)}
+                        firstName: { type: new GraphQLNonNull(GraphQLString) },
+                        lastName: { type: new GraphQLNonNull(GraphQLString) },
+                        email: { type: new GraphQLNonNull(GraphQLString) },
+                        password: { type: new GraphQLNonNull(GraphQLString) }
                     },
-                    resolve: UserResolver.addUser       
+                    resolve: UserResolver.addUser
                 },
                 updateUser: {
                     type: UserType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: UserInputType},
+                        input: { type: UserInputType },
                         lang: { type: GraphQLString }
                     },
-                   resolve: UserResolver.updateUser
-         
+                    resolve: UserResolver.updateUser
+
                 },
                 changePassword: {
                     type: UserType,
@@ -168,180 +171,195 @@ export default class Resolvers{
                         oldpassword: { type: GraphQLString },
                         lang: { type: GraphQLString }
                     },
-                   resolve: UserResolver.changeUserPassword
-         
+                    resolve: UserResolver.changeUserPassword
+
                 },
                 deleteUser: {
-                    type:  UserType,
+                    type: UserType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: UserResolver.deleteUser     
+                    resolve: UserResolver.deleteUser
                 },
                 addRole: {
                     type: RoleType,
                     args: {
-                        name: {type: GraphQLString}
+                        name: { type: GraphQLString }
                     },
-                    resolve: RoleResolver.addRole      
+                    resolve: RoleResolver.addRole
                 },
                 updateRole: {
                     type: RoleType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: RoleInputType}
+                        input: { type: RoleInputType }
                     },
-                   resolve: RoleResolver.updateRole    
+                    resolve: RoleResolver.updateRole
                 },
                 deleteRole: {
-                    type:  RoleType,
+                    type: RoleType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: RoleResolver.deleteRole     
+                    resolve: RoleResolver.deleteRole
                 },
                 addUserRole: {
                     type: UserRoleType,
                     args: {
-                        userId: {type: GraphQLInt},
-                        roleId: {type: GraphQLInt}
+                        userId: { type: GraphQLInt },
+                        roleId: { type: GraphQLInt }
                     },
-                    resolve: RoleResolver.addUserRole      
+                    resolve: RoleResolver.addUserRole
                 },
                 deleteUserRole: {
                     type: UserRoleType,
                     args: {
-                        userId: {type: GraphQLInt},
-                        roleId: {type: GraphQLInt}
+                        userId: { type: GraphQLInt },
+                        roleId: { type: GraphQLInt }
                     },
-                    resolve: RoleResolver.deleteUserRole      
+                    resolve: RoleResolver.deleteUserRole
                 },
                 addProduct: {
                     type: ProductType,
                     args: {
-                        name: {type: GraphQLString},
-                        desc: {type: GraphQLString},
-                        img: {type: GraphQLString },
-                        brand: {type: GraphQLString},
-                        color: {type: GraphQLString},
-                        size: {type: GraphQLString},
-                        price: {type: GraphQLInt},
-                        isActive: {type: GraphQLBoolean},
-                        quantity: {type: GraphQLInt},
-                        categoryId: {type: GraphQLInt},
+                        name: { type: GraphQLString },
+                        desc: { type: GraphQLString },
+                        img: { type: GraphQLString },
+                        brand: { type: GraphQLString },
+                        color: { type: GraphQLString },
+                        size: { type: GraphQLString },
+                        price: { type: GraphQLInt },
+                        isActive: { type: GraphQLBoolean },
+                        quantity: { type: GraphQLInt },
+                        categoryId: { type: GraphQLInt },
                     },
-                    resolve: ProductResolver.create     
+                    resolve: ProductResolver.create
                 },
                 updateProduct: {
                     type: ProductType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: ProductInputType}
+                        input: { type: ProductInputType }
                     },
-                    resolve: ProductResolver.update     
+                    resolve: ProductResolver.update
                 },
                 deleteProduct: {
-                    type:  ProductType,
+                    type: ProductType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: ProductResolver.delete     
+                    resolve: ProductResolver.delete
                 },
                 addCartItem: {
                     type: CartType,
                     args: {
-                        productId: {type: GraphQLInt},
-                        userId: {type: GraphQLInt},
+                        productId: { type: GraphQLInt },
+                        userId: { type: GraphQLInt },
                         // state: {type: GraphQLString},
-                        quantity: {type: GraphQLInt},
+                        quantity: { type: GraphQLInt },
                     },
-                    resolve: CartResolver.addCartItem       
+                    resolve: CartResolver.addCartItem
                 },
                 updateCartItemQuantity: {
                     type: CartType,
                     args: {
-                        id: {type: GraphQLInt},
-                        quantity: {type: GraphQLInt},
+                        id: { type: GraphQLInt },
+                        quantity: { type: GraphQLInt },
                     },
-                    resolve: CartResolver.updateCartItemQuantity       
+                    resolve: CartResolver.updateCartItemQuantity
                 },
-               deleteCartItem: {
+                deleteCartItem: {
                     type: CartType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) }
                     },
-                    resolve: CartResolver.deleteCartItem     
+                    resolve: CartResolver.deleteCartItem
                 },
                 clearCart: {
-                    type:  CartType,
+                    type: CartType,
                     args: {
                         userId: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: CartResolver.clearCart     
+                    resolve: CartResolver.clearCart
                 },
                 login: {
+                    type: LoginType,
+                    args: {
+                        email: { type: GraphQLString },
+                        password: { type: GraphQLString }
+                    },
+                    resolve: LoginResolver.login
+                },
+                authorize: {
                     type: new GraphQLObjectType({
-                        name: "Login",
-                        fields: ()=> ({
-                            token: { type: GraphQLString }
+                        name: "authorize",
+                        fields: () => ({
+                            roles: { type: new GraphQLList(RoleType) },
+                            firstName: { type: GraphQLString },
+                            lastName: { type: GraphQLString },
+                            email: { type: GraphQLString },
+                            id: { type: GraphQLString }
                         })
                     }),
                     args: {
-                        email: {type: GraphQLString},
-                        password: {type: GraphQLString}
+                        token: { type: GraphQLString },
                     },
-                    resolve: LoginResolver.login
+                    resolve: async (parent: any, args: any, context: any) => {
+                        const user = await context.dependency.get("tokenGeneration").verify(args.token, context.dependency.get("appSecretKey"));
+                        return user;
+                    }
+
                 },
                 addOrder: {
                     type: OrderType,
                     args: {
                         // state: {type: GraphQLString},
-                        userId: {type: GraphQLInt},
+                        userId: { type: GraphQLInt },
                         // city: {type: GraphQLString},
                         // sub_city: {type: GraphQLString},
                         // phone: {type: GraphQLString},
                         // total: {type: GraphQLInt},
-                    },  
-                    resolve: OrderResolver.create     
+                    },
+                    resolve: OrderResolver.create
                 },
                 updateOrder: {
                     type: ProductType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: OrderInputType}
+                        input: { type: OrderInputType }
                     },
-                    resolve: OrderResolver.update     
+                    resolve: OrderResolver.update
                 },
                 deleteOrder: {
-                    type:  OrderType,
+                    type: OrderType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: OrderResolver.delete     
+                    resolve: OrderResolver.delete
                 },
                 addCategory: {
                     type: CategoryType,
                     args: {
-                        name: {type: GraphQLString},
+                        name: { type: GraphQLString },
                     },
-                    resolve: CategoryResolver.create        
+                    resolve: CategoryResolver.create
                 },
                 updateCategory: {
                     type: CategoryType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
-                        input: { type: CategoryInputType}
+                        input: { type: CategoryInputType }
                     },
-                    resolve: CategoryResolver.update     
+                    resolve: CategoryResolver.update
                 },
                 deleteCategory: {
-                    type:  CategoryType,
+                    type: CategoryType,
                     args: {
                         id: { type: new GraphQLNonNull(GraphQLInt) },
                     },
-                    resolve: CategoryResolver.delete     
+                    resolve: CategoryResolver.delete
                 }
-        
+
             }
         })
 
@@ -349,7 +367,7 @@ export default class Resolvers{
             query: RootQuery,
             mutation: Mutation
         })
-        
+
     }
 
 
