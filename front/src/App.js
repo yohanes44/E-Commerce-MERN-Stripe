@@ -11,6 +11,15 @@ import Register from "./pages/register/Register";
 
 // import {Router, Route, Switch } from "react-router";
 
+
+//admin pages
+import HomeAdmin from "./pages/adminPanel/home/Home";
+import ListAdmin from "./pages/adminPanel/list/List";
+import Single from "./pages/adminPanel/single/Single";
+import New from "./pages/adminPanel/new/New";
+
+
+// New
 import {
   BrowserRouter as Router,
   Route,
@@ -19,14 +28,15 @@ import {
   Navigate 
 } from "react-router-dom";
 
+import { productInputs, userInputs } from "./formSource";
 
 
 import AuthProvider , { useAuth } from "./utility/context/auth";
 
 import CartProvider , { useCart } from "./utility/context/cart";
+import DarkModeProvider from "./utility/context/darkMode";
 
 function App() {
-
 
 
   // const requireAuth = (element)=>{
@@ -43,6 +53,7 @@ function App() {
     <Router>
      <AuthProvider>
       <CartProvider>
+        <DarkModeProvider>
       <Routes>
         <Route path="/" element={ <Home />} /> 
         <Route  path="/products/:category" element={<ProductList />} /> 
@@ -54,7 +65,19 @@ function App() {
         </Route>  */}
         <Route path="/register" element={<Register />} /> 
         <Route path="/login" element={ <Login /> } /> 
+        <Route path="adminPanel">
+            <Route index element={<HomeAdmin/>}/>
+            <Route path="users">
+              <Route index element={<ListAdmin/>}/>
+              <Route path=":userId" element={<Single/>}/> 
+              <Route path="new" element={<New inputs={userInputs} title="Add New User"/>}/> 
+            </Route>
+            <Route path=":productId" element={<Single/>}/> 
+            <Route path="new" element={<New inputs={productInputs} title="Add New Product"/>}/> 
+        </Route>
       </Routes>
+      </DarkModeProvider>
+
       </CartProvider>
     </AuthProvider>
 
