@@ -1,0 +1,97 @@
+
+
+.newJoinMembers{
+    flex: 4;
+    padding: 20px;
+    --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0,0,0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201,201,201, 0.47);
+
+    // border: 2px solid green;
+
+    // border-radius: 10px;
+
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 5px;
+        // border: 2px solid red;
+
+
+        .top{
+            font-weight: 600;
+            color: #0c0a0a;
+            // margin-left: 10px;   
+        }
+
+        .bottom{
+            .member{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                padding: 5px;
+                // border: 2px solid red;
+
+                .img{
+                    flex: 3;
+                    display: flex;
+                    justify-content: flex-start ;
+                    // border: 2px solid red;
+
+                    img{
+                        height: 60px;
+                        width: 60px;
+                        border-radius: 50%;
+    
+                    }
+                }
+
+                .content{
+                    flex: 6;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;   
+                    padding: 5px;
+                    // border: 2px solid red;
+                    // gap: 15px;
+
+                    .top{
+
+                    }
+                    .bottom{
+                        color: gray;
+                        margin-top: 5px;
+                    }
+                }
+
+                .actions{
+                    flex: 3;
+                    display: flex;
+                    justify-content: flex-end;
+                    // border: 2px solid red;
+                    
+                    .action{
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-around;
+                        align-items: center;
+                        gap: 10px;
+    
+                        background-color: #ece8ff;
+                        padding: 5px 8px;
+    
+                        gap: 5%;
+                        border-radius: 20%;
+    
+                        color: gray;
+                    }
+
+                   
+                }
+            }
+        }
+    }
+}

@@ -7,27 +7,51 @@
     .homeContainer{
         flex: 6;
 
-        .widgets, .charts{
+        .widgets, .charts, .latestSummary{
             display: flex;
             padding: 20px;
             gap: 20px;
+            
+        }
+
+        .latestSummary{
+            display: flex;
+            // border: 2px solid red;
+            
+            .list{
+                flex: 8;
+                --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0,0,0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201,201,201, 0.47);
+                // padding: 20px;
+                // margin: 20px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+
+                .listTitle{
+                    font-weight: 600;
+                    color: #0c0a0a;
+                }
+            }
         }
 
         .charts{
-            padding: 5px 20px ;
+            padding: 5px 20px;
         }
 
         .listContainer{    
-            --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0,0,0.47);
-            box-shadow: 2px 4px 10px 1px rgba(201,201,201, 0.47);
-            padding: 20px;
-            margin: 20px;
+                // --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0,0,0.47);
+                // box-shadow: 2px 4px 10px 1px rgba(201,201,201, 0.47);
+                // padding: 20px;
+                // margin: 20px;
 
-            .listTitle{
-                font-weight: 500;
-                color: gray;
-                margin-bottom: 15px;
-            }
+                // .listTitle{
+                //     font-weight: 500;
+                //     color: gray;
+                //     margin-bottom: 15px;
+                // }
         }
 
 

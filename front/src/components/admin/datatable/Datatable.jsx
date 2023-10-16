@@ -38,7 +38,11 @@ export default function Datatable() {
             <div>Add New</div>
           </Link>
        </div>
-         <DataGrid  className="dataGrid"
+         <DataGrid  className="dataGrid" sx={
+          {
+            width: "fit-content"
+          }
+         }
         rows={rows}
         columns={headCells.concat(actionColumn)}
         // pageSize={5}

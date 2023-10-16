@@ -3,20 +3,37 @@ import myPic from "../src/images/category/shirt2.jpg"
 
 const numOfColumns = 10;
 
+// {
+//   field: "action", 
+//   headerName: "Action", 
+//   width: 200,
+//   renderCell: ()=>{
+//   return (<div className="cellAction">
+//     <Link to="/adminPanel/users/test" style={{textDecoration: "none"}}>
+//     <div className="viewButton">
+//       View
+//     </div>
+//     </Link>
+//     <div className="deleteButton">
+//       Delete
+//     </div>
+//   </div>)
+// } }
 
 export const headCells = [
     {
-        id: 'name',
-        numeric: false,
-        disablePadding: true,
-        label: 'Dessert (100g serving)',
+        field: 'name',
+        headerName: "name", 
+        width: 200,
+        renderCell: ()=>{
+            return (<div className="cellAction">
+              
+              <div className="deleteButton">
+                Delete
+              </div>
+            </div>)
+       }
     },
-    {
-      id: 'name',
-      numeric: false,
-      disablePadding: true,
-      label: 'Dessert (100g serving)',
-  },
     {
         id: 'calories',
         numeric: true,

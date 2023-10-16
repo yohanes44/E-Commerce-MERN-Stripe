@@ -2,17 +2,10 @@ import "./chart.scss"
 
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
- {name: "January", Total: 100},
- {name: "February", Total: 1200},
- {name: "March", Total: 500},
- {name: "April", Total: 800},
- {name: "May", Total: 600},
- {name: "June", Total: 400}
-]; 
 
 
-export default function Chart({aspect, title}) {
+
+export default function Chart({aspect, title, data}) {
   return (
     <div className="chart">
       <div className="title">{title}</div>
