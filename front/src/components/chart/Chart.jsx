@@ -5,9 +5,13 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 
 
-export default function Chart({aspect, title, data}) {
+export default function Chart({aspect, title, data, page}) {
+  console.log("JO: chart page, page == ", page);
+  console.log((page == "adminPanel/product"));
   return (
-    <div className="chart">
+    <div className="chart" style={{
+      flex: (page == "adminPanel/product") ? "5" : "6"  
+    }}>
       <div className="title">{title}</div>
 <ResponsiveContainer width="100%" aspect={aspect}  >
 <AreaChart width={730} height={250} data={data}

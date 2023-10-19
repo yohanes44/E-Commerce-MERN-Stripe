@@ -17,7 +17,7 @@ import HomeAdmin from "./pages/adminPanel/home/Home";
 import ListAdmin from "./pages/adminPanel/list/List";
 import Single from "./pages/adminPanel/single/Single";
 import New from "./pages/adminPanel/new/New";
-
+import ProductAdmin from "./pages/adminPanel/product/product";
 
 // New
 import {
@@ -74,7 +74,7 @@ function App() {
             </Route>
             <Route path="product">
               <Route index element={<ListAdmin/>}/>
-              <Route path=":productId" element={<Single/>}/> 
+              <Route path=":productId" element={<ProductAdmin/>}/> 
               <Route path="new" element={<New inputs={productInputs} title="Add New Product"/>}/> 
             </Route>
         </Route>

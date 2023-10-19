@@ -5,7 +5,7 @@ import Navbar from '../../../components/admin/navbar/Navbar';
 import "./single.scss"
 
 import userImage from "./myPic.jpg"
-import Chart from '../../../components/admin/chart/Chart';
+import Chart from '../../../components/chart/Chart';
 import List from "../../../components/admin/table/Table"
 
 function Single() {

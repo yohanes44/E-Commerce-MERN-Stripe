@@ -5,7 +5,7 @@ import Navbar from '../../../components/admin/navbar/Navbar';
 import "./home.scss"
 import Widget from '../../../components/admin/widget/Widget';
 import Featured from '../../../components/admin/featured/Featured';
-import Chart from '../../../components/admin/chart/Chart';
+import Chart from '../../../components/chart/Chart';
 import List from '../../../components/admin/table/Table';
 
 import NewJoinMembers from '../../../components/admin/newJoinMembers/NewJoinMembers';
