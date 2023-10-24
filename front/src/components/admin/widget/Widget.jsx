@@ -10,6 +10,9 @@ import {
   MonetizationOnOutlined,
 } from "@mui/icons-material";
 
+import { Link } from "react-router-dom";
+
+
 function Widget({ type }) {
   var data = null;
 
@@ -21,7 +24,7 @@ function Widget({ type }) {
       data = {
         title: "USERS",
         isMoney: false,
-        link: "See all users",
+        link: "/adminPanel/users",
         icon: <PersonOutlined 
             className="icon"
             style={{color: "crimson", backgroundColor: "rgba(255,0,0,0.2)"}} />,
@@ -63,10 +66,13 @@ function Widget({ type }) {
 
   return (
     <div className="widget">
+     
       <div className="left">
         <div className="title">{data.title}</div>
         <div className="counter">{data.isMoney && "$"} {ammount}</div>
-        <div className="link">{data.link}</div>
+        <Link to={data.link}>
+          <div className="link">{`view all ${data.title}`}</div>
+        </Link>
       </div>
       <div className="right">
         <div className="percentage">
@@ -75,6 +81,7 @@ function Widget({ type }) {
         </div>
        {data.icon}
       </div>
+     
     </div>
   );
 }

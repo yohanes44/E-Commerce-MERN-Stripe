@@ -29,7 +29,7 @@ function Sidebar() {
     <div className="sidebar" >
       <div className="wrapper">
         <div className="top">
-          <Link to="/" style={{textDecoration: "none"}}>
+          <Link to="/adminPanel" style={{textDecoration: "none"}}>
           <div className="logo">Admin Panel</div>
         
           </Link>
@@ -46,14 +46,14 @@ function Sidebar() {
             </Link>
 
             <p className="title">Lists</p>
-            <Link to="/users" style={{textDecoration: "none"}}>
+            <Link to="/adminPanel/users" style={{textDecoration: "none"}}>
               <li>
                 <PersonOutline className="icon" />
                 <span>Users</span>
               </li>
             </Link>
 
-            <Link to="/products" style={{textDecoration: "none"}}>
+            <Link to="/adminPanel/products" style={{textDecoration: "none"}}>
               <li>
                 <Store className="icon" />
                 <span>Products</span>

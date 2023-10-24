@@ -10,6 +10,7 @@ import List from '../../../components/admin/table/Table';
 
 import NewJoinMembers from '../../../components/admin/newJoinMembers/NewJoinMembers';
 import LatestTransaction from '../../../components/admin/latestTrabsactions/latestTransactions';
+import { Link } from "react-router-dom";
 
 function HomeAdmin() {
     return (
@@ -17,6 +18,7 @@ function HomeAdmin() {
            <Sidebar/>
            <div className="homeContainer">
                 <Navbar />
+
                 <div className="widgets">
                     <Widget type="user"/>
                     <Widget type="order"/>
@@ -27,7 +29,7 @@ function HomeAdmin() {
                 <div className="charts">
                     {/* <Featured /> */}
                     <Chart  aspect={4/1} title="User Analytics"
-                     data={
+                        data={
                         [
                             {name: "January", Total: 100},
                             {name: "February", Total: 1200},
@@ -35,8 +37,9 @@ function HomeAdmin() {
                             {name: "April", Total: 800},
                             {name: "May", Total: 600},
                             {name: "June", Total: 400}
-                           ]
-                    } />
+                        ]
+                        } 
+                    />
                 </div>
 
 
