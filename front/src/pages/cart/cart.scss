@@ -51,6 +51,19 @@
                 .product{
                     display: flex;
                     justify-content: space-between;
+                     margin: 7px;
+                    padding: 5px;
+
+                    .cancelOperation{
+                        color: red;
+                        font-weight:bolder;
+                        font-size: 19px;
+                        cursor: pointer;
+                        border: 2px solid rgba(0, 0, 0, 0.274) ;
+                        height: fit-content;
+                        padding: 3px;
+                        border-radius: 5px;
+                    }
 
                     .productDetail{
                         flex: 2;
@@ -58,6 +71,7 @@
 
                         img{
                             width: 200px;
+                            height: 170px;
                         }
 
                         .details{

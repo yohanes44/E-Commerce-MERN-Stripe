@@ -7,68 +7,101 @@ import { KeyboardArrowLeftOutlined, KeyboardArrowRightOutlined } from '@mui/icon
 
 import React, { useState } from 'react'
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Redirect,
+  Link
+} from "react-router-dom"
+
 export default function Slider() {
 
-  const [sliderItem, setSliderItem] = useState(2)
+  const [sliderItem, setSliderItem] = useState(0)
 
 const sliderItems = [
   {
-    id: 1,
-    img: "https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k",
-    title: "Summer Sale",
+    id: 0,
+    img: "http://localhost:3005/api/image/product/cover2.jpg",
+    title: "Huge Discount",
+    category: "shoes",
     desc: "DON'T COMPROMISE  ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS."
+  },
+  {
+    id: 1,
+    img: "http://localhost:3005/api/image/category/shoes4.jpg",
+    title: "Shoes",
+    category: "shoes",
+    desc: "Showcase the latest footwear trends, from sneakers to high heels, for the fashion-forward shopper."
   },
   {
     id: 2,
-    img: "https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k",
-    title: "Winter Sale",
-    desc: "DON'T COMPROMISE  ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS."
-  },
-  {
-    id: 3,
-    img: "https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k",
-    title: "Autumn Sale",
-    desc: "DON'T COMPROMISE  ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS."
+    img: "http://localhost:3005/api/image/category/mobile10.jpg",
+    title: "Electornics",
+    category: "mobile",
+    desc: "Explore cutting-edge gadgets and technology, including smartphones and laptops."
   }
 ]
 
-const handleClick = (direction)=>{
+const handleClickCarousel = (direction)=>{
+
+  let newSliderNum;
+
   if(direction ===  "left"){
-    setSliderItem(sliderItem > 0? sliderItem - 1: 2);
+    console.log("direction ===  left, ");
+    // setSliderItem(sliderItem > 0? sliderItem - 1: 2);
+  
+    newSliderNum = (currentSlide == 0) ? 2 : currentSlide - 1;
+    // setSliderItem(1)
+    setCurrentSlide(newSliderNum)
   }
   if(direction === "right"){
-    setSliderItem(sliderItem < 2? sliderItem + 1: 0);
+    // setSliderItem(sliderItem < 2? sliderItem + 1: 0);
+    console.log("direction ===  right");
+    newSliderNum = (currentSlide == 2) ? 0 : currentSlide + 1;
+
+    setCurrentSlide(newSliderNum)
+    // setSliderItem(2)
   }
 }
+
+const [currentSlide, setCurrentSlide] = useState(0);
+
 
 
   return (
     <div className="sliderContainer">
-      <div className="arrow left" onClick={()=>handleClick("left")}>
+      <div className="arrow left" onClick={()=>handleClickCarousel("left")}>
         <KeyboardArrowLeftOutlined />
       </div>
       <div className="wrapper" style={{
             transform:  `translateX(${sliderItem} * -100vw)`
       }}>
+        
+
         <div className="slide">
           <div className="imgContainer">
-            <img src="https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k" alt="img" />
+            <img src={sliderItems[currentSlide].img} alt="img" />
           </div>
           <div className="infoContainer">
-            <h1 className="title">SUMMER SALE</h1>
-            <p className="desc">DON'T COMPROMISE  ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.</p>
-            <button>SHOW NOW</button>
+           
+            <h1 className="title">{sliderItems[currentSlide].title}</h1>
+            <p className="desc">{sliderItems[currentSlide].desc}</p>
+            <Link to={`products/${sliderItems[currentSlide].category}`}>
+                <button>SHOP NOW</button>
+            </Link>
           </div>
-
         </div>
 
-        {
-          sliderItems.map((item, i) => (
 
-        <div className="slide">
+        {/* {
+          sliderItems.map((item, index) => (
+
+        <div className={`slide ${currentSlide == index ? 'jo' : ''}`} index={index} >
           <div className="imgContainer">
             <img src={item.img} alt="img" />
           </div>
+          <h1>{index}</h1>
           <div className="infoContainer">
             <h1 className="title">{item.title}</h1>
             <p className="desc">{item.desc}</p>
@@ -77,21 +110,11 @@ const handleClick = (direction)=>{
 
         </div>
           ))
-        }
-        <div className="slide">
-          <div className="imgContainer">
-            <img src="https://fastly.picsum.photos/id/699/200/300.jpg?hmac=s68cvOJXxl4ZvaOM6PpveL8klBiaViC9Nbi02oETt5k" alt="img" />
-          </div>
-          <div className="infoContainer">
-            <h1 className="title">POPULAR SALE</h1>
-            <p className="desc">DON'T COMPROMISE  ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.</p>
-            <button>SHOW NOW</button>
-          </div>
-
-        </div>
+        } */}
        
+   
       </div>
-      <div className="arrow right" onClick={()=>handleClick("right")}>
+      <div className="arrow right" onClick={()=>handleClickCarousel("right")}>
         <KeyboardArrowRightOutlined />
       </div>
     </div>

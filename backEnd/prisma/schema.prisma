@@ -15,6 +15,7 @@ model User {
   firstName String      @db.VarChar(255)
   lastName  String      @db.VarChar(255)
   email     String      @unique @db.VarChar(255)
+  phoneNumber Int       
   password  String      @db.VarChar(255)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -45,7 +46,7 @@ model Product {
   desc     String  @db.VarChar(255)
   img      String  @db.VarChar(255)
   brand    String  @db.VarChar(255)
-  color  Json[] 
+  color    String
   size     String  @db.VarChar(255)
   categoryId Int
   price    Int

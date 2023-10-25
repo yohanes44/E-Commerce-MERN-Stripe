@@ -1,9 +1,6 @@
 import React, { useEffect, createContext, useContext, useState } from "react";
-
-import { Navigate, useNavigate } from "react-router";
-import { request, gql } from "graphql-request"; // Import necessary functions and objects
+import { request, gql } from "graphql-request";
 import backEndGraphQLURL from "../../utility/http";
-
 import { useAuth } from "./auth";
 
 const CartContext = createContext();
@@ -14,137 +11,173 @@ export const useCart = () => {
 
 export default function CartProvider({ children }) {
 
-  const [cartItems, setCartItems] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartItem, setCartItem] = useState({});
   const [totalCart, setTotalCart] = useState(0);
-
-
-  const { isAuthenticated, setAuthenticated, login, setToken, user } =
-    useAuth();
-
-  
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
-    try {
-      if (isAuthenticated) {
-         findTotalCart(user.id);
-         findCartItems(user.id);
-      }
-    //   if (!isAuthenticated) {
-    //     setTotalCart(0);
-    //   }
-    } catch (error) {
-      console.log(error);
+    if (isAuthenticated) {
+      findTotalCart(user.id);
+      findCartItems(user.id);
     }
-  }, [isAuthenticated, cartItems]);
+  }, [isAuthenticated, user, totalCart, cartItems]);
+
+  const findTotalCart = async (userId) => {
+    try {
+      const findCartItemQuery = gql`
+        query GetCartItems($userId: Int!) {
+          cartItems(userId: $userId) {
+            id
+            userId
+            productId
+            state
+            quantity
+            product {
+              id
+              name
+              img
+              color
+              quantity
+              price
+            }
+          }
+        }
+      `;
+
+      const variables = { userId: parseInt(userId) };
+      const response = await request(backEndGraphQLURL, findCartItemQuery, variables);
+
+      setTotalCart(response.cartItems.length);
+    } catch (error) {
+      console.error("Error fetching total cart:", error);
+    }
+  };
+
+  const findCartItems = async (userId) => {
+    try {
+      const productQuery = gql`
+        query GetCartItems($userId: Int!) {
+          cartItems(userId: $userId) {
+            id
+            userId
+            productId
+            state
+            quantity
+            product {
+              id
+              name
+              img
+              color
+              quantity
+              price
+            }
+          }
+        }
+      `;
+
+      const variables = { userId: parseInt(userId) };
+      const responseProduct = await request(backEndGraphQLURL, productQuery, variables);
+
+      setCartItems(responseProduct.cartItems);
+    } catch (err) {
+      console.error("Error fetching cart items:", err);
+    }
+  };
+
+  const addCartItems = async (id, quantity) => {
 
 
-  console.log("CartContext: user == ");
-  console.log(user);
-
-  const findTotalCart = async (id) => {
-
-    console.log("CartContext: findTotalCart called");
-    
-    // const userId = parseInt(user.id);
+    console.log("addCartItems function called");
     const userId = parseInt(user.id);
+    const productId = id;
 
-    console.log("CartContext: user == ");
-    console.log(user);
-
-    const findCartItemQuery = gql`
-      query GetCartItems($userId: Int!) {
-        cartItems(userId: $userId) {
-          id
+    try {
+      const addToCartMutation = gql`
+      mutation addCartItem($userId: Int!, $productId: Int!, $quantity: Int!) {
+        addCartItem(userId: $userId, productId: $productId, quantity: $quantity) {
           userId
           productId
-          state
-          quantity
-          product {
-            id
-            name
-            img
-            color
-            quantity
-            price
-          }
         }
       }
     `;
-    const variables = { userId: userId };
+      const variables = { userId, productId, quantity};
 
-    let response = await request(
-      backEndGraphQLURL,
-      findCartItemQuery,
-      variables
-    );
-
-    
-    console.log("CartContext: user raphQL response == ");
-    console.log(response);
-
-    console.log("CartContext: cartItems.length raphQL response == ");
-    console.log(response.cartItems.length);
-  
-
-    setTotalCart(response.cartItems.length);
+      let responseAddCartItem = await request(backEndGraphQLURL,addToCartMutation,variables);
+      setCartItem( responseAddCartItem.addCartItem);
+    } catch (err) {
+      console.log(err)
+    }
   };
 
-  
-  const findCartItems = async (id) => {
+  const cancelCartItem = async (id) => {
     
-        try {
-          const productQuery = gql`
-            query GetCartItems($userId: Int!) {
-              cartItems(userId: $userId) {
-                id
-                userId
-                productId
-                state
-                quantity
-                product{
-                  id
-                  name
-                  img
-                  color
-                  quantity
-                  price
-                }
-              }
-            }
-          `;
-  
-          const variables = { userId: parseInt(user.id) }; // Define your variable object
-  
-          let responseProduct = await request(
-            backEndGraphQLURL,
-            productQuery,
-            variables
-          );
+    console.log("cancelCartItem function called");
 
-          setCartItems(responseProduct.cartItems);
-  
-          console.log("responseProduct.cartItems", responseProduct.cartItems);
-  
-          // setLoading(false);
-  
-          //jo
-  
-          //jo
-        } catch (err) {
-          console.log(err);
-          // setError(err);
-          // setLoading(false);
+    try {
+      const deleteCartItemMutation = gql`
+      mutation deleteCartItem($id: Int!) {
+        deleteCartItem(id: $id) {
+          id
         }
+      }
+    `;
+      const variables = { id};
+
+      let responseDeleteCartItem = await request(backEndGraphQLURL,deleteCartItemMutation,variables);
+      console.log( responseDeleteCartItem.deleteCartItem);
+
+    } catch (err) {
+      console.log(err)
+    }
   }
+
+  const updateCartItemQuantity = async (id, currentQuantity, operation) => {
+
+   
+    const updateQuantity = async (id, quantity)=>{
+
+      console.log("updateQuantity function called");
+  
+      try {
+        const updateCartItemQuantityMutation = gql`
+        mutation updateCartItemQuantity($id: Int!, $quantity: Int!) {
+          updateCartItemQuantity(id: $id, quantity: $quantity) {
+            id
+          }
+        }
+      `;
+        const variables = { id: id, quantity};
+  
+        let responseUpdateCartItemQuantity= await request(backEndGraphQLURL,updateCartItemQuantityMutation,variables);
+        console.log( responseUpdateCartItemQuantity.updateCartItemQuantity);
+  
+      } catch (err) {
+        console.log(err)
+      }
+
+    }
+
+     if(operation === "add" ){
+      updateQuantity(id, currentQuantity + 1);
+    }
+    if(operation === "minus"){
+      updateQuantity(id, currentQuantity - 1);
+    }
+ 
+   
+  }
+
 
   const contextValue = {
     totalCart,
-    cartItems, 
+    cartItems,
     setCartItems,
-    findCartItems
+    findCartItems,
+    addCartItems,
+    cancelCartItem,
+    updateCartItemQuantity
   };
 
-  return (
-    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
-  );
+  return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 }

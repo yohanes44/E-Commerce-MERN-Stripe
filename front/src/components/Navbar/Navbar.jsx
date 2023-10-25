@@ -25,6 +25,10 @@ export default function Navbar() {
 
 
   return (
+   
+  //  <div>
+  //   Nav Bar Test
+  //  </div>
     <div className="navbar">
       <div className="navbarContainer">
         <div className="left">
@@ -74,7 +78,7 @@ export default function Navbar() {
                 </Badge>
               </div>
             </Link>
-            <div className="menuItem" onClick={(e)=> logOut()}>Logout</div> 
+                 <div className="menuItem" onClick={(e)=> logOut()}>Logout</div> 
                 </>  
            }
             {/* { (isAuthenticated === false) ?

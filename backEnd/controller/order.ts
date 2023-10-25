@@ -113,15 +113,18 @@ export default class OrderController{
                   state: "ordered",
                   city: "Addis Ababa",
                   sub_city: "Bole",
-                  phone: "+251967584032"
+                  phone: cartItems[0].user.phoneNumber
                 },
               });
 
-              await db.cart.deleteMany({
+              await db.cart.updateMany({
                 where: { 
                     userId: data.userId,
                     state: "inCart" 
                 },
+                data: {
+                    state: "ordered"
+                }
               });
       
               return createdOrder;

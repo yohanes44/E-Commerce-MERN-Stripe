@@ -13,14 +13,25 @@ import NewsLetter from "../../components/newsLetter/NewsLetter";
 import Footer from "../../components/footer/Footer";
 
 import "./product.scss";
+
 import { Add, Remove } from "@mui/icons-material";
 
 import { useAuth } from "../../utility/context/auth";
 
+import { useCart } from "../../utility/context/cart";
+
+
 export default function Product() {
 
+ 
   
   const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
+  const { totalCart,
+    cartItems,
+    setCartItems,
+    findCartItems,
+    addCartItems} = useCart();
+
 
   
   const location = useLocation();
@@ -120,22 +131,12 @@ export default function Product() {
     const productId = id;
 
     try {
-      const addToCartMutation = gql`
-      mutation addCartItem($userId: Int!, $productId: Int!, $quantity: Int!) {
-        addCartItem(userId: $userId, productId: $productId, quantity: $quantity) {
-          userId
-          productId
-        }
-      }
-    `;
-      const variables = { userId, productId, quantity};
 
-      let responseAddCartItem = await request(backEndGraphQLURL,addToCartMutation,variables);
-      setCartItem( responseAddCartItem.addCartItem);
-      setConfirmPopUp(true);
-
-      setLoading(false);
-    } catch (err) {
+      addCartItems(id, quantity);
+      setConfirmPopUp(true);  
+   } 
+    
+    catch (err) {
       console.log(err)
       setError(err);  
       setLoading(false);

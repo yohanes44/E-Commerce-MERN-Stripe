@@ -6,6 +6,8 @@
     height: 100vh;
     background-color: coral;
     position: relative;
+    // border: 3px solid green;
+
     // overflow: hidden;
 
     .arrow{
@@ -36,28 +38,36 @@
 
 
     .wrapper{
-        height: 100%;
+        // width: 100%;
+        height: 100vh;
+
         display: flex;
-    
-        
  
         .slide{
             display: flex;
             align-items: center;
-            width: 100vw;
+            width: 100%;
+            // max-width: 1020px;
             // border: 2px solid red;
-            height: 100vh;
+            height: auto;
+            
             background-color: #fcf1ed;
+            // border: 3px solid red;
+            // opacity: 0;
 
             .imgContainer{
                 flex: 1;
                 height: 100%;
+                width: 50%;
+                // border: 2px solid black;
+
                 // width: 50vh;
                 // border: 2px solid green;
                 
                     img{
-                        height: 80%;
-                        //  width: 100%;
+                        height: 100%;
+                        width: 100%;
+                         
                     }
             
             }
@@ -65,7 +75,7 @@
                 flex: 1;
                 padding: 50px;
                 // border: 2px solid green;
-                // width: 50vh;
+                 width: 50%;
                
                 .title{
                
@@ -87,6 +97,11 @@
                     cursor: pointer;
                 }
             }
+
+          
+        }
+        .jo{
+            opacity: 1;
         }
     
     }
