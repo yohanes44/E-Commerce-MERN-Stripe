@@ -175,7 +175,7 @@ export default function Product() {
               >
                 Color
               </span>
-              {product.color.map((color) => {
+              {/* {product.color.map((color) => {
                 return (
                   <div
                     onClick={() => {
@@ -185,7 +185,7 @@ export default function Product() {
                     style={{ backgroundColor: `${color.color}` }}
                   ></div>
                 );
-              })}
+              })} */}
             </div>
             <div className="filter">
               <span className="filterTitle">Size</span>
