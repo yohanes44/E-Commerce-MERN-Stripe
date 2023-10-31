@@ -20,20 +20,12 @@ import { useAuth } from "../../utility/context/auth";
 
 import { useCart } from "../../utility/context/cart";
 
-
 export default function Product() {
+  const { isAuthenticated, setAuthenticated, login, setToken, user } =
+    useAuth();
+  const { totalCart, cartItems, setCartItems, findCartItems, addCartItems } =
+    useCart();
 
- 
-  
-  const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
-  const { totalCart,
-    cartItems,
-    setCartItems,
-    findCartItems,
-    addCartItems} = useCart();
-
-
-  
   const location = useLocation();
   const id = parseInt(location.pathname.split("/")[2]);
 
@@ -59,20 +51,25 @@ export default function Product() {
     quantity: 0,
   });
 
+  const [productVariation, setProductVariation] = useState([]);
+  const [allProductVariation, setAllProductVariation] = useState([]);
+  const [selectedProductVariation, setSelectedProductVariation] = useState({});
+
   const [cartItem, setCartItem] = useState({});
 
+  const [colors, setColors] = useState([]);
   const [color, setColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  
 
-  const [sizes, setSizes] =  useState(["XS", "S", "M", "L", "XL"]);
+  const [maxLimit, setMaxLimit] = useState(10);
+
+  const [sizes, setSizes] = useState([]);
 
   const [size, setSize] = useState("");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [confirmPopUp, setConfirmPopUp] = useState(false);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,28 +91,69 @@ export default function Product() {
           }
         `;
 
-        const variables = { id: parseInt(id) }; // Define your variable object
+        const productVariationQuery = gql`
+          query getProductVariation($id: Int!) {
+            productVariation(id: $id) {
+              id
+              color
+              img
+              size
+              quantity
+            }
+          }
+        `;
+        const productVariables = { id: parseInt(id) }; // Define your variable object
+        const productVariationVariables = { id: parseInt(id) }; // Define your variable object
 
         let responseProduct = await request(
           backEndGraphQLURL,
           productQuery,
-          variables
+          productVariables
         );
-
-        // let temp = responseProduct.product;
-        responseProduct.product.color = JSON.parse(
-          responseProduct.product.color
-        );
-
+        
         setProduct(responseProduct.product);
+      
+        let responseProductVariation = await request(
+          backEndGraphQLURL,
+          productVariationQuery,
+          productVariationVariables
+        );
 
-        console.log("product color", product.color[1].color);
+        setProductVariation(responseProductVariation.productVariation);
+        setAllProductVariation(responseProductVariation.productVariation);
 
+        let tempColors = [];
+        setColors(
+          responseProductVariation.productVariation.map((pro) => {
+            // console.log(pro.color );
+            if (!tempColors.includes(pro.color)) {
+              tempColors.push(pro.color);
+              // console.log(tempColors.includes(pro.color));
+              return pro.color;
+            }
+            // return false;
+          })
+        );
+    
+        setColors(tempColors);
+         setSelectedProductVariation(
+          productVariation[0]
+        );
+    
+        // console.log(responseProductVariation.productVariation);
+    
+        setSizes(
+          responseProductVariation.productVariation.map((pro) => {
+            return pro.size;
+          })
+        );
+        
+        setColor(responseProductVariation.productVariation[0].color);
+        // console.log({CL: getColor()});
+        initializeVariant(responseProductVariation.productVariation[0].color,  responseProductVariation.productVariation);
+        setSize( responseProductVariation.productVariation[0].size);
+        // variationHandler();
         setLoading(false);
-
-        //jo
-
-        //jo
       } catch (err) {
         setError(err);
         setLoading(false);
@@ -123,50 +161,114 @@ export default function Product() {
     };
 
     fetchData();
-  }, [id, quantity]);
+  },[id, quantity]);
+
+
+
+  function initializeVariant(cl, allProductVariation){
+    
+    console.log("initializeVariant called, CL == ", cl);
+
+    let variant = allProductVariation.filter((pro) => {
+      if (pro.color === cl) {
+        return pro;
+      }
+    });
+
+    
+    setProductVariation(variant);
+    setSizes(
+      variant.map((pro) => {
+        return pro.size;
+      })
+    );
+
+  }
+
 
   const addToCart = async (e) => {
-
     const userId = parseInt(user.id);
     const productId = id;
 
     try {
-
       addCartItems(id, quantity);
-      setConfirmPopUp(true);  
-   } 
-    
-    catch (err) {
-      console.log(err)
-      setError(err);  
+      setConfirmPopUp(true);
+    } catch (err) {
+      console.log(err);
+      setError(err);
       setLoading(false);
     }
   };
-  
-  const handleQuantity = (operation) => {    
+
+  const handleQuantity = (operation) => {
     setQuantity((state) => {
-      if (operation === 'add') {
+      if (operation === "add") {
         return state + 1; // Increment by 1 for 'add' operation
       }
-      if (operation === 'minus') {
+      if (operation === "minus") {
         return state - 1; // Decrement by 1 for 'minus' operation
       }
     });
   };
 
 
+  const handleVariation = (variationKey, variationValue, allProductVariation) => {
+   
+   let variant = null;
+   console.log({selectedColor: variationValue});
+   if (variationKey === "color") {
+     variant = allProductVariation.filter((pro) => {
+       if (pro.color === variationValue) {
+         return pro;
+       }
+     });
+     setColor(variationValue);
+     setProductVariation(variant);
+    
+     setSizes(
+      variant.map((pro) => {
+        return pro.size;
+      })
+    );
+
+    setSize(
+      variant[0].size
+    );
+      
+    // console.log({productVariation, variant});
+
+   }
+  
+  return;
+  };
+
+  const getVariant = (color, size) => {  
+      let variant = productVariation.find((pro) => {
+        if (pro.color === color && pro.size === size) {
+          return pro;
+        }
+      });
+
+      setMaxLimit(variant.quantity);
+      console.log({jomaxLimit: variant.quantity});
+  }
+
   return (
     <div className="productPageContainer">
       <Navbar />
       <Announcement />
       <div className="wrapper">
-        <div className="imgContainer">
-          <img src={product.img} alt="" />
+        <div className="imgContainer" style={{
+          
+        }}>
+          <img src={  (product.img) ? product.img: "http://localhost:3005/api/image/product/productDefaultPic.png"} alt="" />
         </div>
         <div className="infoContainer">
           <h1 className="title">{product.name}</h1>
           <p className="desc">{product.desc}</p>
           <span className="price">Birr {product.price * quantity}</span>
+          <h3>color: {color}, size: {size}</h3>
+         
           <div className="filterContainer">
             <div className="filter">
               <span
@@ -175,51 +277,73 @@ export default function Product() {
               >
                 Color
               </span>
-              {/* {product.color.map((color) => {
+              {colors.map((color) => {
                 return (
                   <div
-                    onClick={() => {
-                      setColor(color.color);
+                    onClick={(e) => {
+                      console.log(color);
+                      // setProductVariation(allProductVariation);
+                      handleVariation("color", color, allProductVariation);
+                      // setProductVariation(allProductVariation);
+                      // setColor(color.color);
                     }}
                     className="filterColor"
-                    style={{ backgroundColor: `${color.color}` }}
+                    style={{
+                      backgroundColor: color,
+                      border: `0.4px solid black`,
+                    }}
                   ></div>
                 );
-              })} */}
+              })}
             </div>
             <div className="filter">
               <span className="filterTitle">Size</span>
-              <select name="" id="">
-                {
-                  sizes.map((size)=>{
-                    return <option value={size}>{size}</option>
-                  })
-                }
+              <select name="" id=""  onChange={(e) => {
+                        setSize(e.target.value);
+                        getVariant(color, e.target.value)
+                      }}>
+                {sizes.map((size) => {
+                  return (
+                    <option
+                     
+                      value={size}
+                    >
+                      {size}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
 
           <div className="addContainer">
             <div className="amountContainer">
-              <Remove  disabled={quantity < 2} onClick={(e) => {
-                  if(quantity > 1) return handleQuantity("minus")
-                  }
-                } />
+              <Remove
+                disabled={quantity < 2}
+                onClick={(e) => {
+                  if (quantity > 1) return handleQuantity("minus");
+                }}
+              />
               <span className="amount">{quantity}</span>
-              <Add disabled={quantity > 10}  onClick={(e)=>{
-                  if(quantity < 10) return handleQuantity("add")
-              }} />
+              <Add
+                disabled={quantity > maxLimit}
+                onClick={(e) => {
+                  if (quantity < maxLimit) return handleQuantity("add");
+                }}
+              />
             </div>
             <button onClick={addToCart}>ADD TO CART</button>
-           
           </div>
-          { confirmPopUp ?
-          <div className="popUpContainer">
+          {confirmPopUp ? (
+            <div className="popUpContainer">
               <div className="productDetail">
-                 <h1 style={{color: "green"}} className="confirmText">{`${product.name} Added to Cart Succesfuly`}</h1>
+                <h1
+                  style={{ color: "green" }}
+                  className="confirmText"
+                >{`${product.name} Added to Cart Succesfuly`}</h1>
               </div>
-          </div>: null
-          }
+            </div>
+          ) : null}
         </div>
       </div>
       <NewsLetter />
