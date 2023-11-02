@@ -14,7 +14,7 @@ import Product from './Product'
 
 import "./products.scss"
 
-export default function Products() {
+export default function Products({ selectedFilter }) {
   
   const location = useLocation();
   const category = location.pathname.split("/")[2]

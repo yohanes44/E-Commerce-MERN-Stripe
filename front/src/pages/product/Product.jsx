@@ -19,6 +19,7 @@ import { Add, Remove } from "@mui/icons-material";
 import { useAuth } from "../../utility/context/auth";
 
 import { useCart } from "../../utility/context/cart";
+import { Link } from "react-router-dom";
 
 export default function Product() {
   const { isAuthenticated, setAuthenticated, login, setToken, user } =
@@ -58,7 +59,7 @@ export default function Product() {
   const [cartItem, setCartItem] = useState({});
 
   const [colors, setColors] = useState([]);
-  const [color, setColor] = useState("");
+  const [activeColor, setActiveColor] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   const [maxLimit, setMaxLimit] = useState(10);
@@ -136,9 +137,10 @@ export default function Product() {
         );
     
         setColors(tempColors);
-         setSelectedProductVariation(
-          productVariation[0]
-        );
+         
+        // setSelectedProductVariation(
+        //   productVariation[0]
+        // );
     
         // console.log(responseProductVariation.productVariation);
     
@@ -148,7 +150,7 @@ export default function Product() {
           })
         );
         
-        setColor(responseProductVariation.productVariation[0].color);
+        setActiveColor(responseProductVariation.productVariation[0].color);
         // console.log({CL: getColor()});
         initializeVariant(responseProductVariation.productVariation[0].color,  responseProductVariation.productVariation);
         setSize( responseProductVariation.productVariation[0].size);
@@ -161,7 +163,7 @@ export default function Product() {
     };
 
     fetchData();
-  },[id, quantity]);
+  },[id]);
 
 
 
@@ -183,13 +185,18 @@ export default function Product() {
       })
     );
 
+    setMaxLimit(variant[0].quantity);
+    setSelectedProductVariation(variant[0]);
   }
 
 
   const addToCart = async (e) => {
+
+
+
     const userId = parseInt(user.id);
     const productId = id;
-
+    
     try {
       addCartItems(id, quantity);
       setConfirmPopUp(true);
@@ -198,9 +205,16 @@ export default function Product() {
       setError(err);
       setLoading(false);
     }
+
+    // console.log("addToCart called");
+    // console.log({selectedProductVariation, quantity});
+
   };
 
   const handleQuantity = (operation) => {
+    
+    console.log("1 handleQuantity called, selectedQuantity == ", selectedProductVariation);
+
     setQuantity((state) => {
       if (operation === "add") {
         return state + 1; // Increment by 1 for 'add' operation
@@ -209,20 +223,25 @@ export default function Product() {
         return state - 1; // Decrement by 1 for 'minus' operation
       }
     });
+
+    console.log("2 handleQuantity called, selectedQuantity == ", selectedProductVariation);
+
+    // setMaxLimit(maxLimit);
   };
 
 
   const handleVariation = (variationKey, variationValue, allProductVariation) => {
    
    let variant = null;
-   console.log({selectedColor: variationValue});
+  //  console.log({selectedColor: variationValue});
    if (variationKey === "color") {
      variant = allProductVariation.filter((pro) => {
        if (pro.color === variationValue) {
          return pro;
        }
      });
-     setColor(variationValue);
+     
+     setActiveColor(variationValue);
      setProductVariation(variant);
     
      setSizes(
@@ -234,7 +253,8 @@ export default function Product() {
     setSize(
       variant[0].size
     );
-      
+    setVar(variant[0]);      
+    setQuantity(1);
     // console.log({productVariation, variant});
 
    }
@@ -242,15 +262,21 @@ export default function Product() {
   return;
   };
 
+
+  function setVar(variant){
+    setMaxLimit(variant.quantity);
+    setSelectedProductVariation(variant);
+  }
+
   const getVariant = (color, size) => {  
       let variant = productVariation.find((pro) => {
         if (pro.color === color && pro.size === size) {
           return pro;
         }
       });
-
-      setMaxLimit(variant.quantity);
-      console.log({jomaxLimit: variant.quantity});
+      
+      setVar(variant);
+      setQuantity(1);
   }
 
   return (
@@ -263,36 +289,53 @@ export default function Product() {
         }}>
           <img src={  (product.img) ? product.img: "http://localhost:3005/api/image/product/productDefaultPic.png"} alt="" />
         </div>
-        <div className="infoContainer">
+
+        {
+          user ? <div className="infoContainer">
           <h1 className="title">{product.name}</h1>
           <p className="desc">{product.desc}</p>
           <span className="price">Birr {product.price * quantity}</span>
-          <h3>color: {color}, size: {size}</h3>
+          {/* <h1>{selectedProductVariation.color},  {quantity}</h1> */}
+         
          
           <div className="filterContainer">
             <div className="filter">
               <span
                 className="filterTitle"
-                style={{ color: color, fontWeight: "bolder" }}
+                style={{ fontWeight: "bolder" }}
               >
                 Color
               </span>
               {colors.map((color) => {
                 return (
-                  <div
+                  <div style={{
+                    width: "22px",
+                    height: "22px",
+                    borderRadius: "50%",
+                    margin: "0px 5px",
+                    cursor: "pointer",
+                    border: (activeColor == color) ? `2px solid ${color}`: `none`,
+                    // display: "flex",
+                    // justifyContent: "center",
+                    padding: "2px"
+                  }}>
+                      <div
                     onClick={(e) => {
-                      console.log(color);
+                      // console.log(color);
                       // setProductVariation(allProductVariation);
                       handleVariation("color", color, allProductVariation);
+                      // console.log({"jo": productVariation});
+                      // console.log();
                       // setProductVariation(allProductVariation);
                       // setColor(color.color);
                     }}
                     className="filterColor"
                     style={{
                       backgroundColor: color,
-                      border: `0.4px solid black`,
+                      border: `0.4px solid ${color}`,
                     }}
                   ></div>
+                  </div>
                 );
               })}
             </div>
@@ -300,7 +343,8 @@ export default function Product() {
               <span className="filterTitle">Size</span>
               <select name="" id=""  onChange={(e) => {
                         setSize(e.target.value);
-                        getVariant(color, e.target.value)
+                        // setMaxLimit
+                        getVariant(activeColor, e.target.value)
                       }}>
                 {sizes.map((size) => {
                   return (
@@ -326,13 +370,15 @@ export default function Product() {
               />
               <span className="amount">{quantity}</span>
               <Add
-                disabled={quantity > maxLimit}
+                disabled={quantity > selectedProductVariation.quantity}
                 onClick={(e) => {
-                  if (quantity < maxLimit) return handleQuantity("add");
+                  e.stopPropagation();
+                  if (quantity < selectedProductVariation.quantity) return handleQuantity("add");
                 }}
               />
             </div>
             <button onClick={addToCart}>ADD TO CART</button>
+            
           </div>
           {confirmPopUp ? (
             <div className="popUpContainer">
@@ -345,7 +391,27 @@ export default function Product() {
             </div>
           ) : null}
         </div>
-      </div>
+        : <Link to="/login">
+          <div style={{
+          // border: "2px solid red",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start"
+        }} className="infoContainer"><button 
+            style={{
+              backgroundColor: "teal",
+              color: "white",
+              border: "none",
+              padding: "10px 25px",
+              borderRadius: "5px"
+            }}
+        className="productDetail">
+        Login
+      </button></div>
+        
+          </Link> 
+        }
+              </div>
       <NewsLetter />
       <Footer />
     </div>

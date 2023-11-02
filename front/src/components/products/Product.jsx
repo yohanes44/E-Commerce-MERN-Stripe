@@ -9,7 +9,7 @@ export default function Product({item}) {
     <div className='productContainer'>
             <Link to={`/product/${item.id}`}>
       
-        <img src={item.img} alt="itemImg" />
+        <img src={ (item.img) ? item.img : "http://localhost:3005/api/image/product/productDefaultPic.png"} alt="itemImg" />
         <div className="info">
             <div className="icon">
                 <ShoppingCartOutlined />
