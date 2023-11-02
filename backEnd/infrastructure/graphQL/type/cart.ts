@@ -21,6 +21,7 @@ export default  new GraphQLObjectType({
     fields: ()=> ({
         id: { type: GraphQLID },
         productId: { type: GraphQLID },
+        variationId: { type: GraphQLID },
         userId: { type: GraphQLID },
         orderId: { type: GraphQLID },
         state: { type: GraphQLString },

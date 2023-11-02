@@ -110,10 +110,7 @@ export default class OrderController{
                 data: {
                   userId: data.userId,
                   total: totalPrice,
-                  state: "ordered",
-                  city: "Addis Ababa",
-                  sub_city: "Bole",
-                  phone: cartItems[0].user.phoneNumber
+                  state: "ordered"
                 },
               });
 

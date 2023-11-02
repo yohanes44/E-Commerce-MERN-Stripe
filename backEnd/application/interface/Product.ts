@@ -5,10 +5,10 @@ export default interface Product {
         desc: string,
         img: string,
         brand: string,
-        color: string,
-        size: string,
+        // color: string,
+        // size: string,
         price: number,
         isActive: boolean,
-        quantity: number,
+        // quantity: number,
         categoryId: any
 }  

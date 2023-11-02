@@ -18,6 +18,9 @@ import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 import CartType from "./type/cart"
 import UserType from "./type/user"
 import ProductType from "./type/product"
+import ProductVariationType from "./type/productVariation"
+import ProductAndVariationType from "./type/productAndVariation"
+
 import RoleType from "./type/role"
 import UserRoleType from "./type/userRole"
 import OrderType from "./type/order"
@@ -85,6 +88,20 @@ export default class Resolvers {
                     },
                     resolve: ProductResolver.getProducts
                 },
+                productVariation: {
+                    type: new GraphQLList(ProductVariationType),
+                    args: {
+                        id: { type: GraphQLInt }, // Make categoryId optional
+                    },
+                    resolve: ProductResolver.getProductVariation
+                },
+                productAndVariation: {
+                    type: new GraphQLList(ProductType),
+                    args: {
+                        category: { type: GraphQLString }, // Make categoryId optional
+                    },
+                    resolve: ProductResolver.getProductAndVariation
+               },
                 order: {
                     type: OrderType,
                     args: { id: { type: GraphQLInt } },
@@ -149,7 +166,11 @@ export default class Resolvers {
                         firstName: { type: new GraphQLNonNull(GraphQLString) },
                         lastName: { type: new GraphQLNonNull(GraphQLString) },
                         email: { type: new GraphQLNonNull(GraphQLString) },
-                        password: { type: new GraphQLNonNull(GraphQLString) }
+                        phoneNumber: { type: new GraphQLNonNull(GraphQLInt) },
+                        password: { type: new GraphQLNonNull(GraphQLString) },
+                        
+                        city: { type: GraphQLString },
+                        sub_city: { type: GraphQLString }
                     },
                     resolve: UserResolver.addUser
                 },
@@ -161,7 +182,6 @@ export default class Resolvers {
                         lang: { type: GraphQLString }
                     },
                     resolve: UserResolver.updateUser
-
                 },
                 changePassword: {
                     type: UserType,
@@ -226,11 +246,11 @@ export default class Resolvers {
                         desc: { type: GraphQLString },
                         img: { type: GraphQLString },
                         brand: { type: GraphQLString },
-                        color: { type: GraphQLString },
-                        size: { type: GraphQLString },
+                        // color: { type: GraphQLString },
+                        // size: { type: GraphQLString },
                         price: { type: GraphQLInt },
                         isActive: { type: GraphQLBoolean },
-                        quantity: { type: GraphQLInt },
+                        // quantity: { type: GraphQLInt },
                         categoryId: { type: GraphQLInt },
                     },
                     resolve: ProductResolver.create
@@ -250,11 +270,23 @@ export default class Resolvers {
                     },
                     resolve: ProductResolver.delete
                 },
+                addProductVariation: {
+                    type: ProductVariationType,
+                    args: {
+                         img: { type: GraphQLString },
+                         color: { type: GraphQLString },
+                         size: { type: GraphQLString },
+                         quantity: { type: GraphQLInt },
+                         productId: { type: GraphQLInt },
+                    },
+                    resolve: ProductResolver.createProductVariation
+                },
                 addCartItem: {
                     type: CartType,
                     args: {
                         productId: { type: GraphQLInt },
                         userId: { type: GraphQLInt },
+                        variationId: { type: GraphQLInt },
                         // state: {type: GraphQLString},
                         quantity: { type: GraphQLInt },
                     },
@@ -341,6 +373,7 @@ export default class Resolvers {
                     type: CategoryType,
                     args: {
                         name: { type: GraphQLString },
+                        img: { type: GraphQLString },
                     },
                     resolve: CategoryResolver.create
                 },

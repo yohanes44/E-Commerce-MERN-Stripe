@@ -23,13 +23,13 @@ export default new GraphQLInputObjectType({
     fields: {
         name: { type: GraphQLString },
         desc: { type: GraphQLString },
-        img: { type: GraphQLString },
+        // img: { type: GraphQLString },
         brand: { type: GraphQLString },
-        color: { type: GraphQLJSON },
-        size: { type: GraphQLString },
+        // color: { type: GraphQLJSON },
+        // size: { type: GraphQLString },
         price: { type: GraphQLInt },
         isActive: { type: GraphQLBoolean },
-        quantity: { type: GraphQLInt },
+        // quantity: { type: GraphQLInt },
         categoryId: { type: GraphQLInt }
     },
   });

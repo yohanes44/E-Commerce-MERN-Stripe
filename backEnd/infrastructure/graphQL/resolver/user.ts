@@ -18,7 +18,15 @@ class UserResolver {
     async addUser(parent: any, args: any, context: any) {
         return await context.controller.UserController.create(
             {
-                firstName: args.firstName, lastName: args.lastName, email: args.email, password: args.password
+                firstName: args.firstName, 
+                lastName: args.lastName, 
+                email: args.email, 
+                phoneNumber: args.phoneNumber,  
+                
+                city: args.city, 
+                sub_city: args.sub_city,
+
+                password: args.password, 
             });
     }
 

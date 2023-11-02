@@ -54,36 +54,48 @@ export default class UserController {
         }
     }
 
-    async create({ firstName, lastName, email, password }: UserInterfce) {
+    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole" }: { firstName: string, lastName: string, email: string, password: string, phoneNumber: number, city: string, sub_city: string }) {
 
         try {
 
-            const userExistance = await db.user.findUnique({
+            const user = await db.user.findFirst({
                 where: {
                     email: email
                 }
             })
 
-            if (userExistance) {
+
+            if (user) {
                 throw new this.exception("user0002");
             }
 
             const hashedPassword = await this.dependencies.get("encryption").hash(password);
 
-            const userInstance = new UserClass({ firstName, lastName, email, password });
+            // const userInstance = new UserClass({ firstName, lastName, email, password });
 
-            const user = await db.user.create({
+            const newUser = await db.user.create({
                 data: {
                     firstName: firstName,
                     lastName: lastName,
+                    password: hashedPassword,
                     email: email,
-                    password: hashedPassword
+                    updatedAt: new Date().toString()
                 },
             })
+
+            const createUserAddress = await db.address.create({
+                data: {
+                  userId: newUser.id,
+                  phoneNumber: phoneNumber,
+                  city: city,
+                  sub_city: sub_city 
+                }
+              });
 
             return user
         }
         catch (err: any) {
+            console.log(err);
             if (err instanceof this.exception) {
                 throw err;
             } else {

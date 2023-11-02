@@ -4,8 +4,8 @@ export default interface Cart{
         productId: number,
         userId: number,
         state: string,
-        quantity: number
-
+        quantity: number,
+        variationId: number
 
 
         // productId Int

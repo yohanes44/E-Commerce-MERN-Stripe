@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,81 +7,110 @@ datasource db {
   url      = "mysql://root:@localhost:3306/ecommerceapi"
 }
 
-model User {
+model address {
+  id          Int    @id @default(autoincrement())
+  userId      Int
+  phoneNumber Int
+  city        String @db.VarChar(255)
+  sub_city    String @db.VarChar(255)
+  user        user   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Address_userId_fkey")
+
+  @@index([userId], map: "Address_userId_fkey")
+}
+
+model cart {
+  id               Int              @id @default(autoincrement())
+  productId        Int
+  variationId      Int
+  userId           Int
+  orderId          Int?
+  state            String           @db.VarChar(255)
+  quantity         Int
+  order            order?           @relation(fields: [orderId], references: [id], map: "Cart_orderId_fkey")
+  product          product          @relation(fields: [productId], references: [id], map: "Cart_productId_fkey")
+  user             user             @relation(fields: [userId], references: [id], map: "Cart_userId_fkey")
+  productvariation productvariation @relation(fields: [variationId], references: [id], map: "Cart_variationId_fkey")
+
+  @@index([orderId], map: "Cart_orderId_fkey")
+  @@index([productId], map: "Cart_productId_fkey")
+  @@index([userId], map: "Cart_userId_fkey")
+  @@index([variationId], map: "Cart_variationId_fkey")
+}
+
+model category {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(255)
+  img     String    @db.VarChar(255)
+  product product[]
+}
+
+model order {
+  id     Int    @id @default(autoincrement())
+  state  String @db.VarChar(255)
+  userId Int
+  total  Int
+  cart   cart[]
+  user   user   @relation(fields: [userId], references: [id], map: "Order_userId_fkey")
+
+  @@index([userId], map: "Order_userId_fkey")
+}
+
+model product {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  desc             String             @db.VarChar(255)
+  img              String             @db.VarChar(255)
+  brand            String             @db.VarChar(255)
+  categoryId       Int
+  price            Int
+  isActive         Boolean            @default(true)
+  cart             cart[]
+  category         category           @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
+  productvariation productvariation[]
+
+  @@index([categoryId], map: "Product_categoryId_fkey")
+}
+
+model productvariation {
+  id        Int     @id @default(autoincrement())
+  color     String? @db.VarChar(255)
+  img       String? @db.VarChar(255)
+  size      String? @db.VarChar(255)
+  quantity  Int
+  productId Int
+  cart      cart[]
+  product   product @relation(fields: [productId], references: [id], map: "ProductVariation_productId_fkey")
+
+  @@index([productId], map: "ProductVariation_productId_fkey")
+}
+
+model role {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  user_role user_role[]
+}
+
+model user {
   id        Int         @id @default(autoincrement())
   firstName String      @db.VarChar(255)
   lastName  String      @db.VarChar(255)
-  email     String      @unique @db.VarChar(255)
-  phoneNumber Int       
   password  String      @db.VarChar(255)
   createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  
-  User_role User_role[]
-  Order     Order[]
-  Cart      Cart[]
+  updatedAt DateTime
+  email     String
+  address   address[]
+  cart      cart[]
+  order     order[]
+  user_role user_role[]
 }
 
-model Role {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  User_role User_role[]
-} 
+model user_role {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  roleId Int
+  role   role @relation(fields: [roleId], references: [id], map: "User_role_roleId_fkey")
+  user   user @relation(fields: [userId], references: [id], onDelete: Cascade, map: "User_role_userId_fkey")
 
-  model User_role {
-    id     Int @id @default(autoincrement())
-    userId Int
-    roleId Int
-
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade )
-    role Role @relation(fields: [roleId], references: [id])
-  }
-
-model Product {
-  id       Int     @id @default(autoincrement())
-  name     String  @db.VarChar(255)
-  desc     String  @db.VarChar(255)
-  img      String  @db.VarChar(255)
-  brand    String  @db.VarChar(255)
-  color    String
-  size     String  @db.VarChar(255)
-  categoryId Int
-  price    Int
-  isActive Boolean @default(true)
-  quantity Int
-  category Category   @relation(fields: [categoryId], references: [id])
-  Cart     Cart[]
-}
-
-model Category {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-  img String  @db.VarChar(255)
-  Product     Product[]
-}
-
-model Order {
-  id       Int    @id @default(autoincrement())
-  state    String @db.VarChar(255)
-  userId   Int
-  city     String @db.VarChar(255)
-  sub_city String @db.VarChar(255)
-  phone    String @db.VarChar(255)
-  total    Int
-
-  user User   @relation(fields: [userId], references: [id])
-  Cart Cart[]
-}
-
-model Cart {
-  id        Int    @id @default(autoincrement())
-  productId Int
-  userId    Int
-  orderId   Int?
-  state     String @db.VarChar(255)
-  quantity  Int
-
-  user    User    @relation(fields: [userId], references: [id])
-  order   Order?   @relation(fields: [orderId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  @@index([roleId], map: "User_role_roleId_fkey")
+  @@index([userId], map: "User_role_userId_fkey")
 }

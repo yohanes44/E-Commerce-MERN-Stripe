@@ -32,11 +32,18 @@ export default class AuthController{
         
         try{
             
-            const user: any = await db.user.findUnique({
+            
+            const user: any = await db.user.findFirst({
                 where: {
-                email: email
+                    email: email
                 }
             })
+            
+            // const user: any = await db.user.findUnique({
+            //     where: {
+            //         id: userAddress.userId
+            //     }
+            // })
             
 
            if(!user){

@@ -56,9 +56,11 @@ export default class CartController{
             const existingProduct = await db.cart.findFirst({
                 where: {
                   productId: data.productId,
+                  variationId: data.variationId,
                   userId: data.userId
                 },
               });
+
             if(existingProduct){
                 // update quantity of the cartItem by one
                 return await db.cart.update({
@@ -74,6 +76,7 @@ export default class CartController{
             return await db.cart.create({
                 data: {
                     productId: data.productId,
+                    variationId: data.variationId,
                     userId: data.userId,
                     state: "inCart",
                     quantity: data.quantity

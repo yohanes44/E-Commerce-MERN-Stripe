@@ -3,6 +3,7 @@ import orm from "../../persistance/orm"
 import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 
 import CategoryType from "./category"
+import ProductVariationType from "./productVariation"
 
 
 
@@ -32,6 +33,18 @@ export default new GraphQLObjectType({
         isActive: { type: GraphQLBoolean },
         quantity: { type: GraphQLInt },
         categoryId: { type: GraphQLInt },
+        variation: {
+            type:  new GraphQLList(ProductVariationType),
+            resolve: async (parent, context, args)=>{
+                const userProducts = await orm.productvariation.findMany({
+                    where: {
+                        productId: parent.id,
+                    },
+                  })
+                  console.log(parent);
+                return userProducts;
+            }
+        },
         category: {
             type:  CategoryType,
             resolve: async (parent, args)=>{
@@ -42,5 +55,7 @@ export default new GraphQLObjectType({
                   })
             }
         }
+
+      
     })
 })  
