@@ -34,6 +34,7 @@ export default new GraphQLObjectType({
         variations: {
             type: new GraphQLList(ProductVariationType),
             resolve: async (parent: any, args: any, context: any) => {
+                
                 return orm.productvariation.findMany({
                     where: {
                         productId: parent.id

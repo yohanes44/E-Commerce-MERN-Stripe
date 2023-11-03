@@ -85,6 +85,14 @@ export default class Resolvers {
                     type: new GraphQLList(ProductType),
                     args: {
                         category: { type: GraphQLString }, // Make categoryId optional
+                        selectedFilter: { type:  new GraphQLInputObjectType({
+                                name: 'ProductFilterInput',
+                                fields: {
+                                  color: { type: GraphQLString },
+                                  size: { type: GraphQLString },
+                                  sort: { type: GraphQLString },
+                                }
+                              }) }
                     },
                     resolve: ProductResolver.getProducts
                 },

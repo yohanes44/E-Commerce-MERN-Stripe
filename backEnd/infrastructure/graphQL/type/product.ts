@@ -41,7 +41,7 @@ export default new GraphQLObjectType({
                         productId: parent.id,
                     },
                   })
-                  console.log(parent);
+                //   console.log(parent);
                 return userProducts;
             }
         },

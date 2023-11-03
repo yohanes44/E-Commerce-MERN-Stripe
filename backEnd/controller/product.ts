@@ -36,23 +36,100 @@ export default class ProductController {
         }
     }
 
-    async getProducts(category: string, filterInput) {
+    // category ? { category: { name: category } : {}
+    async getProducts(category: string, selectedFilter: any) {
         try {
-            const products = await db.product.findMany({
-                include: {
-                    category: true,
-                },
-                where: category ? { category: { name: category } } : {},
-            });    
-    
-         
             
+            console.log(selectedFilter);
+
+            const where = { 
+                category: {},
+                productvariation: {} 
+            };
+
+            const include = {
+                category: true,
+                productvariation: true,
+            };
+
+            if(category){
+                where.category = {
+                    name: category
+                };
+            }
+
+            if(selectedFilter.color != "all" ){
+                where.productvariation = {
+                    some: {
+                        color: selectedFilter.color
+                    }
+                }
+            }
+
+            if(selectedFilter.size != "all" ){
+                where.productvariation = {
+                    some: {
+                        color: selectedFilter.color
+                    }
+                }
+            }
+
+            const products = await db.product.findMany({
+                where,
+                include,
+            });
+
+            console.log({products});
             return products;
-        }
+        }  
         catch (err: any) {
             console.log(err);
         }
     }
+
+
+
+    // async getProducts(category: string, filterInput: any) {
+    //     try {
+    //         let unfiltered = await db.product.findMany({
+    //             where: { 
+    //                     category: { name: category },
+    //                     productvariation: {
+    //                         some: (filterInput.color && filterInput.size) ? {
+    //                                             color: filterInput.color,
+    //                                             size: filterInput.size
+    //                                } : (filterInput.color && filterInput.size == null) ? {
+    //                                         color: filterInput.color
+    //                                     } : (filterInput.color == null && filterInput.size) ? {
+    //                                         size: filterInput.size
+    //                                     } 
+    //                 }
+    //             },
+    //             include: {
+    //                 category: true,
+    //                 productvariation: true
+    //             },
+    //         });    
+    
+    //         // if(filterInput.color != "all"){
+    //         //     let unfilteredColor = await db.product.findMany({
+    //         //         include: {
+    //         //             category: true,
+    //         //         },
+    //         //         where: category ? { category: { name: category } } : {},
+    //         //     });    
+    //         // }
+    //         // if(filterInput.size != "all"){
+
+    //         // }
+            
+
+    //         return unfiltered;
+    //     }
+    //     catch (err: any) {
+    //         console.log(err);
+    //     }
+    // }
 
     async getProductVariation(productId: number) {
         try {

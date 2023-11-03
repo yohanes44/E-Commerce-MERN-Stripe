@@ -112,6 +112,8 @@ export default function ProductList() {
                     })
                 }
         } )
+
+
     setFilters( (filter) => {
             return {
                 ...filter, color: tempColors, size: tempSizes
@@ -195,7 +197,7 @@ export default function ProductList() {
                 </select>
             </div>
         </div>
-        <Products selectedFilter={selectedFilter} />
+        <Products selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} setFilters={setFilters} />
         <NewsLetter />
         <Footer />
     </div>
