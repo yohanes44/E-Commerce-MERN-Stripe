@@ -36,7 +36,7 @@ export default class ProductController {
         }
     }
 
-    async getProducts(category: string, filterInput) {
+    async getProducts(category: string, filterInput: any) {
         try {
             const products = await db.product.findMany({
                 include: {
