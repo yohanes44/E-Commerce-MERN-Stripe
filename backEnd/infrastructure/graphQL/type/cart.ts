@@ -14,6 +14,7 @@ import  graphql, {
 } from "graphql";
 
 import ProductType from "./product"
+import ProductVariationType from "./product"
 
 
 export default  new GraphQLObjectType({
@@ -28,6 +29,19 @@ export default  new GraphQLObjectType({
         quantity: { type: GraphQLInt },
         product: {
             type:  ProductType,
+            resolve: async (parent, args)=>{
+             
+                const userProducts = await orm.product.findUnique({
+                    where: {
+                        id: parent.productId,
+                    },
+                  })
+                
+                return userProducts;
+            }
+        },
+        productvariation: {
+            type:  ProductVariationType,
             resolve: async (parent, args)=>{
              
                 const userProducts = await orm.product.findUnique({

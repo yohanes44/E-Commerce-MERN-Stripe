@@ -34,15 +34,24 @@ export default class CartController{
 
     async getCartItems (userId: number) {
         try{
-            return await db.cart.findMany({
+            let cartItems =  await db.cart.findMany({
                 where: {
                     userId,
                     state: "inCart"
                 },
                 include: {
-                    product: true
+                    product: true,
+                    productvariation: true
+                    // productvariation: {
+                    //     select: {
+                    //         productId: product.id
+                    //     }
+                    // }
                  }
             })
+
+            console.log({cartItems});
+            return cartItems;
         }
         catch(err: any){
             console.log(err);
@@ -50,6 +59,8 @@ export default class CartController{
     }
 
     async addCartItem(data : CartInterfce){
+
+        console.log("addCartItem called");
         
         try{
 

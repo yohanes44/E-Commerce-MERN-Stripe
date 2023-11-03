@@ -14,7 +14,7 @@ import Product from './Product'
 
 import "./products.scss"
 
-export default function Products({ selectedFilter }) {
+export default function Products({ selectedFilter, setSelectedFilter, setFilters }) {
   
   const location = useLocation();
   const category = location.pathname.split("/")[2]
@@ -28,19 +28,21 @@ export default function Products({ selectedFilter }) {
     const fetchData = async ()=>{
       try{
         const productQuery = gql`
-        query GetProducts($category: String!) {
-          products(category: $category) {
+        query GetProducts($category: String!, $selectedFilter: ProductFilterInput!) {
+          products(category: $category, selectedFilter: $selectedFilter) {
             id
             name
             img
           }
         }
         `
-      
-        const variables = { category }
 
+        console.log(selectedFilter);
+        const variables = { category, selectedFilter }
         const responseProduct = await request(backEndGraphQLURL, productQuery, variables);
 
+        console.log("responseProduct");
+        console.log(responseProduct);
 
         setProducts(responseProduct.products);
         setLoading(false);
@@ -54,7 +56,7 @@ export default function Products({ selectedFilter }) {
      fetchData();
   
 
-  }, [category]);
+  }, [category, selectedFilter.color, selectedFilter.size]);
 
   return (
     <div className='productsContainer'>

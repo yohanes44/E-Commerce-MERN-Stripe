@@ -36,19 +36,77 @@ export default class ProductController {
         }
     }
 
-    async getProducts(category: string, filterInput: any) {
+    // category ? { category: { name: category } : {}
+    async getProducts(category: string, selectedFilter: any) {
         try {
+            
+            console.log(selectedFilter);
+
+            const where = { 
+                category: {},
+                productvariation: {} 
+            };
+
+            const include = {
+                category: true,
+                productvariation: true,
+            };
+
+            if(category){
+                where.category = {
+                    name: category
+                };
+            }
+
+            if(selectedFilter.color != "all" && selectedFilter.size != "all"){
+                where.productvariation = {
+                    some: {
+                        color: selectedFilter.color,
+                        size: selectedFilter.size
+                    }
+                }
+            }
+
+            if(selectedFilter.size != "all" && selectedFilter.color == "all"){
+                where.productvariation = {
+                    some: {
+                        size: selectedFilter.size
+                    }
+                }
+            }
+            if(selectedFilter.color != "all" && selectedFilter.size == "all"){
+                where.productvariation = {
+                    some: {
+                        color: selectedFilter.color
+                    }
+                }
+            }
+
+            const orderBy : any= {}
+
+            if (selectedFilter.sort === "newest") {
+                orderBy.id = "desc";
+            } else if (selectedFilter.sort === "price_desc") {
+                orderBy.price = "desc";
+            } else if (selectedFilter.sort === "price_asc") {
+                orderBy.price = "asc";
+            } else if (selectedFilter.sort === "alphabetical_desc") {
+                orderBy.name = "desc";
+            } else if (selectedFilter.sort === "alphabetical_asc") {
+                orderBy.name = "asc";
+            }
+
             const products = await db.product.findMany({
-                include: {
-                    category: true,
-                },
-                where: category ? { category: { name: category } } : {},
-            });    
-    
-         
+                where,
+                include,
+                orderBy
+            });
+
+            // console.log({products});
+
             
             return products;
-        }
+        }  
         catch (err: any) {
             console.log(err);
         }
