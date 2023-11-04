@@ -39,64 +39,6 @@ export default function Cart() {
       navigate('/login');
     }
     
-  
-
-    // useEffect(() => {
-
-    //   console.log("Cart, user");
-    //   console.log(user);
-
-      
-    //   const userId = parseInt(user.id);
-
-    //     const fetchData = async () => {
-    //       try {
-    //         const productQuery = gql`
-    //           query GetCartItems($userId: Int!) {
-    //             cartItems(userId: $userId) {
-    //               id
-    //               userId
-    //               productId
-    //               state
-    //               quantity
-    //               product{
-    //                 id
-    //                 name
-    //                 img
-    //                 color
-    //                 quantity
-    //                 price
-    //               }
-    //             }
-    //           }
-    //         `;
-    
-    //         const variables = { userId: userId }; // Define your variable object
-    
-    //         let responseProduct = await request(
-    //           backEndGraphQLURL,
-    //           productQuery,
-    //           variables
-    //         );
-  
-    //         setCartItems(responseProduct.cartItems);
-    
-    //         console.log("responseProduct.cartItems", responseProduct.cartItems);
-    
-    //         // setLoading(false);
-    
-    //         //jo
-    
-    //         //jo
-    //       } catch (err) {
-    //         console.log(err);
-    //         // setError(err);
-    //         // setLoading(false);
-    //       }
-    //     };
-    
-    //     fetchData();
-    //   }, [user.id]);
  
       const handleChangeQuantity = (cartItemId, currentQuantity, operation) =>{
         updateCartItemQuantity(parseInt(cartItemId), currentQuantity, operation);
@@ -113,6 +55,10 @@ export default function Cart() {
         })
         return totalPrice;
       }
+
+    //   console.log("cartItems front");
+    //   console.log(cartItems);
+
     
     return (
         
@@ -139,12 +85,17 @@ export default function Cart() {
                                   <hr />
                         <div className="product">
                         <div className="productDetail">
-                            <img src={cartItem.product.img} alt="" />
+                            <img src={ cartItem.product.img || cartItem.productvariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
                             <div className="details">
                                 <span className="productName"><b>Product:</b>  {cartItem.product.name}</span>
                                 <span className="productId"><b>ID:</b>  {cartItem.id}</span>
-                                <span className="productColor"></span>
-                                <span className="productSize"><b>Size:</b> </span>
+                                <span className="productColor" ><b style={{color: "black"}}>Color:</b> <span style={{color: cartItem.productvariation.color,
+                                 width: "40px",
+                                 height: "40px",
+                                 borderRadius: "50%",
+                                //  backgroundColor: cartItem.productvariation.color,
+                           }}>{cartItem.productvariation.color}</span></span>
+                                <span className="productSize"><b>Size:</b> {cartItem.productvariation.size}</span>
                             </div>
                         </div>
                         
@@ -164,7 +115,7 @@ export default function Cart() {
                                 }/>
                                 
                             </div>
-                            <div className="productPrice">$  {cartItem.quantity * cartItem.product.price}</div>
+                            <div className="productPrice">$  {cartItem.productvariation.quantity * cartItem.product.price}</div>
                         </div>
 
                         <div className="cancelOperation" onClick={(e)=> handleCancel(cartItem.id)}>

@@ -192,22 +192,17 @@ export default function Product() {
 
   const addToCart = async (e) => {
 
-
-
     const userId = parseInt(user.id);
     const productId = id;
     
     try {
-      addCartItems(id, quantity);
+      addCartItems(id, quantity, selectedProductVariation.id);
       setConfirmPopUp(true);
     } catch (err) {
       console.log(err);
       setError(err);
       setLoading(false);
     }
-
-    // console.log("addToCart called");
-    // console.log({selectedProductVariation, quantity});
 
   };
 
@@ -287,7 +282,7 @@ export default function Product() {
         <div className="imgContainer" style={{
           
         }}>
-          <img src={  (product.img) ? product.img: "http://localhost:3005/api/image/product/productDefaultPic.png"} alt="" />
+          <img src={ product.img || selectedProductVariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
         </div>
 
         {
@@ -380,16 +375,7 @@ export default function Product() {
             <button onClick={addToCart}>ADD TO CART</button>
             
           </div>
-          {confirmPopUp ? (
-            <div className="popUpContainer">
-              <div className="productDetail">
-                <h1
-                  style={{ color: "green" }}
-                  className="confirmText"
-                >{`${product.name} Added to Cart Succesfuly`}</h1>
-              </div>
-            </div>
-          ) : null}
+         
         </div>
         : <Link to="/login">
           <div style={{

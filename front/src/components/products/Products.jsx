@@ -56,7 +56,7 @@ export default function Products({ selectedFilter, setSelectedFilter, setFilters
      fetchData();
   
 
-  }, [category, selectedFilter.color, selectedFilter.size]);
+  }, [category, selectedFilter]);
 
   return (
     <div className='productsContainer'>

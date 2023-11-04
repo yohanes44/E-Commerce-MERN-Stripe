@@ -8,9 +8,19 @@ export default function Product({item}) {
   return (
     <div className='productContainer'>
             <Link to={`/product/${item.id}`}>
+
+            <div className="" style={{
+                textAlign: "center",
+                color: "teal",
+                fontSize: "20px"
+            }}>
+                {item.name}
+            </div>
       
         <img src={ (item.img) ? item.img : "http://localhost:3005/api/image/product/productDefaultPic.png"} alt="itemImg" />
+       
         <div className="info">
+          
             <div className="icon">
                 <ShoppingCartOutlined />
             </div>

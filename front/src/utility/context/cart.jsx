@@ -33,20 +33,28 @@ export default function CartProvider({ children }) {
             productId
             state
             quantity
-            product {
-              id
-              name
+    				product {
+    				  id
               img
+              name
+              price
+    				}
+    				productvariation {
+    				  id
+              img
+              size
               color
               quantity
-              price
-            }
+    				}
           }
         }
       `;
 
       const variables = { userId: parseInt(userId) };
       const response = await request(backEndGraphQLURL, findCartItemQuery, variables);
+      
+      // console.log({response});
+
 
       setTotalCart(response.cartItems.length);
     } catch (error) {
@@ -59,19 +67,24 @@ export default function CartProvider({ children }) {
       const productQuery = gql`
         query GetCartItems($userId: Int!) {
           cartItems(userId: $userId) {
-            id
-            userId
-            productId
-            state
-            quantity
-            product {
-              id
-              name
-              img
-              color
-              quantity
+            id,
+            userId,
+            productId,
+            state,
+            quantity,
+    				product {
+    				  id,
+              img,
+              name,
               price
-            }
+    				},
+    				productvariation {
+    				  id,
+              img,
+              size,
+              color,
+              quantity
+    				}
           }
         }
       `;
@@ -85,23 +98,27 @@ export default function CartProvider({ children }) {
     }
   };
 
-  const addCartItems = async (id, quantity) => {
+  const addCartItems = async (id, quantity, variationId) => {
 
 
     console.log("addCartItems function called");
+
+
     const userId = parseInt(user.id);
     const productId = id;
 
+    variationId = parseInt(variationId);
+
     try {
       const addToCartMutation = gql`
-      mutation addCartItem($userId: Int!, $productId: Int!, $quantity: Int!) {
-        addCartItem(userId: $userId, productId: $productId, quantity: $quantity) {
+      mutation addCartItem($productId: Int!, $userId: Int!, $variationId: Int!, $quantity: Int!) {
+        addCartItem(productId: $productId, userId: $userId, variationId: $variationId, quantity: $quantity) {
           userId
           productId
         }
       }
     `;
-      const variables = { userId, productId, quantity};
+      const variables = { userId, productId, quantity, variationId};
 
       let responseAddCartItem = await request(backEndGraphQLURL,addToCartMutation,variables);
       setCartItem( responseAddCartItem.addCartItem);

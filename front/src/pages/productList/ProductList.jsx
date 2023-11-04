@@ -56,6 +56,12 @@ export default function ProductList() {
               }
             }
           `
+
+
+
+
+
+
           const response = await request(backEndGraphQLURL, query);
           setCategories(response.categories.map(
              (cat) =>{
@@ -137,13 +143,6 @@ export default function ProductList() {
         <h1 className="title">{category}</h1>
         <div className="filterContainer">
             <div className="filter">
-                <div>
-                    <ul>
-                        <li>Color: {selectedFilter.color}</li>
-                        <li>Size: {selectedFilter.size}</li>
-                        <li>Sort: {selectedFilter.sort}</li>
-                    </ul>
-                </div>
                 <span className="filterText">Filter Products:</span>
                 <select name="" id="" onChange={
                     (e)=>{
@@ -190,10 +189,10 @@ export default function ProductList() {
                     }
                 }>
                     <option value="newest" selected>Newest</option>
-                    <option value="price(asc)" >Price (asc)</option>
-                    <option value="price(desc)" >Price (desc)</option>
-                    <option value="alphbetical(asc)" >Alphbetical (asc)</option>
-                    <option value="alphbetical(desc)" >Alphbetical (desc)</option>
+                    <option value="price_desc" >Price (asc)</option>
+                    <option value="price_asc" >Price (desc)</option>
+                    <option value="alphabetical_asc" >Alphbetical (asc)</option>
+                    <option value="alphabetical_desc" >Alphbetical (desc)</option>
                 </select>
             </div>
         </div>
