@@ -44,9 +44,9 @@ export default  new GraphQLObjectType({
             type:  ProductVariationType,
             resolve: async (parent, args)=>{
              
-                const userProducts = await orm.product.findUnique({
+                const userProducts = await orm.productvariation.findUnique({
                     where: {
-                        id: parent.productId,
+                        id: parent.variationId,
                     },
                   })
                 

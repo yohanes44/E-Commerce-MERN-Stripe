@@ -34,6 +34,12 @@ export default class CartController{
 
     async getCartItems (userId: number) {
         try{
+
+            let orderBy : any = {
+
+            }
+            orderBy.id = "desc";
+
             let cartItems =  await db.cart.findMany({
                 where: {
                     userId,
@@ -42,15 +48,11 @@ export default class CartController{
                 include: {
                     product: true,
                     productvariation: true
-                    // productvariation: {
-                    //     select: {
-                    //         productId: product.id
-                    //     }
-                    // }
-                 }
+                },
+                orderBy
             })
 
-            console.log({cartItems});
+            // console.log(cartItems[0].productvariation.img);
             return cartItems;
         }
         catch(err: any){

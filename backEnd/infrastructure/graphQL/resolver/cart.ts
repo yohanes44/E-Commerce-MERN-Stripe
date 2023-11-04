@@ -11,7 +11,10 @@ class CartResolver{
     }
 
     async getCartItems(parent: any, args: any, context: any){
-        return await context.controller.CartController.getCartItems(args.userId);
+        let cartItems = await context.controller.CartController.getCartItems(args.userId);
+
+        // console.log({cartItems: cartItems});
+        return cartItems;
     }
 
     async addCartItem(parent: any, args: any, context: any){
