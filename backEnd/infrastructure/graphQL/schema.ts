@@ -42,6 +42,7 @@ import CategoryResolver from "./resolver/category"
 import LoginResolver from "./resolver/auth"
 
 import LoginType from "./type/login"
+import RegisterType from "./type/register"
 
 
 
@@ -169,16 +170,20 @@ export default class Resolvers {
             name: "Mutation",
             fields: {
                 addUser: {
-                    type: UserType,
+                    type: RegisterType,
                     args: {
                         firstName: { type: new GraphQLNonNull(GraphQLString) },
                         lastName: { type: new GraphQLNonNull(GraphQLString) },
                         email: { type: new GraphQLNonNull(GraphQLString) },
-                        phoneNumber: { type: new GraphQLNonNull(GraphQLInt) },
-                        password: { type: new GraphQLNonNull(GraphQLString) },
-                        
+                        phoneNumber: { type: new GraphQLNonNull(GraphQLString) },
+
                         city: { type: GraphQLString },
-                        sub_city: { type: GraphQLString }
+                        sub_city: { type: GraphQLString },
+
+                        password: { type: new GraphQLNonNull(GraphQLString) },
+                        repeatPassword: { type: new GraphQLNonNull(GraphQLString) },
+                        
+                      
                     },
                     resolve: UserResolver.addUser
                 },
@@ -323,7 +328,7 @@ export default class Resolvers {
                     resolve: CartResolver.clearCart
                 },
                 login: {
-                    type: LoginType,
+                    type: LoginType,        
                     args: {
                         email: { type: GraphQLString },
                         password: { type: GraphQLString }

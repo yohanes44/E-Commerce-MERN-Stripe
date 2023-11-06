@@ -37,14 +37,7 @@ export default class AuthController{
                 where: {
                     email: email
                 }
-            })
-            
-            // const user: any = await db.user.findUnique({
-            //     where: {
-            //         id: userAddress.userId
-            //     }
-            // })
-            
+            })        
 
            if(!user){
             throw new this.exception("auth0001");

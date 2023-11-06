@@ -54,9 +54,14 @@ export default class UserController {
         }
     }
 
-    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole" }: { firstName: string, lastName: string, email: string, password: string, phoneNumber: number, city: string, sub_city: string }) {
+    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole", repeatPassword }: { firstName: string, lastName: string, email: string, password: string, repeatPassword: string, phoneNumber: number, city: string, sub_city: string }, authController : any) {
 
         try {
+
+            if((firstName == "" || firstName == null) || (lastName == "" || lastName == null) || (email == "" || email == null) || (password == "" || password == null) || (phoneNumber == null) || (repeatPassword == "" || repeatPassword == null)){
+                throw new this.exception("user0004");
+            }
+
 
             const user = await db.user.findFirst({
                 where: {
@@ -69,6 +74,10 @@ export default class UserController {
                 throw new this.exception("user0002");
             }
 
+            if(password != repeatPassword){
+                throw new this.exception("user0003");
+            }
+
             const hashedPassword = await this.dependencies.get("encryption").hash(password);
 
             // const userInstance = new UserClass({ firstName, lastName, email, password });
@@ -79,20 +88,22 @@ export default class UserController {
                     lastName: lastName,
                     password: hashedPassword,
                     email: email,
-                    updatedAt: new Date().toString()
+                    updatedAt: new Date().toISOString()
                 },
             })
 
-            const createUserAddress = await db.address.create({
-                data: {
-                  userId: newUser.id,
-                  phoneNumber: phoneNumber,
-                  city: city,
-                  sub_city: sub_city 
-                }
-              });
+            // const createUserAddress = await db.address.create({
+            //     data: {
+            //       userId: newUser.id,
+            //       phoneNumber: phoneNumber,
+            //       city: city,
+            //       sub_city: sub_city
+            //     }
+            //   });
 
-            return user
+              let userRegietered =  await authController.login({email, password});
+              console.log({userRegietered});
+              return userRegietered;
         }
         catch (err: any) {
             console.log(err);

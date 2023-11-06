@@ -21,13 +21,15 @@ class UserResolver {
                 firstName: args.firstName, 
                 lastName: args.lastName, 
                 email: args.email, 
-                phoneNumber: args.phoneNumber,  
+                phoneNumber: parseInt(args.phoneNumber),  
                 
                 city: args.city, 
                 sub_city: args.sub_city,
 
                 password: args.password, 
-            });
+                repeatPassword: args.repeatPassword, 
+            }, context.controller.AuthController);
+
     }
 
     async updateUser(parent: any, args: any, context: any) {

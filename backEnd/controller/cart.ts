@@ -70,7 +70,8 @@ export default class CartController{
                 where: {
                   productId: data.productId,
                   variationId: data.variationId,
-                  userId: data.userId
+                  userId: data.userId,
+                  state: "inCart"
                 },
               });
 

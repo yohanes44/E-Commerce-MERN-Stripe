@@ -82,7 +82,7 @@ export default class OrderController{
         }
     }
 
-    async create(data : OrderInterfce){
+    async create(data : any){
         try{
           
 

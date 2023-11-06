@@ -81,7 +81,11 @@ const [currentSlide, setCurrentSlide] = useState(0);
 
         <div className="slide">
           <div className="imgContainer">
-            <img src={sliderItems[currentSlide].img} alt="img" />
+         
+            {/* <div> */}
+              <img src={sliderItems[currentSlide].img} alt="img" />
+            {/* </div> */}
+           
           </div>
           <div className="infoContainer">
            

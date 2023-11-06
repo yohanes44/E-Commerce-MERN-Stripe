@@ -40,14 +40,25 @@
                 margin: 20px 0px;
             }
 
-            button{
-                width: 40%;
-                border: none;
-                padding: 15px 20px;
-                background-color: teal;
-                color: white;
-                cursor: pointer;
+            .actions{
+
+                // border: 2px solid red;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                // padding: 10px;
+                margin-top: 10px;
+
+                button{
+                    width: fit-content;
+                    border: none;
+                    padding: 10px 20px;
+                    background-color: teal;
+                    color: white;
+                    cursor: pointer;
+                }
             }
+           
         }
     }
 }

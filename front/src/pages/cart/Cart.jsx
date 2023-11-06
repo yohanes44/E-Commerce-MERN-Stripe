@@ -17,6 +17,10 @@ import { useCart } from "../../utility/context/cart";
 
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
+import Pay from "../../components/chapa/Pay";
+
+
+
 export default function Cart() {
 
 
@@ -26,8 +30,10 @@ export default function Cart() {
 
 
     const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
-    const {cartItems, setCartItems, findCartItems, cancelCartItem, updateCartItemQuantity} = useCart();
+    const {cartItems, setCartItems, addOrder, findCartItems, cancelCartItem, updateCartItemQuantity} = useCart();
 
+
+    const [checkOutOpen, setCheckOutOpen] = useState(false);
 
   
 
@@ -56,6 +62,10 @@ export default function Cart() {
         return totalPrice;
       }
 
+      const CheckOutlined = () => {
+        // addOrder(user.id);
+      }
+
     //   console.log("cartItems front");
     //   console.log(cartItems);
 
@@ -70,68 +80,70 @@ export default function Cart() {
             <div className="top">
                 <button style={{backgroundColor: "transparent"}} className="topButton">CONTINUE SHOPING</button>
                 <div className="topTexts">
-                    <span className="topText">Shopping Bag(2)</span>
-                    <span className="topText">Your Wishlist (0)</span>
+                    <span className="topText">Shopping Bag: {cartItems.length}</span>
+                    {/* <span className="topText">Your Wishlist (0)</span> */}
                 </div>
-                <button style={{backgroundColor: "black", color: "white", border: "none"}} className="topButton">CHECKOUT NOW</button>
+                <button onClick={CheckOutlined} style={{backgroundColor: "black", color: "white", border: "none"}} className="topButton">CHECKOUT NOW</button>
             </div>
             <div className="bottom">
-                <div className="info">
-                  {
-                    cartItems.map((cartItem)=>{
-                        return (
-                            
-                            <div>
-                                  <hr />
-                        <div className="product">
-                        <div className="productDetail">
-                            <img src={ cartItem.product.img || cartItem.productvariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
-                            <div className="details">
-                                <span className="productName"><b>Product:</b>  {cartItem.product.name}</span>
-                                <span className="productId"><b>ID:</b>  {cartItem.id}</span>
-                                <span className="productColor" ><b style={{color: "black"}}>Color:</b> <span style={{color: cartItem.productvariation.color,
-                                 width: "40px",
-                                 height: "40px",
-                                 borderRadius: "50%",
-                                //  backgroundColor: cartItem.productvariation.color,
-                           }}>{cartItem.productvariation.color}</span></span>
-                                <span className="productSize"><b>Size:</b> {cartItem.productvariation.size}</span>
-                            </div>
-                        </div>
-                        
-                        <div className="priceDetail">
-                         <div className="productAmountContainer">
-                                <Add disabled={cartItem.quantity > 10} onClick={ (e)=> {
-                                    if(cartItem.quantity < 10 ){
-                                        return handleChangeQuantity(cartItem.id, cartItem.quantity, "add") 
+                {
+                    (checkOutOpen && cartItems.length > 0) ?  <Pay firstName={user.firstName} lastName={user.lastName} email={user.email} amount={ calculateTotalCart() + shippingCost + shippingDiscount}/> :
+                    <><div className="info">
+                    {
+                      cartItems.map((cartItem)=>{
+                          return (
+                              
+                              <div>
+                                    <hr />
+                          <div className="product">
+                          <div className="productDetail">
+                              <img src={ cartItem.product.img || cartItem.productvariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
+                              <div className="details">
+                                  <span className="productName"><b>Product:</b>  {cartItem.product.name}</span>
+                                  <span className="productId"><b>ID:</b>  {cartItem.id}</span>
+                                  <span className="productColor" ><b style={{color: "black"}}>Color:</b> <span style={{color: cartItem.productvariation.color,
+                                   width: "40px",
+                                   height: "40px",
+                                   borderRadius: "50%",
+                                  //  backgroundColor: cartItem.productvariation.color,
+                             }}>{cartItem.productvariation.color}</span></span>
+                                  <span className="productSize"><b>Size:</b> {cartItem.productvariation.size}</span>
+                              </div>
+                          </div>
+                          
+                          <div className="priceDetail">
+                           <div className="productAmountContainer">
+                                  <Add disabled={cartItem.quantity > 10} onClick={ (e)=> {
+                                      if(cartItem.quantity < 10 ){
+                                          return handleChangeQuantity(cartItem.id, cartItem.quantity, "add") 
+                                      }
+                                  }}/>
+                                  <div className="productAmount"> {cartItem.quantity}</div>
+                                  <Remove disabled={cartItem.quantity < 2} onClick={ (e)=>{
+                                      if(cartItem.quantity > 1 ){
+                                          return handleChangeQuantity(cartItem.id, cartItem.quantity, "minus") 
+                                      }
                                     }
-                                }}/>
-                                <div className="productAmount"> {cartItem.quantity}</div>
-                                <Remove disabled={cartItem.quantity < 2} onClick={ (e)=>{
-                                    if(cartItem.quantity > 1 ){
-                                        return handleChangeQuantity(cartItem.id, cartItem.quantity, "minus") 
-                                    }
-                                  }
-                                }/>
-                                
-                            </div>
-                            <div className="productPrice">$  {cartItem.productvariation.quantity * cartItem.product.price}</div>
-                        </div>
-
-                        <div className="cancelOperation" onClick={(e)=> handleCancel(cartItem.id)}>
-                            {/* <CancelOutlinedIcon /> */}
-                            cancel
-                        </div>
-                    </div>
-                  
-      
-                            </div>
-                        )
-                    })
-                  }
-                  
-                </div>
-                <div className="summary">
+                                  }/>
+                                  
+                              </div>
+                              <div className="productPrice">$  {cartItem.quantity * cartItem.product.price}</div>
+                          </div>
+  
+                          <div className="cancelOperation" onClick={(e)=> handleCancel(cartItem.id)}>
+                              {/* <CancelOutlinedIcon /> */}
+                              cancel
+                          </div>
+                      </div>
+                    
+        
+                              </div>
+                          )
+                      })
+                    }
+                    
+                  </div>
+                    <div className="summary">
                     <h1 className="summaryTitle">ORDER SUMMARY</h1>
                     <div className="summaryItem">
                         <span className="summaryItemText">Subtotal</span>
@@ -151,8 +163,21 @@ export default function Cart() {
                         <span className="summaryItemText" >Total</span>
                         <span className="summaryItemPrice"> $ { calculateTotalCart() + shippingCost + shippingDiscount}</span>
                     </div>
-                    <button>CHECKOUT NOW</button>
+                    <button onClick={ (e) => {
+                        if(cartItems.length > 0){
+                            setCheckOutOpen(true);
+                            // CheckOutlined();
+                        }
+                    }}>CHECKOUT NOW</button>
                 </div>
+                </>
+                }
+               
+                
+                {/* <Pay firstName={user.firstName} lastName={user.lastName} email={user.email} amount={ calculateTotalCart() + shippingCost + shippingDiscount}/> :  */}
+                   
+                 
+                
             </div>
         </div>
         <Footer />

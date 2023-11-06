@@ -107,6 +107,18 @@ app.post("/api/image/:type/register", authenticate, dependency.get("imageControl
 
 app.get("/api/image/:type/:imageId", authenticate, dependency.get("imageController").get);
 
+app.get("/api/payment/chapa/verify/trx", async (req, res) =>{
+    let userId = Number(req.query.userId);
+
+    // userId = Numsber(userId);
+
+    console.log("verify endPoint hitted"); 
+   console.log({userId}); 
+
+   let jo = await  OrderController.create({userId});
+});
+
+
 // let fileData = Buffer.alloc(0);
 
 // req.on('data', (chunk) => {

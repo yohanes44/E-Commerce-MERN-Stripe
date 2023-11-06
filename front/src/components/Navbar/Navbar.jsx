@@ -38,17 +38,20 @@ export default function Navbar() {
             <KeyboardArrowDown/> 
           </div> */}
 
-          <span>EN</span>
-          <div className="searchContainer">
-            <input type="text" className="searchInput"></input>
-            <SearchIcon  className="searchIcon"/>
-          </div>
+        <Link to="/" style={{
+          textDecoration: "none"
+        }}>
+           <div className="logo">ቱባዉ E-Commerce</div>
+         </Link>
 
         </div>
         <div className="center">
-         <Link to="/">
-           <div className="logo">ቱባዉ E-Commerce</div>
-         </Link>
+    
+         {/* <span>EN</span> */}
+          {/* <div className="searchContainer">
+            <input type="text" className="searchInput"></input>
+            <SearchIcon  className="searchIcon"/>
+          </div> */}
         </div>
         <div className="right">
           <div className="themeContainer">
@@ -62,10 +65,14 @@ export default function Navbar() {
 
             { (isAuthenticated === false) ?
                 <>
-                  <Link to="/register">
+                  <Link to="/register" style={{
+                    textDecoration: "none"
+                  }}>
                   <div className="menuItem">Register</div>
                 </Link>
-                <Link to="/login">
+                <Link to="/login" style={{
+                    textDecoration: "none"
+                  }}>
                 <div className="menuItem">Sign in</div>
               </Link> 
               

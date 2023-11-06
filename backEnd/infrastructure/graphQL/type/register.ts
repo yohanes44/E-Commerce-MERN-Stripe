@@ -17,7 +17,7 @@ import UserType from "./user"
 
 
 export default new GraphQLObjectType({
-    name: "login",
+    name: "register",
     fields: ()=> ({
         token: { type: GraphQLString },
         user: {

@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Product({item}) {
   return (
     <div className='productContainer'>
-            <Link to={`/product/${item.id}`}>
-
+           
             <div className="" style={{
                 textAlign: "center",
                 color: "teal",
@@ -22,17 +21,20 @@ export default function Product({item}) {
         <div className="info">
           
             <div className="icon">
+                 <Link to={`/product/${item.id}`}>
+         
                 <ShoppingCartOutlined />
+                 </Link>
             </div>
-            <div className="icon">
+            {/* <div className="icon">
                 <SearchOutlined />
             </div>
             <div className="icon">
                 <FavoriteBorderOutlined />
-            </div>
+            </div> */}
             
         </div>
-            </Link>
+           
     </div>
   )
 }

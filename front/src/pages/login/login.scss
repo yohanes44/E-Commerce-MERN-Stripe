@@ -18,10 +18,25 @@
         padding: 20px;
         background-color: white;
 
+        .titles{
+            // border: 2px solid red;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
         .title{
             font-size: 24px;
             font-weight: 300;
+            // border: 2px solid blue;
+        }
 
+        .home{
+            background-color: rgba(0, 128, 128, 0.623);
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 20px;
         }
 
         form{
@@ -35,16 +50,33 @@
                 padding: 10px;
             }
 
-            button{
-                width: 40%;
-                border: none;
-                padding: 15px 20px;
-                background-color: teal;
-                color: white;
-                margin-bottom: 10px;
-                cursor: pointer;
-            }
+            .actions{
+                // border: 2px solid blue;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // height: 30px;
+                gap: 5%;
 
+                button{
+                    width: 40%;
+                    border: none;
+                    padding: 0px 20px;
+                    background-color: teal;
+                    color: white;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40px;
+
+                    width: fit-content;
+                    
+                }
+    
+            }
+         
             a{
                 margin: 5px 0px;
                 font-size: 12px;

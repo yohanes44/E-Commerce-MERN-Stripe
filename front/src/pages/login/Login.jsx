@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate from react
 import { request, gql } from "graphql-request"; // Import necessary functions and objects
 import backEndGraphQLURL from "../../utility/http";
 
+import {
+  Link
+} from "react-router-dom"
+
 
 export default function Login() {
 
@@ -56,7 +60,10 @@ export default function Login() {
       const variables = { email, password};
 
       let responseLogin= await request(backEndGraphQLURL,loginMutation,variables);
-      console.log("test Login Success man == ", responseLogin.login.token);
+      // console.log("test Login Response " );
+      // console.log(typeof responseLogin.errors);
+      // console.log("test Login Success man == ", responseLogin.login.token);
+
       login(responseLogin.login.token, responseLogin.login.user); 
       // console.log("Login: setUser test");
       // console.log(responseLogin.login.user)
@@ -67,7 +74,7 @@ export default function Login() {
     }
     catch(err){
       console.log(err.message);
-      setError(err.message);
+      setError(err.message.split("።")[0 ]);
     }
 
   }
@@ -79,8 +86,24 @@ export default function Login() {
          <h1>email = {email}</h1>
          <h1>password ={password}</h1>
        </div> */}
-        <h1 className="title">SIGN IN</h1>
+
+        <div className="titles">
+          <h1 className="title">SIGN IN</h1>
+          <h1 className="title home">
+            <Link to="/" style={{
+              textDecoration: "none",
+              color: 'white'
+            }}>
+              Home
+            </Link></h1>       
+        </div>
+
         <form action="">
+          {/* <div> */}
+            {
+              error ? <div style={{ color: "red"}}>{error}</div> : null
+            }
+          {/* </div> */}
             <input type="text" name="email" placeholder='email' onChange={(e)=>{
               const val = e.target.value;
               setEmail(val);
@@ -89,10 +112,21 @@ export default function Login() {
                  const val = e.target.value;
                  setPassword(val);
             }}/>
-            <button onClick={handleSubmit} >LOGIN</button>
+            <div className="actions">
+              <button onClick={handleSubmit} >LOGIN</button>
+              <button style={{
+                     backgroundColor: "rgba(0, 128, 128, 0.555)",
+                  }}><Link to="/register" style={{
+                textDecoration: "none",
+                color: "white"
+              }}>
+              CREATE A NEW ACCOUNT
+              </Link></button>
+            </div>
+          
             {/* <link */}
             <a>DO NOT YOU REMEMBER THE PASSWORD?</a>
-            <a>CREATE A NEW ACCOUNT</a>
+            {/* <a>CREATE A NEW ACCOUNT</a> */}
         </form>
     </div>
 </div>

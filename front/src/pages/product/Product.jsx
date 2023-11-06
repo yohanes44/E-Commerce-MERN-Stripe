@@ -20,6 +20,7 @@ import { useAuth } from "../../utility/context/auth";
 
 import { useCart } from "../../utility/context/cart";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Product() {
   const { isAuthenticated, setAuthenticated, login, setToken, user } =
@@ -71,6 +72,8 @@ export default function Product() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [confirmPopUp, setConfirmPopUp] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -192,18 +195,23 @@ export default function Product() {
 
   const addToCart = async (e) => {
 
-    const userId = parseInt(user.id);
-    const productId = id;
-    
-    try {
-      addCartItems(id, quantity, selectedProductVariation.id);
-      setConfirmPopUp(true);
-    } catch (err) {
-      console.log(err);
-      setError(err);
-      setLoading(false);
-    }
+    console.log({isAuthenticated});
 
+    if(!isAuthenticated){
+      navigate('/login');
+    }else{
+      const userId = parseInt(user.id);
+      const productId = id;
+      
+      try {
+        addCartItems(id, quantity, selectedProductVariation.id);
+        setConfirmPopUp(true);
+      } catch (err) {
+        console.log(err);
+        setError(err);
+        setLoading(false);
+      }
+    }
   };
 
   const handleQuantity = (operation) => {
@@ -284,9 +292,7 @@ export default function Product() {
         }}>
           <img src={ product.img || selectedProductVariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
         </div>
-
-        {
-          user ? <div className="infoContainer">
+      <div className="infoContainer">
           <h1 className="title">{product.name}</h1>
           <p className="desc">{product.desc}</p>
           <span className="price">Birr {product.price * quantity}</span>
@@ -377,26 +383,7 @@ export default function Product() {
           </div>
          
         </div>
-        : <Link to="/login">
-          <div style={{
-          // border: "2px solid red",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start"
-        }} className="infoContainer"><button 
-            style={{
-              backgroundColor: "teal",
-              color: "white",
-              border: "none",
-              padding: "10px 25px",
-              borderRadius: "5px"
-            }}
-        className="productDetail">
-        Login
-      </button></div>
-        
-          </Link> 
-        }
+      
               </div>
       <NewsLetter />
       <Footer />

@@ -127,6 +127,35 @@ export default function CartProvider({ children }) {
     }
   };
 
+
+  const addOrder = async (userId) => {
+
+
+    console.log("addOrder function called");
+
+
+    userId = parseInt(user.id);
+    // const productId = id;
+
+    // variationId = parseInt(variationId);
+
+    try {
+      const addOrderMutation = gql`
+      mutation addOrder($userId: Int!) {
+        addOrder(userId: $userId) {
+          userId
+        }
+      }
+    `;
+      const variables = { userId };
+
+      let responseAddCartItem = await request(backEndGraphQLURL, addOrderMutation, variables);
+      setCartItem( responseAddCartItem.addOrder);
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
   const cancelCartItem = async (id) => {
     
     console.log("cancelCartItem function called");
@@ -192,6 +221,7 @@ export default function CartProvider({ children }) {
     setCartItems,
     findCartItems,
     addCartItems,
+    addOrder,
     cancelCartItem,
     updateCartItemQuantity
   };

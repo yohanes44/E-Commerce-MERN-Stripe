@@ -11,8 +11,12 @@ model address {
   id          Int    @id @default(autoincrement())
   userId      Int
   phoneNumber Int
+
+
   city        String @db.VarChar(255)
   sub_city    String @db.VarChar(255)
+  
+  
   user        user   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Address_userId_fkey")
 
   @@index([userId], map: "Address_userId_fkey")
@@ -55,6 +59,21 @@ model order {
   @@index([userId], map: "Order_userId_fkey")
 }
 
+model wishlist {
+  id      Int       @id @default(autoincrement())
+  userId   Int
+
+  productId  Int
+ 
+  product   product @relation(fields: [productId], references: [id], onDelete: Cascade, map: "wishlist_productId_fkey")
+  user   user @relation(fields: [userId], references: [id], onDelete: Cascade, map: "wishlist_userId_fkey")
+
+  @@index([userId], map: "wishlist_userId_fkey")
+  @@index([productId], map: "wishlist_productId_fkey")
+
+ }
+
+
 model product {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
@@ -67,6 +86,7 @@ model product {
   cart             cart[]
   category         category           @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
   productvariation productvariation[]
+  wishlist wishlist[]
 
   @@index([categoryId], map: "Product_categoryId_fkey")
 }
@@ -102,6 +122,7 @@ model user {
   cart      cart[]
   order     order[]
   user_role user_role[]
+  wishlist wishlist[]
 }
 
 model user_role {
@@ -109,6 +130,7 @@ model user_role {
   userId Int
   roleId Int
   role   role @relation(fields: [roleId], references: [id], map: "User_role_roleId_fkey")
+  
   user   user @relation(fields: [userId], references: [id], onDelete: Cascade, map: "User_role_userId_fkey")
 
   @@index([roleId], map: "User_role_roleId_fkey")

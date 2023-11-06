@@ -87,7 +87,7 @@ export default function AuthProvider({children}){
         setUser(null);
         setAuthenticated(false);
         setToken(null);
-        navigate('/');
+        navigate('/login');
         console.log("logout button clicked");
       }
 
