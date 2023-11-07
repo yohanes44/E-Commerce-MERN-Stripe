@@ -10,7 +10,7 @@ class OrderResolver {
     }
 
     async getOrders(parent: any, args: any, context: any) {    
-        return await context.controller.OrderController.getOrder(args.id);
+        return await context.controller.OrderController.getOrders();
     }
 
     async getUserOrders(parent: any, args: any, context: any) {

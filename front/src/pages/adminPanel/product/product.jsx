@@ -5,6 +5,10 @@ import Navbar from '../../../components/admin/navbar/Navbar';
 
 import SalesPerformance from '../../../components/salesPerformance/salesPerformance';
 
+
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
 import "./product.scss"
 
 import joImg from "../../../images/category/shirt5.jpg"
@@ -12,20 +16,94 @@ import joImg from "../../../images/category/shirt5.jpg"
 import Chart from "../../../components/chart/Chart"
 
 import {Publish, DriveFolderUploadOutlined} from '@mui/icons-material';
+import Datatable from '../../../components/admin/datatable/Datatable';
+
+
+
+import { request, gql } from 'graphql-request'; // Import necessary functions and objects
+
+import  backEndGraphQLURL from '../../../utility/http';
+
 
 function Product() {
 
     const [productImg, setProductImg] = useState(joImg);
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState({
+        id: null, 
+        name: null,
+        desc: null,
+        img: null,
+        brand: null,
+        isActive: null,
+        price: null,
+        variation:{
+         id: null,
+         color: null,
+         size: null
+        },
+        category:{
+         id: null,
+         name: null
+        }
+    });
+
+    const location = useLocation();
+
+  
+
+    const productId = parseInt(location.pathname.split("/")[3]);
 
 
+    useEffect(()=>{
+   
+        let fetchData = async () => {
+            try{
 
-    console.log({productImg});
+                let  query = null;
+                let variables = null;
+                let dotWalkField = null;
 
+                    query = gql`
+                    query product($id: Int!) {
+                        product(id: $id) {
+                               id, 
+                               name,
+                               desc,
+                               img,
+                               brand,
+                               isActive,
+                               price,
+                               variation{
+                                id,
+                                color,
+                                size
+                               },
+                               category{
+                                id,
+                                name
+                               }
+
+                    }}
+                  `;
+
+                   variables = { id: productId }; // Define your variable object
+                   dotWalkField = "products";
+                   let response =   await request(backEndGraphQLURL, query, variables);
+                console.log({response});
+                   setProduct(response.product);
+
+            }
+            catch(err){
+                console.log(err.message);
+            }
+        }
+
+        fetchData();
+    }, [productId])
     return (
         <div className="productAdmin">
             <Sidebar />
-            <div className="productContainer">
+            <div className="productContainer2">
                 <Navbar />
                 <div className="product">
                     <div className="top">
@@ -47,13 +125,13 @@ function Product() {
                         {/* </div> */}
                         <div className="productHighLight">
                             <div className="productTitle">
-                                <img src={joImg} alt="" />
-                                <div className="productNamex">Herman Coat</div>
+                                <img src={product.img || "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"} alt="" />
+                                <div className="productNamex">{product.name}</div>
                             </div>
                             <div className="productInfo">
                                 <div className="productInfoItem">
                                     <span>id:</span>
-                                    <span>3</span>
+                                    <span>{product.id}</span>
                                 </div>
                                 <div className="productInfoItem">
                                     <span>sales:</span>
@@ -61,7 +139,7 @@ function Product() {
                                 </div>
                                 <div className="productInfoItem">
                                     <span>in stock:</span>
-                                    <span>5</span>
+                                    <span>{product.variation.length}</span>
                                 </div>
                             </div>
                         </div>
@@ -70,14 +148,14 @@ function Product() {
                     <div className="bottom">
                         <form>
                         <div className="productForm">
-                            <label> Product Name</label>
-                            <input type="text" placeholder='Product Title' />
+                            <label>Product Name</label>
+                            <input type="text" placeholder='Product Title' value={product.name} />
 
                             <label> Product Description</label>
-                            <input type="text" placeholder="Product Description" name="Product Desc" />
+                            <input type="text" placeholder="Product Description" name="Product Desc"  value={product.desc}/>
 
                             <label> Price</label>
-                            <input type="text" placeholder="2000" name="Product title" />
+                            <input type="text" placeholder="2000" name="Product title" value={product.price} />
 
                             <label> In Stock</label>
                             <select name="inStock" id="inStock">
@@ -88,7 +166,7 @@ function Product() {
                         <div className="productImage">
                             
                             <div className="top">
-                                <img src={ productImg ? productImg : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" } alt="" className="img" />
+                                <img src={ product.img || "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" } alt="" className="img" />
                                 <label className="upload"  htmlFor='file'>
                                     <Publish  />
                                     <input type="file" id="file" 
@@ -101,6 +179,8 @@ function Product() {
                             <button className="update">Update</button>
                         </div>
                         </form>
+
+                        {/* <Datatable  /> */}
                     </div>
                 </div>
             </div>

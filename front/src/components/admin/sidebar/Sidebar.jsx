@@ -59,7 +59,7 @@ function Sidebar() {
                 <span>Products</span>
               </li>
             </Link>
-            <Link  style={{textDecoration: "none"}}>
+            <Link to="/adminPanel/orders"  style={{textDecoration: "none"}}>
               <li>
                 <CreditCard className="icon" />
                 <span>Orders</span>
@@ -72,7 +72,7 @@ function Sidebar() {
               </li>
             </Link>
 
-            <p className="title">Useful</p>
+            {/* <p className="title">Useful</p>
             <Link  style={{textDecoration: "none"}}>
               <li>
                 <InsertChart className="icon" />
@@ -84,8 +84,10 @@ function Sidebar() {
                 <NotificationsNone className="icon" />
                 <span>Notifications</span>
               </li>
-            </Link>
-            <p className="title">Services</p>
+            </Link> */}
+
+
+            {/* <p className="title">Services</p>
             <Link  style={{textDecoration: "none"}}>
               <li>
                 <SettingsSystemDaydreamOutlined className="icon" />
@@ -103,7 +105,9 @@ function Sidebar() {
                 <SettingsApplications className="icon" />
                 <span>Settings</span>
               </li>
-            </Link>
+            </Link> */}
+
+
             <p className="title">User</p>
             <Link  style={{textDecoration: "none"}}>
               <li>

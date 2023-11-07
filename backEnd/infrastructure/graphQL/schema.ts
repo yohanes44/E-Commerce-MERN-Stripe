@@ -162,7 +162,13 @@ export default class Resolvers {
                     type: new GraphQLList(CartType),
                     args: { userId: { type: GraphQLInt } },
                     resolve: CartResolver.getCartItems
+                },
+                orderedCartItems: {
+                    type: new GraphQLList(CartType),
+                    args: { userId: { type: GraphQLInt } },
+                    resolve: CartResolver.getOrderedCartItems
                 }
+                
             }
         })
 
@@ -170,7 +176,7 @@ export default class Resolvers {
             name: "Mutation",
             fields: {
                 addUser: {
-                    type: RegisterType,
+                    type: RegisterType  ,
                     args: {
                         firstName: { type: new GraphQLNonNull(GraphQLString) },
                         lastName: { type: new GraphQLNonNull(GraphQLString) },

@@ -22,42 +22,43 @@ const numOfColumns = 10;
 
 export const headCells = [
     {
-        field: 'name',
-        headerName: "name", 
+        field: 'id',
+        headerName: "Id", 
         width: 200,
-        renderCell: ()=>{
-            return (<div className="cellAction">
+      //   renderCell: ()=>{
+      //       return (<div className="cellAction">
               
-              <div className="deleteButton">
-                Delete
-              </div>
-            </div>)
-       }
+      //         <div className="deleteButton">
+      //           Delete
+      //         </div>
+      //       </div>)
+      //  }
     },
     {
-        id: 'calories',
+        field: 'firstName',
         numeric: true,
         disablePadding: false,
-        label: 'Calories',
+        headerName: 'First Name',
+       
       },
       {
-        id: 'fat',
+        field: 'lastName',
         numeric: true,
         disablePadding: false,
-        label: 'Fat (g)',
+        label: 'Last Name',
       },
       {
-        id: 'carbs',
+        field: 'email',
         numeric: true,
         disablePadding: false,
-        label: 'Carbs (g)',
+        label: 'Email',
       },
-      {
-        id: 'protein',
-        numeric: true,
-        disablePadding: false,
-        label: 'Protein (g)',
-      },
+      // {
+      //   field: 'protein',
+      //   numeric: true,
+      //   disablePadding: false,
+      //   label: 'Protein (g)',
+      // },
   
 ]
  

@@ -45,9 +45,13 @@ export default class OrderController{
         }
     }
 
-    async getOrders(id: any){
+    async getOrders(){
         try{
-            return await db.order.findMany()
+            return await db.order.findMany({
+                include: {
+                    user: true,
+                }
+            })
         }
         catch(err: any){
             console.log(err);

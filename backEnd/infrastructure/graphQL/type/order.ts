@@ -19,6 +19,7 @@ export default new GraphQLObjectType({
     fields: ()=> ({
         // id: { type: GraphQLID },
         // state: { type: GraphQLString },
+        id:{ type: GraphQLID },
         userId: { type: GraphQLID },
         // city: { type: GraphQLString },
         // sub_city: { type: GraphQLString },

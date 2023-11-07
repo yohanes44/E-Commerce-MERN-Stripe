@@ -4,7 +4,7 @@ import ProductInterfce from "../application/interface/Product";
 import ProductVariationInterfce from "../application/interface/ProductVariation";
 import UserClass from "../application/entities/user";
 
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, category } from "@prisma/client"
 
 const db = new PrismaClient();
 
@@ -37,10 +37,10 @@ export default class ProductController {
     }
 
     // category ? { category: { name: category } : {}
-    async getProducts(category: string, selectedFilter: any) {
+    async getProducts({category = "", selectedFilter ={}} : {category : string, selectedFilter: any} ) {
         try {
             
-            console.log(selectedFilter);
+            // console.log(selectedFilter);
 
             const where = { 
                 category: {},

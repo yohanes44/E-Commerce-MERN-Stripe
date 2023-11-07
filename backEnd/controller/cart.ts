@@ -41,9 +41,39 @@ export default class CartController{
             orderBy.id = "desc";
 
             let cartItems =  await db.cart.findMany({
-                where: {
+                where: (userId) ?  {
                     userId,
                     state: "inCart"
+                } : {},
+                include: {
+                    product: true,
+                    productvariation: true
+                },
+                orderBy
+            })
+
+            // console.log(cartItems[0].productvariation.img);
+            return cartItems;
+        }
+        catch(err: any){
+            console.log(err);
+        }
+    }
+
+    async getOrderedCartItems (userId: number) {
+        try{
+
+            let orderBy : any = {
+
+            }
+            orderBy.id = "desc";
+
+            let cartItems =  await db.cart.findMany({
+                where: (userId) ?  {
+                    userId,
+                    state: "ordered"
+                } : {
+                    state: "ordered"
                 },
                 include: {
                     product: true,

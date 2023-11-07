@@ -10,7 +10,7 @@ class ProductResolver{
     }
 
     async getProducts (parent: any, args: any, context: any){
-        return await context.controller.ProductController.getProducts(args.category, args.selectedFilter);
+        return await context.controller.ProductController.getProducts({category: args.category, selectedFilter: args.selectedFilter});
     }
     async getProductVariation(parent: any, args: any, context: any){
         return await context.controller.ProductController.getProductVariation(args.id);

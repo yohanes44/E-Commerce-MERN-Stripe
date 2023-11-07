@@ -4,20 +4,27 @@ import "./datatable.scss"
 
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
-import {headCells, rows} from "../../../../src/dataTableSource"
 import { Link } from "react-router-dom";
 
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Datatable() {
+
+
+export default function Datatable({headers, rows}) {
+
+  const location = useLocation();
+  const listType = location.pathname.split("/")[2]
+  
+
 
   const actionColumn = [
     {
     field: "action", 
     headerName: "Action", 
     width: 200,
-    renderCell: ()=>{
+    renderCell: (params)=>{
     return (<div className="cellAction">
-      <Link to="/adminPanel/users/test" style={{textDecoration: "none"}}>
+      <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}>
       <div className="viewButton">
         View
       </div>
@@ -44,7 +51,7 @@ export default function Datatable() {
           }
          }
         rows={rows}
-        columns={headCells.concat(actionColumn)}
+        columns={headers.concat(actionColumn)}
         // pageSize={5}
         // rowsPerPageOptions={[5]}
         initialState={{

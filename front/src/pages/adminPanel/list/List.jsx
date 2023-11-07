@@ -1,17 +1,264 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from '../../../components/admin/sidebar/Sidebar';
-import Navbar from '../../../components/admin/navbar/Navbar';
 
 import "./list.scss"
 import Datatable from '../../../components/admin/datatable/Datatable';
 
+
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { request, gql } from 'graphql-request'; // Import necessary functions and objects
+
+import  backEndGraphQLURL from '../../../utility/http';
+
+import Navbar from '../../../components/Navbar/Navbar'
+import Announcement from '../../../components/announcements/Announcement'
+import Footer from '../../../components/footer/Footer'
+import { Add, Remove } from '@mui/icons-material'
+
+import { useAuth } from "../../../utility/context/auth";
+import { useCart } from "../../../utility/context/cart";
+
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+// import { rows } from '../../../dataTableSource';
+
+
 export default function ListAdmin() {
+
+   const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
+   const {cartItems, setCartItems, addOrder, findCartItems, cancelCartItem, updateCartItemQuantity} = useCart(); 
+
+   const navigate = useNavigate();
+
+   const location = useLocation();
+   const listType = location.pathname.split("/")[2]
+   
+   const [headers, setHeaders] = useState([]);
+
+   
+
+
+   const [rows, setRows] = useState([]);
+ 
+   useEffect(()=>{
+
+    const fetchData = async () => {
+        // console.log({listType});
+        
+        try{
+
+            let  query = null;
+            let variables = null;
+            let dotWalkField = null;
+            let response = null;
+    
+            if(listType == "users"){
+                setHeaders([
+                    {
+                        field: 'id',
+                        headerName: "Id", 
+                       
+                    },
+                    {
+                        field: 'firstName',
+                        numeric: true,
+                        disablePadding: false,
+                        headerName: 'First Name',
+                       
+                      },
+                      {
+                        field: 'lastName',
+                        numeric: true,
+                        disablePadding: false,
+                        label: 'Last Name',
+                      },
+                      {
+                        field: 'email',
+                        numeric: true,
+                        disablePadding: false,
+                        width: 250,
+                        label: 'Email',
+                      },
+                ])
+    
+                query = gql`
+                {
+                  users{
+                    id,
+                    firstName,
+                    lastName,
+                    email
+                  }
+                }
+              `
+                dotWalkField = "users";
+
+                response = await request(backEndGraphQLURL, query);  
+    
+            }
+    
+            if(listType == "products"){
+                setHeaders([
+                    {
+                        field: 'id',
+                        numeric: true,
+                        headerName: "Id", 
+                       
+                    },
+                    {
+                        field: 'name',
+                        numeric: false,
+                        disablePadding: false,
+                        headerName: 'Name',
+                       
+                      },
+                      {
+                        field: 'desc',
+                        numeric: false,
+                        disablePadding: false,
+                        headerName: 'Description',
+                      },
+                      {
+                        field: 'brand',
+                        numeric: false,
+                        disablePadding: false,
+                        width: 250,
+                        label: 'Brand',
+                      },
+                ])
+                let selectedFilter = {};
+                let category = "";
+    
+                query = gql`
+                query products($category: String!, $selectedFilter: ProductFilterInput!) {
+                    products(category: $category, selectedFilter: $selectedFilter) {
+                           id, 
+                           name, 
+                           desc,
+                           variation{
+                                id,
+                                img, 
+                                color
+                            }
+                }}
+              `;
+               variables = { category, selectedFilter }; // Define your variable object
+               dotWalkField = "products";
+               response =   await request(backEndGraphQLURL, query, variables);
+            }
+
+            if(listType == "orders"){
+                setHeaders([
+                    {
+                        field: 'id',
+                        numeric: true,
+                        headerName: "Id",
+                    },
+                    {
+                        field: 'product',
+                        numeric: false,
+                        width: 150,
+                        disablePadding: false,
+                        headerName: 'Product',
+                       
+                      },
+                      {
+                        field: 'variation',
+                        numeric: false,
+                        width: 200,
+                        disablePadding: false,
+                        headerName: 'Variation',
+                      },
+                      {
+                        field: 'state',
+                        numeric: false,
+                        disablePadding: false,
+                        label: 'State',
+                      },
+                      {
+                        field: 'user',
+                        numeric: false,
+                        disablePadding: false,
+                        width: 150,
+                        label: 'User',
+                      },
+                ])
+                let selectedFilter = {};
+                let category = "";
+    
+                query =    query = gql`
+                {
+                    orderedCartItems{
+                        id,
+                        variationId,
+                        state,
+                        quantity
+                        user{
+                          id,
+                          firstName,
+                          lastName,
+                          email,
+                        },
+                        product{
+                          id,
+                          name,
+                          img,
+                          price,
+                          category {
+                            id,
+                            name
+                          }
+                        },
+                        productvariation {
+                          id,
+                          img,
+                          color,
+                          size
+                        }   
+                  }
+                }
+              `
+               dotWalkField = "orderedCartItems";
+
+
+
+               response =  await request(backEndGraphQLURL, query);
+               
+               let temp = response[dotWalkField].map( (obj) => {
+                  let newObj = {};
+                  
+                  newObj.id = obj.id;
+                  newObj.product = obj.product.name;
+                  newObj.state = obj.state;
+                  newObj.variation = `${obj.product.name}-${obj.productvariation.color}-${obj.productvariation.size}`;
+                  newObj.user = `${obj.user.email}`;
+                  return newObj;
+               })
+
+            
+               response[dotWalkField] =  temp;
+            }
+    
+             setRows(response[dotWalkField]);
+        
+        }
+        catch(err){
+            console.log(err.message);
+        }
+       
+    }
+
+    fetchData();
+
+   }, [listType])
+
+
     return (
         <div className='list'>
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                <Datatable />
+                <Datatable  headers={headers} rows={rows} />
             </div>
         </div>
     );

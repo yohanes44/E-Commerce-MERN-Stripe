@@ -15,6 +15,10 @@ import  graphql, {
 
 import ProductType from "./product"
 import ProductVariationType from "./product"
+import UserType from "./user"
+import CategoryType from "./category"
+
+
 
 
 export default  new GraphQLObjectType({
@@ -27,6 +31,32 @@ export default  new GraphQLObjectType({
         orderId: { type: GraphQLID },
         state: { type: GraphQLString },
         quantity: { type: GraphQLInt },
+        user: {
+            type:  UserType,
+            resolve: async (parent, args)=>{
+             
+                const userProducts = await orm.user.findUnique({
+                    where: {
+                        id: parent.userId,
+                    },
+                  })
+                  
+                return userProducts;
+            }
+        },
+        // category: {
+        //     type:  CategoryType,
+        //     resolve: async (parent, args)=>{
+             
+        //         const userProducts = await orm.category.findUnique({
+        //             where: {
+        //                 id: parent.userId,
+        //             },
+        //           })
+                  
+        //         return userProducts;
+        //     }
+        // },
         product: {
             type:  ProductType,
             resolve: async (parent, args)=>{
