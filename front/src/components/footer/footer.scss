@@ -10,6 +10,9 @@
         flex-direction: column;
         padding: 20px;
 
+        p{
+
+        }
 
         .logo{
 
@@ -21,7 +24,7 @@
 
         .socialContainer{
             display: flex;
-
+            padding-left: 20px;
             .socialIcon{
                 width: 40px;
                 height: 40px;
@@ -43,6 +46,8 @@
 
         .title{
             margin-bottom: 30px;
+            // border: 2px solid red;
+            text-align: center;
         }
 
         .list{
@@ -59,6 +64,17 @@
         }
     }
 
+    .payment{
+
+        padding: 20px;
+
+        img{
+            // border: 2px solid red;
+            
+            width: 200px;
+            height: 60px;
+        }
+    }
     .right{
         flex: 1;
         padding: 20px;

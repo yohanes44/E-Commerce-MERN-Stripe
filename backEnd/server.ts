@@ -79,7 +79,7 @@ app.use(express.json());
 
 app.use("/api/graphql", graphqlHTTP( async (req: any) => {
 
-    ExceptionHandlingService.changeLanguage("amh");
+    ExceptionHandlingService.changeLanguage("eng");
 
         return {
             schema: new graphQLSchema().getSchema(),

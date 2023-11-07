@@ -11,18 +11,22 @@ import {
 
 import "./categoryItem.scss"
 
-export default function CategoryItem({item}) {
+export default function CategoryItem({ item }) {
 
 
   return (
     <div className='categoryItemContainer'>
+      <h2>{item.name}</h2>
+      <div className="wrapperItem">
         <img className='ciImg' src={item.img} alt="itemImg" />
         <div className="info">
-            <h1 className="title">{item.name}</h1>
-            <Link to={`/products/${item.name}`}>
-              <button>SHOP NOW</button>
-            </Link>
+          {/* <h3 className="title">{item.name}</h3> */}
+          <Link to={`/products/${item.name}`}>
+            <button>SHOP NOW</button>
+          </Link>
         </div>
+      </div>
+
     </div>
   )
 }

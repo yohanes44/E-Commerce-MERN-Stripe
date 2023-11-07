@@ -14,7 +14,7 @@ export default class JoException extends Error {
             amh: "የበፊት ይለፍ ቃል ትክክል አይደለም።"
         },
         auth0003: {
-            eng: "password does not match።",
+            eng: "incorrect password።",
             amh: "የይለፍ ቃል ትክክል አይደለም።"
         },
         db0001: {

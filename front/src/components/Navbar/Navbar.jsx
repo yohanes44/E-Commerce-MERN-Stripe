@@ -54,10 +54,10 @@ export default function Navbar() {
           </div> */}
         </div>
         <div className="right">
-          <div className="themeContainer">
+          {/* <div className="themeContainer">
             <div className="black"></div>
             <div className="white"></div>
-          </div>
+          </div> */}
           
           {/* <Link to={`/products/${item.name}`}>
               <button>SHOP NOW</button>

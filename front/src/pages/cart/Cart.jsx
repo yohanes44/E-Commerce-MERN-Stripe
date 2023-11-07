@@ -83,11 +83,16 @@ export default function Cart() {
                     <span className="topText">Shopping Bag: {cartItems.length}</span>
                     {/* <span className="topText">Your Wishlist (0)</span> */}
                 </div>
-                <button onClick={CheckOutlined} style={{backgroundColor: "black", color: "white", border: "none"}} className="topButton">CHECKOUT NOW</button>
+                <button onClick={ (e) => {
+                        if(cartItems.length > 0){
+                            setCheckOutOpen(true);
+                            // CheckOutlined();
+                        }
+                    }} style={{backgroundColor: "black", color: "white", border: "none"}} className="topButton">CHECKOUT NOW</button>
             </div>
             <div className="bottom">
                 {
-                    (checkOutOpen && cartItems.length > 0) ?  <Pay firstName={user.firstName} lastName={user.lastName} email={user.email} amount={ calculateTotalCart() + shippingCost + shippingDiscount}/> :
+                    (checkOutOpen && cartItems.length > 0) ?  <Pay setCheckOutOpen={setCheckOutOpen} firstName={user.firstName} lastName={user.lastName} email={user.email} amount={ calculateTotalCart() + shippingCost + shippingDiscount}/> :
                     <><div className="info">
                     {
                       cartItems.map((cartItem)=>{

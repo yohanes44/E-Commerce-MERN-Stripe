@@ -25,7 +25,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 
 
-export default function Pay({ firstName, lastName, email, amount }) {
+export default function Pay({ setCheckOutOpen, firstName, lastName, email, amount }) {
 
     
     const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
@@ -39,7 +39,29 @@ export default function Pay({ firstName, lastName, email, amount }) {
     }
 
     return (
-        <div className="summary">
+        <div className="checkout">
+
+       
+        <div className="summaryChapa">
+            <div onClick={
+                (e) => {
+                    setCheckOutOpen(false);
+                }
+            } style={{
+                position: "absolute",
+                alignSelf: "flex-end",
+                marginRight: "-25px",
+                marginTop: "-150px",
+                // border: "2px solid black"
+            }}>
+                <CancelOutlinedIcon  style={{
+                    color: "red"
+                }}/>
+            </div>
+            <h1 style={{
+                justifySelf: "flexStart",
+                // border: "2px solid red"
+            }}>Pay With</h1>
                    
      <form method="POST" action="https://api.chapa.co/v1/hosted/pay" onSubmit={(e) => submit()}>
         <input type="hidden" name="public_key" value="CHAPUBK_TEST-f8mLsqVcg8uHJkM4rVTePiZCaiwWZPCh" />
@@ -55,8 +77,9 @@ export default function Pay({ firstName, lastName, email, amount }) {
         <input type="hidden" name="callback_url" value={`http://localhost:3005/api/payment/chapa/verify/trx?userId=${user.id}`} />
         <input type="hidden" name="return_url" value="http://localhost:3000/cart" />
         <input type="hidden" name="meta[title]" value="test" />
-        <button type="submit">Chapa</button>
+        <button type="submit"><img src="http://localhost:3005/api/image/product/chapa.jpg" alt="" /></button>
     </form>
+    </div>
     </div>
   )
 }
