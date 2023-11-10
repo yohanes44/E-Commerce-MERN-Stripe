@@ -18,6 +18,7 @@ import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 import CartType from "./type/cart"
 import UserType from "./type/user"
 import ProductType from "./type/product"
+import AddressType from "./type/address"
 import ProductVariationType from "./type/productVariation"
 import ProductAndVariationType from "./type/productAndVariation"
 
@@ -257,6 +258,16 @@ export default class Resolvers {
                         roleId: { type: GraphQLInt }
                     },
                     resolve: RoleResolver.deleteUserRole
+                },
+                addAddress: {
+                    type: AddressType,
+                    args: {
+                        userId: { type: GraphQLInt   },
+                        phoneNumber: { type: GraphQLString },
+                        city: { type: GraphQLString },
+                        sub_city: { type: GraphQLString }
+                    },
+                    resolve: UserResolver.addAddress
                 },
                 addProduct: {
                     type: ProductType,

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `user` MODIFY `img` VARCHAR(256) NOT NULL;

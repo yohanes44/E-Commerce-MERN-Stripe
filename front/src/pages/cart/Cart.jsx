@@ -30,7 +30,7 @@ export default function Cart() {
 
 
     const {isAuthenticated, setAuthenticated, login, setToken, user} = useAuth();
-    const {cartItems, setCartItems, addOrder, findCartItems, cancelCartItem, updateCartItemQuantity} = useCart();
+    const {cartItems, cancelCartItem, updateCartItemQuantity} = useCart();
 
 
     const [checkOutOpen, setCheckOutOpen] = useState(false);
@@ -39,12 +39,22 @@ export default function Cart() {
 
     const navigate = useNavigate();
 
+//    useEffect(()=>{
 
+ 
 
-    if(isAuthenticated === false){
-      navigate('/login');
-    }
+//     fetchData();
+
+//    },[])
+
+  
+   
     
+   const fetchData = async ()=>{
+    if(isAuthenticated === false){
+        navigate('/login');
+      }
+}
  
       const handleChangeQuantity = (cartItemId, currentQuantity, operation) =>{
         updateCartItemQuantity(parseInt(cartItemId), currentQuantity, operation);
@@ -105,14 +115,16 @@ export default function Cart() {
                               <img src={ cartItem.product.img || cartItem.productvariation.img || "http://localhost:3005/api/image/product/productDefaultPic.png" } alt="" />
                               <div className="details">
                                   <span className="productName"><b>Product:</b>  {cartItem.product.name}</span>
-                                  <span className="productId"><b>ID:</b>  {cartItem.id}</span>
-                                  <span className="productColor" ><b style={{color: "black"}}>Color:</b> <span style={{color: cartItem.productvariation.color,
+                                  <span className="productId"><b>Product Id:</b>  {cartItem.product.id}</span>
+                                  <span className="productId"><b>Product Variation Id:</b>  {cartItem.variation.id}</span>
+                                  <span className="productColor" ><b style={{color: "black"}}>Color:</b> <span style={{
+                                   color: cartItem.variation.color,
                                    width: "40px",
                                    height: "40px",
                                    borderRadius: "50%",
                                   //  backgroundColor: cartItem.productvariation.color,
-                             }}>{cartItem.productvariation.color}</span></span>
-                                  <span className="productSize"><b>Size:</b> {cartItem.productvariation.size}</span>
+                             }}>{cartItem.variation.color}</span></span>
+                                  <span className="productSize"><b>Size:</b> {cartItem.variation.size}</span>
                               </div>
                           </div>
                           

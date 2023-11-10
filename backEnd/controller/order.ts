@@ -86,9 +86,21 @@ export default class OrderController{
         }
     }
 
+     formatDate(date: any) {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const day = date.getDate();
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+      
+        return `${day}/${month}/${year}`;
+    }
+      
+     
+
     async create(data : any){
         try{
-          
+            
+      
 
             const cartItems = await db.cart.findMany({
                 where: {
@@ -110,21 +122,26 @@ export default class OrderController{
                 0
             );
 
+            const now = new Date();
+            const formattedDate = this.formatDate(now);
+
             const createdOrder = await db.order.create({
                 data: {
                   userId: data.userId,
                   total: totalPrice,
-                  state: "ordered"
+                  state: "ordered",
+                  date: formattedDate
                 },
               });
 
               await db.cart.updateMany({
                 where: { 
                     userId: data.userId,
-                    state: "inCart" 
+                    state: "inCart",
                 },
                 data: {
-                    state: "ordered"
+                    state: "ordered",
+                    orderId: createdOrder.id 
                 }
               });
       

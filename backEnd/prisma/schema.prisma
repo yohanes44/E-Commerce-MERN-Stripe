@@ -10,13 +10,9 @@ datasource db {
 model address {
   id          Int    @id @default(autoincrement())
   userId      Int
-  phoneNumber Int
-
-
+  phoneNumber String @db.VarChar(255)
   city        String @db.VarChar(255)
   sub_city    String @db.VarChar(255)
-  
-  
   user        user   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Address_userId_fkey")
 
   @@index([userId], map: "Address_userId_fkey")
@@ -51,6 +47,7 @@ model category {
 model order {
   id     Int    @id @default(autoincrement())
   state  String @db.VarChar(255)
+  date   String @db.VarChar(255)
   userId Int
   total  Int
   cart   cart[]
@@ -60,33 +57,29 @@ model order {
 }
 
 model wishlist {
-  id      Int       @id @default(autoincrement())
-  userId   Int
-
-  productId  Int
- 
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  productId Int
   product   product @relation(fields: [productId], references: [id], onDelete: Cascade, map: "wishlist_productId_fkey")
-  user   user @relation(fields: [userId], references: [id], onDelete: Cascade, map: "wishlist_userId_fkey")
+  user      user    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "wishlist_userId_fkey")
 
   @@index([userId], map: "wishlist_userId_fkey")
   @@index([productId], map: "wishlist_productId_fkey")
-
- }
-
+}
 
 model product {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
   desc             String             @db.VarChar(255)
-  img              String             @db.VarChar(255)
   brand            String             @db.VarChar(255)
   categoryId       Int
   price            Int
   isActive         Boolean            @default(true)
+  img              String             @db.VarChar(255)
   cart             cart[]
   category         category           @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
   productvariation productvariation[]
-  wishlist wishlist[]
+  wishlist         wishlist[]
 
   @@index([categoryId], map: "Product_categoryId_fkey")
 }
@@ -118,11 +111,12 @@ model user {
   createdAt DateTime    @default(now())
   updatedAt DateTime
   email     String
+  img       String      @db.VarChar(256)
   address   address[]
   cart      cart[]
   order     order[]
   user_role user_role[]
-  wishlist wishlist[]
+  wishlist  wishlist[]
 }
 
 model user_role {
@@ -130,7 +124,6 @@ model user_role {
   userId Int
   roleId Int
   role   role @relation(fields: [roleId], references: [id], map: "User_role_roleId_fkey")
-  
   user   user @relation(fields: [userId], references: [id], onDelete: Cascade, map: "User_role_userId_fkey")
 
   @@index([roleId], map: "User_role_roleId_fkey")

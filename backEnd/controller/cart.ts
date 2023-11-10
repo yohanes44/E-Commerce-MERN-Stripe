@@ -77,12 +77,13 @@ export default class CartController{
                 },
                 include: {
                     product: true,
-                    productvariation: true
+                    productvariation: true,
+                    order: true
                 },
                 orderBy
             })
 
-            // console.log(cartItems[0].productvariation.img);
+            console.log(cartItems[0]);
             return cartItems;
         }
         catch(err: any){

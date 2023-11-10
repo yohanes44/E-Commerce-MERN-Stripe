@@ -16,12 +16,107 @@ export default function CartProvider({ children }) {
   const [totalCart, setTotalCart] = useState(0);
   const { isAuthenticated, user } = useAuth();
 
+  const [deleteCartItem, setDeletedCartItem] = useState({});
+
   useEffect(() => {
-    if (isAuthenticated) {
-      findTotalCart(user.id);
-      findCartItems(user.id);
+    let fetchData = async () =>{
+      
+      try{
+        // if (isAuthenticated) {
+          // findTotalCart(user.id);
+          // findCartItems(user.id);
+          
+          
+          //  console.log({user});
+          if (isAuthenticated) {
+            findTotalCart(user.id);
+            findCartItems(user.id);
+          }
+          //start
+      //     const findCartItemQuery = gql`
+      //     query GetCartItems($userId: Int!) {
+      //       cartItems(userId: $userId) {
+      //         id
+      //         userId
+      //         productId
+      //         state
+      //         quantity
+      //         product {
+      //           id
+      //           img
+      //           name
+      //           price
+      //         }
+      //         variation {
+      //           id
+      //           img
+      //           size
+      //           color
+      //           quantity
+      //         }
+      //       }
+      //     }
+      //   `;
+  
+      //   const findCartItemVariables = { userId: parseInt(user.id) };
+      //   const findCartItemResponse = await request(backEndGraphQLURL, findCartItemQuery, findCartItemVariables);
+        
+      //   // console.log({response});
+  
+  
+      //   setTotalCart(findCartItemResponse.cartItems.length);
+
+      //   const productQuery = gql`
+      //   query GetCartItems($userId: Int!) {
+      //     cartItems(userId: $userId) {
+      //       id,
+      //       userId,
+      //       productId,
+      //       state,
+      //       quantity,
+    	// 			product {
+    	// 			  id,
+      //         img,
+      //         name,
+      //         price
+    	// 			},
+    	// 			variation {
+    	// 			  id,
+      //         img,
+      //         size,
+      //         color,
+      //         quantity
+    	// 			}
+      //     }
+      //   }
+      // `;
+
+      // const productVariables = { userId: parseInt(user.id) };
+      // const responseProduct = await request(backEndGraphQLURL, productQuery, productVariables);
+      
+      // console.log("findCartItems");
+      // setCartItems(responseProduct.cartItems);
+
+        
+          //end
+        
+        
+        }
+
+      // }
+      catch(err){
+
+      }
+      
+
     }
-  }, [isAuthenticated, user, totalCart, cartItems]);
+
+    fetchData();
+
+   
+  }, [user.id, cartItem, cartItems.length, deleteCartItem]);
+
+
 
   const findTotalCart = async (userId) => {
     try {
@@ -39,7 +134,7 @@ export default function CartProvider({ children }) {
               name
               price
     				}
-    				productvariation {
+    				variation {
     				  id
               img
               size
@@ -58,7 +153,7 @@ export default function CartProvider({ children }) {
 
       setTotalCart(response.cartItems.length);
     } catch (error) {
-      console.error("Error fetching total cart:", error);
+      console.error(error.message);
     }
   };
 
@@ -78,7 +173,7 @@ export default function CartProvider({ children }) {
               name,
               price
     				},
-    				productvariation {
+    				variation {
     				  id,
               img,
               size,
@@ -91,10 +186,11 @@ export default function CartProvider({ children }) {
 
       const variables = { userId: parseInt(userId) };
       const responseProduct = await request(backEndGraphQLURL, productQuery, variables);
-
+      
+      console.log("findCartItems");
       setCartItems(responseProduct.cartItems);
     } catch (err) {
-      console.error("Error fetching cart items:", err);
+      console.error(err.message);
     }
   };
 
@@ -121,7 +217,9 @@ export default function CartProvider({ children }) {
       const variables = { userId, productId, quantity, variationId};
 
       let responseAddCartItem = await request(backEndGraphQLURL,addToCartMutation,variables);
-      setCartItem( responseAddCartItem.addCartItem);
+      setCartItem(responseAddCartItem.addCartItem);
+
+      // console.log({added: responseAddCartItem.addCartItem.productId});
     } catch (err) {
       console.log(err)
     }
@@ -171,7 +269,16 @@ export default function CartProvider({ children }) {
       const variables = { id};
 
       let responseDeleteCartItem = await request(backEndGraphQLURL,deleteCartItemMutation,variables);
-      console.log( responseDeleteCartItem.deleteCartItem);
+      // console.log( {deleteCartItem: responseDeleteCartItem.deleteCartItem.id});
+
+      setDeletedCartItem(responseDeleteCartItem.deleteCartItem);
+      // setCartItems((prev)=>{
+      //   return (prev.id != responseDeleteCartItem.deleteCartItem.id) ? true : false;
+      // })
+
+      // setCartItems( (prev)=>{
+      //   return (prev.id != responseDeleteCartItem.deleteCartItem) ? true : false
+      // } )
 
     } catch (err) {
       console.log(err)
@@ -219,7 +326,7 @@ export default function CartProvider({ children }) {
     totalCart,
     cartItems,
     setCartItems,
-    findCartItems,
+    // findCartItems,
     addCartItems,
     addOrder,
     cancelCartItem,

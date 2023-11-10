@@ -33,6 +33,7 @@ export default new GraphQLObjectType({
         isActive: { type: GraphQLBoolean },
         quantity: { type: GraphQLInt },
         categoryId: { type: GraphQLInt },
+        
         variation: {
             type:  new GraphQLList(ProductVariationType),
             resolve: async (parent, context, args)=>{

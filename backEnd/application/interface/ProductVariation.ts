@@ -1,7 +1,7 @@
 
 
 export default interface ProductVariation {
-        img: string,
+        // img: string,
         color: string,
         size: string,
         quantity: number,

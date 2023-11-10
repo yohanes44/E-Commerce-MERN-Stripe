@@ -53,17 +53,21 @@ function Product() {
 
     const productId = parseInt(location.pathname.split("/")[3]);
 
+    const [headers, setHeaders] = useState([]);
+    const [rows, setRows] = useState([]);
+    const [productVariations, setProductVariations] = useState([]);
 
+
+    
+
+    
     useEffect(()=>{
    
         let fetchData = async () => {
             try{
 
-                let  query = null;
-                let variables = null;
-                let dotWalkField = null;
 
-                    query = gql`
+                    let productQuery = gql`
                     query product($id: Int!) {
                         product(id: $id) {
                                id, 
@@ -86,11 +90,92 @@ function Product() {
                     }}
                   `;
 
-                   variables = { id: productId }; // Define your variable object
-                   dotWalkField = "products";
-                   let response =   await request(backEndGraphQLURL, query, variables);
-                console.log({response});
-                   setProduct(response.product);
+                  let productVariables = { id: productId }; // Define your variable object
+                //    dotWalkField = "products";
+                   let productResponse =   await request(backEndGraphQLURL, productQuery, productVariables);
+                //   console.log({response});
+                   setProduct(productResponse.product);
+
+
+
+
+
+                      setHeaders([
+        {
+            field: 'id',
+            numeric: true,
+            headerName: "Id",
+        },
+          {
+            field: 'color',
+            numeric: false,
+            width: 150,
+            disablePadding: false,
+            headerName: 'Color',
+           
+          },
+          {
+            field: 'quantity',
+            numeric: false,
+            width: 200,
+            disablePadding: false,
+            headerName: 'Quantity',
+          },
+          {
+            field: 'img',
+            numeric: false,
+            disablePadding: false,
+            label: 'Image',
+            renderCell: (params) => <div style={{
+                // border: "2px solid red"
+            }} >
+                <img style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%"
+                }} src={params.value}/>
+            </div>,
+
+          },
+    ])
+
+
+                   let productVariationQuery = gql`
+                   query productVariation($id: Int!) {
+                    productVariation(id: $id) {
+                        id,
+                        color,
+                        img,
+                        quantity
+                   }}
+                 `;
+
+                 
+                 let productVariationVariables = { id: productId }; // Define your variable object
+                 //    dotWalkField = "products";
+                    let productVariationResponse =   await request(backEndGraphQLURL, productVariationQuery, productVariationVariables);
+                 //   console.log({response});
+                 setProductVariations(productVariationResponse.productVariation);
+                
+
+     let temp = productVariationResponse.productVariation.map( (obj) => {
+       let newObj = {};
+       
+       newObj.id = obj.id;
+       newObj.color = obj.color;
+       newObj.img = obj.img;
+       newObj.quantity = obj.quantity
+       // newObj.user = `${obj.user.email}`;
+       return newObj;
+    })
+
+    productVariationResponse.productVariation =  temp;
+    setRows(temp);
+
+        console.log({temp});
 
             }
             catch(err){
@@ -180,7 +265,7 @@ function Product() {
                         </div>
                         </form>
 
-                        {/* <Datatable  /> */}
+                        <Datatable  headers={headers} rows={rows} title="Variation"/>
                     </div>
                 </div>
             </div>

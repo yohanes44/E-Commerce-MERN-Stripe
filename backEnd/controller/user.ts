@@ -29,11 +29,18 @@ export default class UserController {
             const user = await db.user.findUnique({
                 where: {
                     id: id
+                },
+                include: {
+                    address: true,
+                    cart: true
                 }
             })
             if(!user){
                 throw new this.exception("user0001");
             }  
+
+            // console.log({user: user.cart[0]});
+
             return user
         }
         catch (err: any) {
@@ -54,7 +61,7 @@ export default class UserController {
         }
     }
 
-    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole", repeatPassword }: { firstName: string, lastName: string, email: string, password: string, repeatPassword: string, phoneNumber: number, city: string, sub_city: string }, authController : any) {
+    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole", repeatPassword, img = "" }: { firstName: string, lastName: string, email: string, img: string, password: string, repeatPassword: string, phoneNumber: number, city: string, sub_city: string }, authController : any) {
 
         try {
 
@@ -88,18 +95,10 @@ export default class UserController {
                     lastName: lastName,
                     password: hashedPassword,
                     email: email,
+                    img: img,
                     updatedAt: new Date().toISOString()
                 },
             })
-
-            // const createUserAddress = await db.address.create({
-            //     data: {
-            //       userId: newUser.id,
-            //       phoneNumber: phoneNumber,
-            //       city: city,
-            //       sub_city: sub_city
-            //     }
-            //   });
 
               let userRegietered =  await authController.login({email, password});
               console.log({userRegietered});
@@ -179,6 +178,25 @@ export default class UserController {
 
     }
 
-
+    
+    async addAddress(userId: number, phoneNumber: string, city: string, sub_city: string){
+        
+        // phoneNumber = Number(phoneNumber);
+        
+        try{
+            const address = await db.address.create({
+                data: {
+                    userId,
+                    phoneNumber,
+                    city,
+                    sub_city
+                },
+            })
+        }
+        catch(err){
+            // console.log(err.message);
+            throw err;
+        }
+    }
 
 }

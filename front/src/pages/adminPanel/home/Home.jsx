@@ -47,7 +47,57 @@ function HomeAdmin() {
                     <NewJoinMembers/>
                     <div className="list">
                       <div className="listTitle">Latest Orders</div>
-                        <List />
+                        <List 
+                        rows={[
+        {
+            id: 1111,
+            product: "mac Pc",
+            // img: myPic,
+            customer: "john",
+            date: "1march",
+            amount: 785,
+            method: "Cash on delivery",
+            status: "Approved"
+        },
+        {
+            id: 1112,
+            product: "Toshiba Pc",
+            // img: myPic,
+            customer: "samy",
+            date: "1 jully",
+            amount: 785,
+            method: "Cash on delivery",
+            status: "Pending"
+        },
+        {
+            id: 1111,
+            product: "mac Pc",
+            // img: myPic,
+            customer: "john",
+            date: "1march",
+            amount: 785,
+            method: "Cash on delivery",
+            status: "Pending"
+        },
+        {
+            id: 1111,
+            product: "mac Pc",
+            // img: myPic,
+            customer: "john",
+            date: "1march",
+            amount: 785,
+            method: "Cash on delivery",
+            status: "Approved"
+        }
+    ]}
+    
+    columns={[
+        "Id",
+        "Product",
+        "Variation",
+        "State",
+        "Quantity"
+      ]}/>
                     </div>
                 </div>
 

@@ -15,12 +15,12 @@ import  graphql, {
 
 
 export default new GraphQLObjectType({
-    name: "Order",
+    name: "Address",
     fields: ()=> ({
-        id:{ type: GraphQLID },
-        userId: { type: GraphQLID },
-        state: { type: GraphQLString },
-        total: { type: GraphQLInt },
-        date: { type: GraphQLString }
+        id: { type: GraphQLID },
+        userId: {type: GraphQLID},
+        phoneNumber: { type: GraphQLString },
+        city: { type: GraphQLString },
+        sub_city: { type: GraphQLString },
     })
 })

@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
-export default function Datatable({headers, rows}) {
+export default function Datatable({headers, rows, title}) {
 
   const location = useLocation();
   const listType = location.pathname.split("/")[2]
@@ -40,17 +40,19 @@ export default function Datatable({headers, rows}) {
   return (
     <div className="dataTable">
        <div className="datatableTitle">
-          <div>Add New User</div>
+          {/* <div>Add New {title}</div> */}
           <Link to="/adminPanel/users/new" className="link">
-            <div>Add New</div>
+            <div>Add New {title}</div>
           </Link>
        </div>
-         <DataGrid  className="dataGrid" sx={
+       <div className="dataGridContainer">
+       <DataGrid   sx={
           {
-            width: "fit-content"
+            width: "fit-content",
           }
          }
-        rows={rows}
+        rows={rows
+        }
         columns={headers.concat(actionColumn)}
         // pageSize={5}
         // rowsPerPageOptions={[5]}
@@ -62,6 +64,8 @@ export default function Datatable({headers, rows}) {
         pageSizeOptions={[5, 10]}
         checkboxSelection
       />
+       </div>
+         
     </div>
   )
 }

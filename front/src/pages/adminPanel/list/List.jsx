@@ -135,6 +135,7 @@ export default function ListAdmin() {
                            id, 
                            name, 
                            desc,
+                           brand,
                            variation{
                                 id,
                                 img, 
@@ -148,6 +149,7 @@ export default function ListAdmin() {
             }
 
             if(listType == "orders"){
+
                 setHeaders([
                     {
                         field: 'id',
@@ -163,11 +165,12 @@ export default function ListAdmin() {
                        
                       },
                       {
-                        field: 'variation',
+                        field: 'category',
                         numeric: false,
-                        width: 200,
+                        width: 150,
                         disablePadding: false,
-                        headerName: 'Variation',
+                        headerName: 'Category',
+                       
                       },
                       {
                         field: 'state',
@@ -176,29 +179,31 @@ export default function ListAdmin() {
                         label: 'State',
                       },
                       {
-                        field: 'user',
+                        field: 'variation',
                         numeric: false,
+                        width: 200,
                         disablePadding: false,
-                        width: 150,
-                        label: 'User',
+                        headerName: 'Variation',
                       },
+                      // {
+                      //   field: 'user',
+                      //   numeric: false,
+                      //   disablePadding: false,
+                      //   width: 150,
+                      //   label: 'User',
+                      // },
                 ])
+
                 let selectedFilter = {};
                 let category = "";
     
-                query =    query = gql`
+                query = gql`
                 {
                     orderedCartItems{
                         id,
                         variationId,
                         state,
                         quantity
-                        user{
-                          id,
-                          firstName,
-                          lastName,
-                          email,
-                        },
                         product{
                           id,
                           name,
@@ -208,8 +213,8 @@ export default function ListAdmin() {
                             id,
                             name
                           }
-                        },
-                        productvariation {
+                        }
+                        variation {
                           id,
                           img,
                           color,
@@ -223,19 +228,18 @@ export default function ListAdmin() {
 
 
                response =  await request(backEndGraphQLURL, query);
-               
                let temp = response[dotWalkField].map( (obj) => {
                   let newObj = {};
                   
                   newObj.id = obj.id;
                   newObj.product = obj.product.name;
+                  newObj.category = obj.product.category.name;
                   newObj.state = obj.state;
-                  newObj.variation = `${obj.product.name}-${obj.productvariation.color}-${obj.productvariation.size}`;
-                  newObj.user = `${obj.user.email}`;
+                  newObj.variation = `${obj.product.name}-${obj.variation.color}-${obj.variation.size}`;
+                  // newObj.user = `${obj.user.email}`;
                   return newObj;
                })
 
-            
                response[dotWalkField] =  temp;
             }
     
@@ -258,7 +262,7 @@ export default function ListAdmin() {
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                <Datatable  headers={headers} rows={rows} />
+                <Datatable  headers={headers} rows={rows} title={listType}/>
             </div>
         </div>
     );
