@@ -157,12 +157,27 @@ export default function ListAdmin() {
                         headerName: "Id",
                     },
                     {
+                      field: 'user',
+                      numeric: false,
+                      width: 150,
+                      disablePadding: false,
+                      headerName: 'User',
+                     
+                    },
+                    {
                         field: 'product',
                         numeric: false,
                         width: 150,
                         disablePadding: false,
                         headerName: 'Product',
                        
+                      },
+                      {
+                        field: 'variation',
+                        numeric: false,
+                        width: 200,
+                        disablePadding: false,
+                        headerName: 'Variation',
                       },
                       {
                         field: 'category',
@@ -173,18 +188,28 @@ export default function ListAdmin() {
                        
                       },
                       {
-                        field: 'state',
+                        field: 'quantity',
                         numeric: false,
+                        width: 100,
                         disablePadding: false,
-                        label: 'State',
+                        headerName: 'Quantity',
+                       
                       },
                       {
-                        field: 'variation',
+                        field: 'date',
                         numeric: false,
-                        width: 200,
+                        width: 150,
                         disablePadding: false,
-                        headerName: 'Variation',
+                        headerName: 'Date',
+                       
                       },
+                      // {
+                      //   field: 'state',
+                      //   numeric: false,
+                      //   disablePadding: false,
+                      //   label: 'State',
+                      // },
+                     
                       // {
                       //   field: 'user',
                       //   numeric: false,
@@ -219,7 +244,17 @@ export default function ListAdmin() {
                           img,
                           color,
                           size
-                        }   
+                        },
+                        user{
+                          id,
+                          firstName,
+                          lastName,
+                          email
+                        },
+                        order{
+                          id,
+                          date
+                        }    
                   }
                 }
               `
@@ -232,15 +267,22 @@ export default function ListAdmin() {
                   let newObj = {};
                   
                   newObj.id = obj.id;
+                  newObj.user = `${obj.user.firstName}  ${obj.user.lastName}`;
                   newObj.product = obj.product.name;
+                  newObj.quantity = obj.quantity;
                   newObj.category = obj.product.category.name;
                   newObj.state = obj.state;
                   newObj.variation = `${obj.product.name}-${obj.variation.color}-${obj.variation.size}`;
+                  newObj.date = obj.order.date;
+                  newObj.orderId = obj.order.id;
+                  
                   // newObj.user = `${obj.user.email}`;
                   return newObj;
                })
 
                response[dotWalkField] =  temp;
+
+
             }
     
              setRows(response[dotWalkField]);
@@ -258,6 +300,8 @@ export default function ListAdmin() {
 
 
     return (
+
+      
         <div className='list'>
             <Sidebar />
             <div className="listContainer">

@@ -14,12 +14,14 @@ import  graphql, {
 import ProductVariationType from "./productVariation"
 import ProductType from "./product"
 import OrderType from "./order"
+import UserType from "./user"
+
 
 
 import orm from "../../persistance/orm"
 
 
-export default new GraphQLObjectType({
+export default  new GraphQLObjectType({
     name: "Cart",
     fields: ()=> ({
         id: { type: GraphQLID },
@@ -69,6 +71,21 @@ export default new GraphQLObjectType({
                   })
                 
                 return variation;
+
+            }
+        },
+        user: {
+            type:  UserType,
+            resolve: async (parent, args)=>{
+             
+                console.log({id: parent.orderId});
+                const user = await orm.user.findFirst({
+                    where: {
+                        id: parent.userId,
+                    },
+                  })
+                
+                return user;
 
             }
         }

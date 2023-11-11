@@ -20,6 +20,8 @@ import New from "./pages/adminPanel/new/New";
 import ProductAdmin from "./pages/adminPanel/product/product";
 import OrderAdmin from "./pages/adminPanel/order/Order";
 
+import OrdersListAdmin from "./pages/adminPanel/orders/orders";
+
 // New
 import {
   BrowserRouter as Router,
@@ -79,7 +81,7 @@ function App() {
               <Route path="new" element={<New inputs={productInputs} title="Add New Product"/>}/> 
             </Route>
             <Route path="orders">
-              <Route index element={<ListAdmin/>}/>
+              <Route index element={<OrdersListAdmin/>}/>
               <Route path=":orderId" element={<OrderAdmin/>}/> 
               <Route path="new" element={<New inputs={productInputs} title="Add New Product"/>}/> 
             </Route>

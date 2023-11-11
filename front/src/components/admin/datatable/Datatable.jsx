@@ -24,7 +24,8 @@ export default function Datatable({headers, rows, title}) {
     width: 200,
     renderCell: (params)=>{
     return (<div className="cellAction">
-      <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}>
+      <Link to={(title == "orders") ? `/adminPanel/${title}/${params.row.orderId}`: `/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}>
+      {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
       <div className="viewButton">
         View
       </div>

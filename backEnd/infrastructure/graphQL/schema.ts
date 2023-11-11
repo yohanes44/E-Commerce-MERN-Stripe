@@ -168,6 +168,11 @@ export default class Resolvers {
                     type: new GraphQLList(CartType),
                     args: { userId: { type: GraphQLInt } },
                     resolve: CartResolver.getOrderedCartItems
+                },
+                orderedCartItemsById: {
+                    type: new GraphQLList(CartType),
+                    args: { id: { type: GraphQLInt } },
+                    resolve: CartResolver.getOrderedCartItemsById
                 }
                 
             }

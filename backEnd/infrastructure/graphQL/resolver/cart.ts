@@ -25,6 +25,13 @@ class CartResolver{
         return cartItems;
     }
     
+    async getOrderedCartItemsById(parent: any, args: any, context: any){
+        let cartItems = await context.controller.CartController.getOrderedCartItemsById(args.id);
+        // console.log({cartItems: cartItems});
+        return cartItems;
+    }
+    
+    
 
     async addCartItem(parent: any, args: any, context: any){
         return await context.controller.CartController.addCartItem(args);

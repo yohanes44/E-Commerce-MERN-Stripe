@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../components/admin/sidebar/Sidebar';
 import Navbar from '../../../components/admin/navbar/Navbar';
 
@@ -15,35 +15,35 @@ import joImg from "../../../images/category/shirt5.jpg"
 
 import Chart from "../../../components/chart/Chart"
 
-import {Publish, DriveFolderUploadOutlined} from '@mui/icons-material';
+import { Publish, DriveFolderUploadOutlined } from '@mui/icons-material';
 import Datatable from '../../../components/admin/datatable/Datatable';
 
 
 
 import { request, gql } from 'graphql-request'; // Import necessary functions and objects
 
-import  backEndGraphQLURL from '../../../utility/http';
+import backEndGraphQLURL from '../../../utility/http';
 
 
 function Order() {
 
     const [productImg, setProductImg] = useState(joImg);
     const [product, setProduct] = useState({
-        id: null, 
+        id: null,
         name: null,
         desc: null,
         img: null,
         brand: null,
         isActive: null,
         price: null,
-        variation:{
-         id: null,
-         color: null,
-         size: null
+        variation: {
+            id: null,
+            color: null,
+            size: null
         },
-        category:{
-         id: null,
-         name: null
+        category: {
+            id: null,
+            name: null
         }
     });
 
@@ -53,57 +53,98 @@ function Order() {
     const [rows, setRows] = useState([]);
 
 
-  
-
-    const productId = parseInt(location.pathname.split("/")[3]);
 
 
-    // useEffect(()=>{
-   
-    //     let fetchData = async () => {
-    //         try{
+    const orderId = parseInt(location.pathname.split("/")[3]);
 
-    //             let  query = null;
-    //             let variables = null;
-    //             let dotWalkField = null;
+    // console.log({orderId});
 
-    //                 query = gql`
-    //                 query product($id: Int!) {
-    //                     product(id: $id) {
-    //                            id, 
-    //                            name,
-    //                            desc,
-    //                            img,
-    //                            brand,
-    //                            isActive,
-    //                            price,
-    //                            variation{
-    //                             id,
-    //                             color,
-    //                             size
-    //                            },
-    //                            category{
-    //                             id,
-    //                             name
-    //                            }
+    const [orders, setOrders] = useState([
+        {
+        id: null,
+        productId: null,
+        variationId: null,
+        userId: null,
+        orderId: null,
+        state: null,
+        quantity: null,
+        product:{
+          id: null,
+          name: null
+        },
+        variation:{
+          id: null,
+          color: null,
+          img: null,
+          size: null
+        },
+        order:{
+          id: null,
+          userId: null,
+          state: null,
+          total: null,
+          date: null
+        }
+    }
+]);
 
-    //                 }}
-    //               `;
+    useEffect(() => {
 
-    //                variables = { id: productId }; // Define your variable object
-    //                dotWalkField = "products";
-    //                let response =   await request(backEndGraphQLURL, query, variables);
-    //             console.log({response});
-    //                setProduct(response.product);
+        let fetchData = async () => {
+            try {
 
-    //         }
-    //         catch(err){
-    //             console.log(err.message);
-    //         }
-    //     }
+                let query = null;
+                let variables = null;
+                let dotWalkField = null;
 
-    //     fetchData();
-    // }, [productId])
+                query = gql`
+                    query orderedCartItemsById($id: Int!) {
+                        orderedCartItemsById(id: $id) {
+                            id,
+  productId,
+  variationId,
+  userId,
+  orderId,
+  state,
+  quantity,
+  product{
+    id,
+    name
+  },
+  variation{
+    id,
+    color,
+    img,
+    size
+  },
+  order{
+    id,
+    userId,
+    state,
+    total,
+    date
+  }
+                    }}
+                  `;
+
+                variables = { id: orderId }; // Define your variable object
+                dotWalkField = "orderedCartItemsById";
+                let response = await request(backEndGraphQLURL, query, variables);
+                console.log({ response });
+                // setProduct(response.orderedCartItemsById);
+                setOrders(response.orderedCartItemsById);
+                console.log({orderedCartItemsById: response.orderedCartItemsById});
+
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+
+        fetchData();
+    }, [orderId])
+
+
     return (
         <div className="productAdmin">
             <Sidebar />
@@ -111,8 +152,26 @@ function Order() {
                 <Navbar />
                 <div className="product">
 
-                    <Datatable headers={headers} rows={rows} title="orders"/>
-                    {/* <div className="top">
+                   {
+                     (orders.length == 0) ? <div>{`No Orders With the id ${orderId}`}</div> : 
+                   
+   
+
+                    <Datatable headers={headers} rows={rows} title="orders" />
+                 
+                }
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Order;
+
+
+
+
+   {/* <div className="top">
                         <div className="title">Product</div>
                         <div className="createBtn">Create</div>
                     </div>
@@ -186,10 +245,3 @@ function Order() {
 
                        
                     </div> */}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export default Order;

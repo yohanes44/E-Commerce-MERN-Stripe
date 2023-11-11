@@ -60,6 +60,8 @@ export default class CartController{
         }
     }
 
+    
+
     async getOrderedCartItems (userId: number) {
         try{
 
@@ -90,6 +92,36 @@ export default class CartController{
             console.log(err);
         }
     }
+
+    async getOrderedCartItemsById (id: number) {
+        try{
+
+            let orderBy : any = {
+
+            }
+            orderBy.id = "desc";
+
+            let cartItems =  await db.cart.findMany({
+                where:  {
+                    orderId: id,
+                    state: "ordered"
+                },
+                include: {
+                    product: true,
+                    productvariation: true,
+                    order: true
+                },
+                orderBy
+            })
+
+            // console.log(cartItems[0]);
+            return cartItems;
+        }
+        catch(err: any){
+            console.log(err);
+        }
+    }
+
 
     async addCartItem(data : CartInterfce){
 

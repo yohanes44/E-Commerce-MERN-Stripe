@@ -1,0 +1,60 @@
+
+
+
+
+.orders{
+    // border: 2px solid red;
+    // width: 100%;
+    display: flex;
+
+    gap: 5%;
+
+    padding: 20px;
+    flex-wrap: wrap;
+
+    .order{
+        // border: 2px solid green;
+        // display: flex;
+        padding: 7px;
+        margin-bottom: 3%;
+
+        --webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0,0,0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201,201,201, 0.47);
+    
+
+        .left{
+            flex: 1;
+            // border: 2px solid red;
+            padding: 10px;
+            
+           .user{
+                display: flex;
+
+                .userImg{
+                    padding: 5px;
+                    // border: 2px solid red;
+                    img{
+                       height: 50px;
+                       width: 50px; 
+                       border-radius: 50%;
+                    }
+                }
+
+                .userInfo{
+                    padding: 5px;
+                    // border: 2px solid red;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+           }
+        }
+        .right{
+            padding: 10px;
+            flex: 2;
+            // border: 2px solid green;
+
+        }
+    }
+}
