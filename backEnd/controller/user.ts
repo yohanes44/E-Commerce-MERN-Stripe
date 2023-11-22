@@ -61,7 +61,7 @@ export default class UserController {
         }
     }
 
-    async create({ firstName, lastName, email, password, phoneNumber, city = "A.A", sub_city = "Bole", repeatPassword, img = "" }: { firstName: string, lastName: string, email: string, img: string, password: string, repeatPassword: string, phoneNumber: number, city: string, sub_city: string }, authController : any) {
+    async create({ firstName, lastName, email, password, phoneNumber = 12, city = "A.A", sub_city = "Bole", repeatPassword, img = "" }: { firstName: string, lastName: string, email: string, img: string, password: string, repeatPassword: string, phoneNumber: number, city: string, sub_city: string }, authController : any) {
 
         try {
 
@@ -162,18 +162,37 @@ export default class UserController {
     async delete(id: number) {
 
         try {
-            const deletedUser = await db.user.delete({
-                where: { id },
-            });
 
-            return deletedUser;
+            console.log("deletedUser userId == ", id);
+
+            console.log("deletedUser test 1");
+            
+            // const  address = await db.address.findFirst({
+            //     where: {
+            //         userId: id
+            //     }
+            // })
+
+            // if(address){
+            //     const deletedAdd = await db.address.deleteMany({
+            //         where: {
+            //             userId: id
+            //         }
+            //     })
+            // }
+
+            // console.log({address});
+
+          // Assuming userToDeleteId is the ID of the user you want to "soft delete"
+await db.user.update({
+    where: { id: id },
+    data: { deleted: 1 },
+  });
+  
+
         }
         catch (err: any) {
-            if (err instanceof this.exception) {
-                throw err;
-            } else {
-                throw new this.exception("db0001");
-            }
+                throw err
         }
 
     }

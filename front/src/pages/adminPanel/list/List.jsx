@@ -22,6 +22,8 @@ import { useCart } from "../../../utility/context/cart";
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 // import { rows } from '../../../dataTableSource';
 
+import { Link } from "react-router-dom";     
+ 
 
 export default function ListAdmin() {
 
@@ -36,7 +38,24 @@ export default function ListAdmin() {
    const [headers, setHeaders] = useState([]);
 
    
+    async function deleteUser(id){
+      try{
+        const deleteUserMutation = gql`
+        mutation deleteUser($id: Int!) {
+          deleteUser(id: $id) {
+            id
+          }
+        }
+      `;
+        const variables = { id: parseInt(id)};
+        let responseLogin= await request(backEndGraphQLURL,deleteUserMutation,variables);
+        
 
+      }
+      catch(err){
+        console.log(err.message);
+      }
+    }
 
    const [rows, setRows] = useState([]);
  
@@ -79,6 +98,26 @@ export default function ListAdmin() {
                         width: 250,
                         label: 'Email',
                       },
+                      {
+                        field: "action", 
+                        headerName: "Action", 
+                        width: 200,
+                        renderCell: (params)=>{
+                        return (<div className="cellAction">
+                          <Link to={`/adminPanel/users/${params.row.id}`} style={{textDecoration: "none"}}>
+                          {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
+                          <div className="viewButton">
+                            View
+                          </div>
+                          </Link>
+                          <div className="deleteButton" onClick={(e) => {
+                            deleteUser(params.row.id)
+                          }}>
+                            Delete
+                          </div>
+                        </div>)
+                      } }
+                    
                 ])
     
                 query = gql`

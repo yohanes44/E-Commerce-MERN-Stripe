@@ -29,8 +29,20 @@ class OrderResolver {
         return await context.controller.OrderController.update(args.id, args.input);
     }
 
+   
+
     async delete(parent: any, args: any, context: any) {
+
         return await context.controller.OrderController.delete(args.id);
+    }
+
+    async orderedCartItemsByOrderId(parent: any, args: any, context: any){
+        return await context.controller.OrderController.orderedCartItemsByOrderId(args.id);
+
+    }
+
+    async orderedCartItemsOrderedByOrderId(parent: any, args: any, context: any){
+        return await context.controller.OrderController.orderedCartItemsOrderedByOrderId();
     }
 
 }

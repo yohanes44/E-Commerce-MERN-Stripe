@@ -25,6 +25,9 @@ export default class OrderController{
             return await db.order.findUnique({
                 where: {
                     id: id
+                },
+                include: {
+                    cart: true,
                 }
             })}
         catch(err: any){
@@ -182,6 +185,58 @@ export default class OrderController{
 
     }
 
+    async orderedCartItemsByOrderId(id : number){
+        try{
+            const order =  await db.cart.findMany({
+                where: { 
+                    orderId: id,
+                 },
+                // include: {
+                //     cart: true,
+                // }
+              });
 
+              console.log({order});
+              return order;
+        }
+        catch(err: any){
+            console.log(err);
+        }
+
+    }
+
+
+    async orderedCartItemsOrderedByOrderId(){
+        try{
+            // const order =  await db.cart.groupBy({
+            //     by: ["orderId"],
+            //   });
+
+            //   let allOrders : any = [];
+
+            //   for (const orderGroup of order) {
+            //     const orderId = orderGroup.orderId; // Get the orderId for this group
+            //     // const itemsInOrder = orderGroup.items; // Array of items in this order group
+               
+
+                return await db.cart.findMany({
+                    where: {
+                        state: "ordered"
+                    }
+                });
+                
+            //     //   console.log(or);
+            //       allOrders.push(or);
+            //     }
+            //   console.log(allOrders);
+                
+            //   return allOrders;
+        }
+        catch(err: any){
+            console.log(err);
+        }
+
+    }
 
 }
+

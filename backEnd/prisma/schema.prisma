@@ -13,9 +13,12 @@ model address {
   phoneNumber String @db.VarChar(255)
   city        String @db.VarChar(255)
   sub_city    String @db.VarChar(255)
-  user        user   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Address_userId_fkey")
+  user        user   @relation(fields: [userId], references: [id], map: "Address_userId_fkey")
+
+  deleted Int   @default(0)
 
   @@index([userId], map: "Address_userId_fkey")
+  
 }
 
 model cart {
@@ -112,11 +115,13 @@ model user {
   updatedAt DateTime
   email     String
   img       String      @db.VarChar(256)
-  address   address[]
+  address   address[] 
   cart      cart[]
   order     order[]
   user_role user_role[]
   wishlist  wishlist[]
+
+   deleted Int   @default(0)
 }
 
 model user_role {

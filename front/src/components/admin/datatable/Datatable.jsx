@@ -17,35 +17,38 @@ export default function Datatable({headers, rows, title}) {
   
 
 
-  const actionColumn = [
-    {
-    field: "action", 
-    headerName: "Action", 
-    width: 200,
-    renderCell: (params)=>{
-    return (<div className="cellAction">
-      <Link to={(title == "orders") ? `/adminPanel/${title}/${params.row.orderId}`: `/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}>
-      {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
-      <div className="viewButton">
-        View
-      </div>
-      </Link>
-      <div className="deleteButton">
-        Delete
-      </div>
-    </div>)
-  } }
-  ]
+  // const actionColumn = [
+  //   {
+  //   field: "action", 
+  //   headerName: "Action", 
+  //   width: 200,
+  //   renderCell: (params)=>{
+  //   return (<div className="cellAction">
+  //     <Link to={(title == "orders") ? `/adminPanel/${title}/${params.row.orderId}`: `/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}>
+  //     {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
+  //     <div className="viewButton">
+  //       View
+  //     </div>
+  //     </Link>
+  //     <div className="deleteButton">
+  //       Delete
+  //     </div>
+  //   </div>)
+  // } }
+  // ]
 
 
   return (
     <div className="dataTable">
+      {
+        (title != "order") ? 
        <div className="datatableTitle">
           {/* <div>Add New {title}</div> */}
           <Link to="/adminPanel/users/new" className="link">
             <div>Add New {title}</div>
           </Link>
-       </div>
+       </div> : null
+      }
        <div className="dataGridContainer">
        <DataGrid   sx={
           {
@@ -54,7 +57,9 @@ export default function Datatable({headers, rows, title}) {
          }
         rows={rows
         }
-        columns={headers.concat(actionColumn)}
+      
+        columns={headers}
+        // columns={headers.concat(actionColumn)}
         // pageSize={5}
         // rowsPerPageOptions={[5]}
         initialState={{

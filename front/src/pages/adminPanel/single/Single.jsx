@@ -45,7 +45,7 @@ function Single() {
     const [orderedCarts, setOrderedCarts] = useState([]);
 
     const [transactions, setTransactions] = useState([]);
-    
+
 
 useEffect( ()=>{
 
@@ -146,7 +146,7 @@ useEffect( ()=>{
                  setOrderedCarts(cartResponse.orderedCartItems);
                  setRows(rws);
 
-
+                
             }
             catch(err){
                 setError(err.message.split("።")[0]);
@@ -203,7 +203,7 @@ return (
                                 </div>
                                 <div className="detailItem">
                                     <span className="itemKey">Phone: </span>
-                                    <span className="itemValue">{user.address.phoneNumber}</span>
+                                    <span className="itemValue">{ user.address.phoneNumber}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="itemKey">Address: </span>

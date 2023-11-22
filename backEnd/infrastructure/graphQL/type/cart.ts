@@ -63,11 +63,11 @@ export default  new GraphQLObjectType({
             type:  OrderType,
             resolve: async (parent, args)=>{
              
-                console.log({id: parent.orderId});
+                console.log({idss: parent.orderId});
                 const variation = await orm.order.findFirst({
                     where: {
                         id: parent.orderId,
-                    },
+                     },
                   })
                 
                 return variation;

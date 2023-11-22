@@ -37,17 +37,18 @@ export default  new GraphQLObjectType({
                 return userProducts;
             }
         },
-        cart: {
-            // type:  new GraphQLList(CartType),
-            // resolve: async (parent, context, args)=>{
-            //     const userProducts = await orm.user.findFirst({
-            //         where: {
-            //             id: parent.userId,
-            //         },
-            //       })
-            //     //   console.log(parent);
-            //     return userProducts;
-            // }
-        },
+
+        // cart: {
+        //     type:  new GraphQLList(CartType),
+        //     resolve: async (parent, context, args)=>{
+        //         const userProducts = await orm.cart.findMany({
+        //             where: {
+        //                 orderId: parent.id,
+        //             },
+        //           })
+        //         //   console.log(parent);
+        //         return userProducts;
+        //     }
+        // },
     })
 })

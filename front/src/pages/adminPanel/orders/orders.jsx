@@ -18,7 +18,8 @@ import Chart from "../../../components/chart/Chart"
 import {Publish, DriveFolderUploadOutlined} from '@mui/icons-material';
 import Datatable from '../../../components/admin/datatable/Datatable';
 
-
+import { Link } from "react-router-dom";     
+                  
 
 import { request, gql } from 'graphql-request'; // Import necessary functions and objects
 
@@ -59,7 +60,30 @@ function Product() {
     const [productVariations, setProductVariations] = useState([]);
 
 
-    
+    const [orders, setOrders] = useState([{
+        key: 1,
+        values: [
+                {
+                    id: null,
+                    order: {
+                        date: null,
+                        id: null,
+                        state: null,
+                        total: null
+                    },
+                    product: {
+                        // abrand,
+
+                    },
+                    user: {
+                        firstName: null,
+                        lastName: null,
+                        email: "yo@g.com",
+                        img: null
+                    }
+                }
+        ]
+    }]);
 
     
     useEffect(()=>{
@@ -68,113 +92,185 @@ function Product() {
             try{
 
 
-                    let productQuery = gql`
-                    query product($id: Int!) {
-                        product(id: $id) {
-                               id, 
-                               name,
-                               desc,
-                               img,
-                               brand,
-                               isActive,
-                               price,
-                               variation{
-                                id,
-                                color,
-                                size
-                               },
-                               category{
-                                id,
-                                name
-                               }
+    //                 let productQuery = gql`
+    //                 query product($id: Int!) {
+    //                     product(id: $id) {
+    //                            id, 
+    //                            name,
+    //                            desc,
+    //                            img,
+    //                            brand,
+    //                            isActive,
+    //                            price,
+    //                            variation{
+    //                             id,
+    //                             color,
+    //                             size
+    //                            },
+    //                            category{
+    //                             id,
+    //                             name
+    //                            }
 
+    //                 }}
+    //               `;
+
+    //               let productVariables = { id: productId }; // Define your variable object
+    //             //    dotWalkField = "products";
+    //                let productResponse =   await request(backEndGraphQLURL, productQuery, productVariables);
+    //             //   console.log({response});
+    //                setProduct(productResponse.product);
+
+    //                   setHeaders([
+    //     {
+    //         field: 'id',
+    //         numeric: true,
+    //         headerName: "Id",
+    //     },
+    //       {
+    //         field: 'color',
+    //         numeric: false,
+    //         width: 150,
+    //         disablePadding: false,
+    //         headerName: 'Color',
+           
+    //       },
+    //       {
+    //         field: 'quantity',
+    //         numeric: false,
+    //         width: 200,
+    //         disablePadding: false,
+    //         headerName: 'Quantity',
+    //       },
+    //       {
+    //         field: 'img',
+    //         numeric: false,
+    //         disablePadding: false,
+    //         label: 'Image',
+    //         renderCell: (params) => <div style={{
+    //             // border: "2px solid red"
+    //         }} >
+    //             <img style={{
+    //                 display: "flex",
+    //                 justifyContent: "center",
+    //                 alignItems: "center",
+    //                 width: "40px",
+    //                 height: "40px",
+    //                 borderRadius: "50%"
+    //             }} src={params.value}/>
+    //         </div>,
+
+    //       },
+    // ])
+
+
+    //                let productVariationQuery = gql`
+    //                query productVariation($id: Int!) {
+    //                 productVariation(id: $id) {
+    //                     id,
+    //                     color,
+    //                     img,
+    //                     quantity
+    //                }}
+    //              `;
+
+                 
+    //              let productVariationVariables = { id: productId }; // Define your variable object
+    //              //    dotWalkField = "products";
+    //                 let productVariationResponse =   await request(backEndGraphQLURL, productVariationQuery, productVariationVariables);
+    //              //   console.log({response});
+    //              setProductVariations(productVariationResponse.productVariation);
+                
+
+    //  let temp = productVariationResponse.productVariation.map( (obj) => {
+    //    let newObj = {};
+       
+    //    newObj.id = obj.id;
+    //    newObj.color = obj.color;
+    //    newObj.img = obj.img;
+    //    newObj.quantity = obj.quantity
+    //    // newObj.user = `${obj.user.email}`;
+    //    return newObj;
+    // })
+
+    // productVariationResponse.productVariation =  temp;
+    // setRows(temp);
+
+    //     console.log({temp});
+
+            
+
+
+             let productQuery = gql`
+                    query orderedCartItemsOrderedByOrderId{
+                        orderedCartItemsOrderedByOrderId{
+                            id,
+                            productId,
+                             variationId,
+                             userId,
+                             orderId,
+                             state,
+                             quantity,
+                            ,
+                         user{
+                           id, 
+                           firstName,
+                           lastName,
+                           email,
+                           img,
+                           address{
+                             city,
+                             sub_city,
+                             phoneNumber
+                           }
+                         },
+                         product{
+                           id,
+                           name,
+                           img,
+                           brand,
+                           price,
+                           category{
+                            name
+                           }
+                         },
+                         variation{
+                           id,
+                           img,
+                           color,
+                           size
+                         },
+                        order{
+                         id,
+                         state,
+                         total,
+                         date,
+                       }
                     }}
                   `;
 
-                  let productVariables = { id: productId }; // Define your variable object
+                //   let productVariables = { id: productId }; // Define your variable object
                 //    dotWalkField = "products";
-                   let productResponse =   await request(backEndGraphQLURL, productQuery, productVariables);
-                //   console.log({response});
-                   setProduct(productResponse.product);
+                   let response =   await request(backEndGraphQLURL, productQuery);
 
-                      setHeaders([
-        {
-            field: 'id',
-            numeric: true,
-            headerName: "Id",
-        },
-          {
-            field: 'color',
-            numeric: false,
-            width: 150,
-            disablePadding: false,
-            headerName: 'Color',
-           
-          },
-          {
-            field: 'quantity',
-            numeric: false,
-            width: 200,
-            disablePadding: false,
-            headerName: 'Quantity',
-          },
-          {
-            field: 'img',
-            numeric: false,
-            disablePadding: false,
-            label: 'Image',
-            renderCell: (params) => <div style={{
-                // border: "2px solid red"
-            }} >
-                <img style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%"
-                }} src={params.value}/>
-            </div>,
-
-          },
-    ])
+                   const groupByArray = (array, key) => {
+                    return Object.entries(array.reduce((result, item) => {
+                      const keyValue = item[key];
+                      result[keyValue] = result[keyValue] || [];
+                      result[keyValue].push(item);
+                      return result;
+                    }, {})).map(([key, values]) => ({ key, values }));
+                  };
 
 
-                   let productVariationQuery = gql`
-                   query productVariation($id: Int!) {
-                    productVariation(id: $id) {
-                        id,
-                        color,
-                        img,
-                        quantity
-                   }}
-                 `;
+                  const groupedData = groupByArray(response.orderedCartItemsOrderedByOrderId, 'orderId');
+                  console.log({groupedData});
+                  setOrders(groupedData);
+                //    setProduct(productResponse.product);
 
-                 
-                 let productVariationVariables = { id: productId }; // Define your variable object
-                 //    dotWalkField = "products";
-                    let productVariationResponse =   await request(backEndGraphQLURL, productVariationQuery, productVariationVariables);
-                 //   console.log({response});
-                 setProductVariations(productVariationResponse.productVariation);
-                
 
-     let temp = productVariationResponse.productVariation.map( (obj) => {
-       let newObj = {};
-       
-       newObj.id = obj.id;
-       newObj.color = obj.color;
-       newObj.img = obj.img;
-       newObj.quantity = obj.quantity
-       // newObj.user = `${obj.user.email}`;
-       return newObj;
-    })
 
-    productVariationResponse.productVariation =  temp;
-    setRows(temp);
-
-        console.log({temp});
-
-            }
+}
             catch(err){
                 console.log(err.message);
             }
@@ -190,474 +286,58 @@ function Product() {
             <div className="productContainer2">
                 <Navbar />
                 <div className="orders">
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
 
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
+                    {
+                      orders.map((order) => {
+                            return  <Link to={`/adminPanel/orders/${order.values[0].order.id}`} 
+                            style={{
+                                textDecoration: "none",
+                                color: "black"
+                                }}>
+                            <div className="order">
+                                   <div className="left">
+                                        <div className="user">
+                                            <div className="userImg">
+                                                <img src={order.values[0].user.img || avatarImg} alt="" />
+                                            </div>
+                                            <div className="userInfo">
+                                                <div className="userInfoItem">
+                                                    {/* <span>id:</span> */}
+                                                    <span>{order.values[0].user.email}</span>
+                                                </div>
+                                                <div className="userInfoItem">
+                                                    {/* <span>Full Name:</span> */}
+                                                    <span>{`${order.values[0].user.firstName} ${order.values[0].user.lastName}`}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+            
                                     </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
+                                    <div className="right">
+                                        <div className="orderInfo">
+                                                <div className="orderInfoItem">
+                                                    <span>Total Products: </span>
+                                                    <span>{order.values.length}</span>
+                                                </div>
+                                                <div className="orderInfoItem">
+                                                    <span>Total Price: </span>
+                                                    <span>{order.values[0].order.total}</span>
+                                                </div>
+                                                <div className="orderInfoItem">
+                                                    <span>Date: </span>
+                                                    <span>10/Nov/2023</span>
+                                                </div>
+                                        </div>
                                     </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
                                 </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
+                                    </Link>
+                         
+     
+                        })
+                    }
+                   
 
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
-                   <div className="order">
-                       <div className="left">
-                            <div className="user">
-                                <div className="userImg">
-                                    <img src={avatarImg} alt="" />
-                                </div>
-                                <div className="userInfo">
-                                    <div className="userInfoItem">
-                                        {/* <span>id:</span> */}
-                                        <span>yohanes@g.com</span>
-                                    </div>
-                                    <div className="userInfoItem">
-                                        {/* <span>Full Name:</span> */}
-                                        <span>Yohanes Debebe</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                       </div>
-                       <div className="right">
-                            <div className="orderInfo">
-                                    <div className="orderInfoItem">
-                                        <span>Total Products:</span>
-                                        <span>5</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Total Price:</span>
-                                        <span>26,0000</span>
-                                    </div>
-                                    <div className="orderInfoItem">
-                                        <span>Date:</span>
-                                        <span>10/Nov/2023</span>
-                                    </div>
-                            </div>
-                       </div>
-                   </div>
+           
                 </div>
             </div>
         </div>
