@@ -38,6 +38,8 @@ model cart {
   @@index([productId], map: "Cart_productId_fkey")
   @@index([userId], map: "Cart_userId_fkey")
   @@index([variationId], map: "Cart_variationId_fkey")
+
+    deleted Int   @default(0)
 }
 
 model category {
@@ -68,6 +70,7 @@ model wishlist {
 
   @@index([userId], map: "wishlist_userId_fkey")
   @@index([productId], map: "wishlist_productId_fkey")
+    deleted Int   @default(0)
 }
 
 model product {
@@ -84,6 +87,7 @@ model product {
   productvariation productvariation[]
   wishlist         wishlist[]
 
+    deleted Int   @default(0)
   @@index([categoryId], map: "Product_categoryId_fkey")
 }
 
@@ -96,6 +100,8 @@ model productvariation {
   productId Int
   cart      cart[]
   product   product @relation(fields: [productId], references: [id], map: "ProductVariation_productId_fkey")
+
+  deleted Int   @default(0)
 
   @@index([productId], map: "ProductVariation_productId_fkey")
 }

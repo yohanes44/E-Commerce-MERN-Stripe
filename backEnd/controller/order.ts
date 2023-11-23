@@ -53,7 +53,13 @@ export default class OrderController{
             return await db.order.findMany({
                 include: {
                     user: true,
+                },
+                where: {
+                    user: {
+                        deleted: 0
+                    }
                 }
+                
             })
         }
         catch(err: any){
@@ -221,7 +227,10 @@ export default class OrderController{
 
                 return await db.cart.findMany({
                     where: {
-                        state: "ordered"
+                        state: "ordered",
+                        user: {
+                            deleted: 0
+                        } 
                     }
                 });
                 

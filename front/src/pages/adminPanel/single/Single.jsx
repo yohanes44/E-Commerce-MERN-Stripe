@@ -41,10 +41,30 @@ function Single() {
         }
     });
 
-
+    const [refetcher, setRefetcher] = useState(false);
     const [orderedCarts, setOrderedCarts] = useState([]);
 
     const [transactions, setTransactions] = useState([]);
+
+    async function deleteOrderItem(id){
+        try{
+
+            console.log({id});
+            let query = gql`
+            mutation deleteProductVariation($id: Int!) {
+                deleteProductVariation(id: $id) {
+                    id,
+            }}
+          `;
+
+           let variables = { id: parseInt(id) }; // Define your variable object
+            let response = await request(backEndGraphQLURL, query, variables);
+            setRefetcher(true);
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
 
 
 useEffect( ()=>{
@@ -155,7 +175,7 @@ useEffect( ()=>{
         }
 
         fetchData();
-}, [userId] )
+}, [userId, refetcher] )
 
 
 // console.log({user})

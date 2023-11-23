@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 
 function Order() {
 
+    const [refetcher, setRefetcher] = useState(false);
     const [productImg, setProductImg] = useState(joImg);
     const [product, setProduct] = useState({
         id: null,
@@ -69,11 +70,27 @@ function Order() {
     const [rows, setRows] = useState([]);
 
 
+    async function deleteOrderItem(id){
+        try{
 
+            console.log({id});
+            let query = gql`
+            mutation deleteCartItem($id: Int!) {
+                deleteCartItem(id: $id) {
+                    id,
+            }}
+          `;
+
+           let variables = { id: parseInt(id) }; // Define your variable object
+            let response = await request(backEndGraphQLURL, query, variables);
+            setRefetcher(true);
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
 
     const orderId = parseInt(location.pathname.split("/")[3]);
-
-    // console.log({orderId});
 
     const [order, setOrder] = useState(
         [{
@@ -133,40 +150,7 @@ function Order() {
                 let variables = null;
                 let dotWalkField = null;
               
-                // cart{
-                //     id,
-                //     productId,
-                //     variationId,
-                //     userId,
-                //     orderId,
-                //     state,
-                //     quantity,
-                // },
-              
-                // query = gql`
-                //     query order($id: Int!) {
-                //         order(id: $id) {
-                //             id,
-                //             state,
-                //             total,
-                //             date,
-                         
-                //             user{
-                //                     id,
-                //                 firstName,
-                //                 lastName,
-                //                 email,
-                //                 img,
-
-                //               address{
-                //                 city,
-                //                 sub_city,
-                //                 phoneNumber
-                //               }
-                //             }
-                //     }}
-                //   `;
-
+        
                 query = gql`
                 query orderedCartItemsByOrderId($id: Int!) {
                     orderedCartItemsByOrderId(id: $id) {
@@ -221,9 +205,8 @@ function Order() {
                 console.log("test above 2");
                 let response = await request(backEndGraphQLURL, query, variables);
                 console.log({ response });
-                // setProduct(response.orderedCartItemsById);
+                
                 setOrder(response.orderedCartItemsByOrderId);
-                // setUser(response.order.user);
                 console.log({ order: response.orderedCartItemsByOrderId });
                 let temp = response.orderedCartItemsByOrderId.map( (obj) => {
                     let newObj = {};
@@ -236,8 +219,7 @@ function Order() {
                     newObj.date = obj.order.date;
                     newObj.totalPrice = `Birr `+ obj.product.price * obj.quantity;
                     newObj.img = obj.variation.img || obj.product.img;
-                    // newObj.user = `${obj.user.email}`;
-                    return newObj;
+                   return newObj;
                  })
 
                 setRows(temp);
@@ -323,11 +305,13 @@ function Order() {
                         return (<div className="cellAction">
                           <Link to="/adminPanel/" style={{textDecoration: "none"}}>
                           {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
-                          <div className="viewButton">
+                          {/* <div className="viewButton">
                             View
-                          </div>
+                          </div> */}
                           </Link>
-                          <div className="deleteButton">
+                          <div className="deleteButton" onClick={(e) => {
+                            deleteOrderItem(params.row.id)
+                          }}>
                             Delete
                           </div>
                         </div>)
@@ -345,7 +329,7 @@ function Order() {
         }
 
         fetchData();
-    }, [orderId])
+    }, [orderId, refetcher])
 
 
     return (

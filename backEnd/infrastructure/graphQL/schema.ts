@@ -325,6 +325,13 @@ export default class Resolvers {
                     },
                     resolve: ProductResolver.createProductVariation
                 },
+                deleteProductVariation: {
+                    type: ProductVariationType,
+                    args: {
+                         id: { type: new GraphQLNonNull(GraphQLInt) },
+                    },
+                    resolve: ProductResolver.deleteProductVariation
+                },
                 addCartItem: {
                     type: CartType,
                     args: {

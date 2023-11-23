@@ -183,23 +183,41 @@ export default class CartController{
             console.log(err);
         }
     }
-
-    async deleteCartItem(id : number){
-        
-        try{
-            const deletedUser = await db.cart.delete({
-                where: { 
-                    id
-                },
-              });
-
-            return deletedUser;
+    async deleteCartItem(id: number) {
+        try {
+          const deletedCartItem = await db.cart.delete({
+            include: {
+              product: true,
+              order: true,
+            },
+            where: {
+              id,
+            },
+          });
+      
+          const cartItemPrice = deletedCartItem.product.price * deletedCartItem.quantity;
+          const orderId = deletedCartItem.order?.id;
+          
+          if (orderId) { // Check if orderId is not null or undefined
+            const orderTotal = (deletedCartItem.order?.total || 0) - cartItemPrice;
+      
+            const updateOrder = await db.order.update({
+              where: {
+                id: orderId,
+              },
+              data: {
+                total: orderTotal,
+              },
+            });
+          }
+      
+          return deletedCartItem;
+        } catch (err: any) {
+          console.error(err);
+          throw err; // Re-throw the error so it can be caught or logged elsewhere in your application.
         }
-        catch(err: any){
-            console.log(err);
-        }
-
-    }
+      }
+      
 
     async clearCart(userId : number){
         

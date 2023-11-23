@@ -44,7 +44,8 @@ export default class ProductController {
 
             const where = { 
                 category: {},
-                productvariation: {} 
+                productvariation: {},
+                deleted: 0 
             };
 
             const include = {
@@ -143,6 +144,7 @@ export default class ProductController {
             const products = await db.product.findMany({
                 where: {
                     categoryId: cat?.id,
+                    deleted: 0 
                 },
                 include:{
                     productvariation: {
@@ -185,6 +187,19 @@ export default class ProductController {
         }
     }
 
+    async deleteProductVariation(id: number){
+        try {
+
+            return await db.productvariation.delete({
+                 where: { 
+                     id
+                  },
+               });
+         }
+         catch (err: any) {
+             console.log(err);
+         }
+    }
     async update(id: any, input: any) {
 
 
@@ -210,9 +225,15 @@ export default class ProductController {
     async delete(id: number) {
 
         try {
-            return await db.product.delete({
-                where: { id },
-            });
+
+           return await db.product.update({
+                where: { 
+                    id
+                 },
+                data: { 
+                    deleted: 1 
+                },
+              });
         }
         catch (err: any) {
             console.log(err);

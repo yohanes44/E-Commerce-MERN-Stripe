@@ -42,7 +42,7 @@ function List( {columns, rows, page} ) {
               <TableCell className='tableCell'>Quantity</TableCell>
               <TableCell className='tableCell'>Status</TableCell>
               <TableCell className='tableCell'>Payment method</TableCell> */}
-              <TableCell className='tableCell'>Actions</TableCell>
+              {/* <TableCell className='tableCell'>Actions</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -66,7 +66,7 @@ function List( {columns, rows, page} ) {
                     }
                     } )
                 }
-                   <TableCell className='tableCell'>
+                   {/* <TableCell className='tableCell'>
                     <div style={{
                       display: "flex",
                       gap: "5%"
@@ -76,13 +76,13 @@ function List( {columns, rows, page} ) {
                           color: "green",
                           cursor: "pointer"
                         }}> <Link to={`/adminPanel/${page}/${row.id}`}>View</Link></button>
-                        <button style={{
+                        <button onClick={(e)} style={{
                           border: "none",
                           color: "red",
                           cursor: "pointer"
                         }}><Link to={`/adminPanel/${page}/${row.id}`}>Delete</Link></button>
                     </div>
-                </TableCell> 
+                </TableCell>  */}
               
                 
                 {/* <TableCell className='tableCell'>

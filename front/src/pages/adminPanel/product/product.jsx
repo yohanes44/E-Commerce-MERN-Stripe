@@ -24,7 +24,8 @@ import { request, gql } from 'graphql-request'; // Import necessary functions an
 
 import  backEndGraphQLURL from '../../../utility/http';
 
-
+import { Link } from "react-router-dom";     
+ 
 function Product() {
 
     const [productImg, setProductImg] = useState(joImg);
@@ -47,6 +48,8 @@ function Product() {
         }
     });
 
+    const [refetcher ,setRefetcher] = useState(false);
+
     const location = useLocation();
 
   
@@ -58,7 +61,30 @@ function Product() {
     const [productVariations, setProductVariations] = useState([]);
 
 
+
+    async function deleteProductVariation(id){
+        try{
+
+            console.log({id});
+            let query = gql`
+            mutation deleteProductVariation($id: Int!) {
+                deleteProductVariation(id: $id) {
+                    id,
+            }}
+          `;
+
+           let variables = { id: parseInt(id) }; // Define your variable object
+            let response = await request(backEndGraphQLURL, query, variables);
+            setRefetcher(true);
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
     
+    async function editProductVariation(id){
+
+    }
 
     
     useEffect(()=>{
@@ -96,22 +122,28 @@ function Product() {
                 //   console.log({response});
                    setProduct(productResponse.product);
 
-
-
-
-
                       setHeaders([
         {
             field: 'id',
             numeric: true,
+            width: 200,
             headerName: "Id",
         },
           {
             field: 'color',
             numeric: false,
-            width: 150,
+            width: 200,
             disablePadding: false,
             headerName: 'Color',
+            renderCell: (params)=>{
+                return (<div className="cellAction">
+                   <input type='text' 
+                    //  value={}
+                     placeholder={params.row.color}
+                     style={{border: "none", backgroundColor: "transparent"}}/>  
+                //    {params.row.color}
+                </div>)
+              }
            
           },
           {
@@ -120,10 +152,20 @@ function Product() {
             width: 200,
             disablePadding: false,
             headerName: 'Quantity',
+            renderCell: (params)=>{
+                return (<div className="cellAction">
+                   <input type='text' 
+                    //  value={}
+                     placeholder={params.row.quantity}
+                     style={{border: "none", backgroundColor: "transparent"}}/>  
+                //    {params.row.quantity}
+                </div>)
+              }
           },
           {
             field: 'img',
             numeric: false,
+            width: 200,
             disablePadding: false,
             label: 'Image',
             renderCell: (params) => <div style={{
@@ -140,6 +182,29 @@ function Product() {
             </div>,
 
           },
+          {
+            field: "action", 
+            headerName: "Action", 
+            width: 200,
+            renderCell: (params)=>{
+            return (<div className="cellAction">
+              <Link to={`/adminPanel/products/${params.row.id}`} style={{textDecoration: "none"}}>
+              {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
+              {/* <div className="viewButton" onClick={(e) => {
+                editProductVariation(params.row.id);
+              }}>
+                Edit
+              </div> */}
+              </Link>
+              <div className="deleteButton" onClick={(e) => {
+                deleteProductVariation(params.row.id)
+              }}>
+                Delete
+              </div>
+            </div>)
+          } }
+
+
     ])
 
 
@@ -184,7 +249,7 @@ function Product() {
         }
 
         fetchData();
-    }, [productId])
+    }, [productId, refetcher])
     return (
         <div className="productAdmin">
             <Sidebar />

@@ -54,7 +54,11 @@ export default class UserController {
 
     async getUsers() {
         try {
-            return await db.user.findMany()
+            return await db.user.findMany({
+                where: {
+                    deleted: 0
+                }
+            })
         }
         catch (err: any) {
             throw new this.exception("db0001");
@@ -166,25 +170,7 @@ export default class UserController {
             console.log("deletedUser userId == ", id);
 
             console.log("deletedUser test 1");
-            
-            // const  address = await db.address.findFirst({
-            //     where: {
-            //         userId: id
-            //     }
-            // })
-
-            // if(address){
-            //     const deletedAdd = await db.address.deleteMany({
-            //         where: {
-            //             userId: id
-            //         }
-            //     })
-            // }
-
-            // console.log({address});
-
-          // Assuming userToDeleteId is the ID of the user you want to "soft delete"
-await db.user.update({
+    await db.user.update({
     where: { id: id },
     data: { deleted: 1 },
   });

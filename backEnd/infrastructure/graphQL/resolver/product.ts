@@ -32,6 +32,11 @@ class ProductResolver{
     async delete (parent: any, args: any, context: any){
         return await context.controller.ProductController.delete(args.id);
     }
+
+    async deleteProductVariation(parent: any, args: any, context: any){
+        return await context.controller.ProductController.deleteProductVariation(args.id);
+
+    }
 }
 
 
