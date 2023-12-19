@@ -1,0 +1,2714 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>HTML 5 Boilerplate</title>
+        <link rel="stylesheet" href="style.css">
+
+        <style type="text/css">
+
+
+            #main_card_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: 20px;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+            border: 1px solid #d5d5d5;
+            }
+
+            #maincard_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: 20px;
+            border-radius: 6px;
+            /* box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+            border: 1px solid #d5d5d5; */
+            }
+            #item_details_col_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 41.66667%;
+            margin-top: 30px;
+            }
+            #item_details_composite_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 66.66667%;
+            }
+            #item_icon_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            display: table-cell;
+            vertical-align: top;
+            width: 50px;
+            }
+            #item_icon_1702383577413>img{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            border: 0;
+            vertical-align: initial;
+            }
+
+            #item_details_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            padding-left: 10px;
+            display: table-cell;
+            vertical-align: top;
+            width: 100%;
+            }
+
+            #item_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            font-size: medium;
+            font-weight: bold;
+            }
+
+            #item_number_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            color: #666666;
+            }
+
+            #total_requested_count_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            color: #666666;
+            }
+
+            #total_requested_for_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            color: #666666;
+            }
+
+            #remain_quant_sec_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 33.33333%;
+            }
+
+            #source_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            }
+
+            #header-count-number text-center{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            }
+            #remain_quantity_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 40px;
+            font-family: inherit;
+            font-weight: 400;
+            }
+
+            #order_options_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 58.33333%;
+            border-left: 2px solid #d5d5d5;
+            }
+
+            #local_sec_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 33.33333%;
+            }
+
+            #local_card_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+            border: 1px solid #d5d5d5;
+            }
+
+            #local_deatils_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #local_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            }
+
+            .header-count-number-error{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #c83c36;
+            }
+
+            #local_stock_acount_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.42857;
+            text-align: center;
+            color: #c83c36;
+            box-sizing: border-box;
+            font-size: 40px;
+            font-family: inherit;
+            font-weight: 400;
+            }
+
+            #local_order_section_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            }
+
+            #local_order_action_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            font: inherit;
+            margin: 0;
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            font-family: inherit;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 9px;
+            font-size: 13px;
+            line-height: 1.42857;
+            border-radius: 3px;
+            user-select: none;
+            width: 80%;
+            word-wrap: break-word;
+            white-space: normal !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            background-color: #e6e9eb;
+            border-color: #cbcbcb;
+            color: #4a4a4a;
+            opacity: 0.3;
+            }
+
+
+            #transfer_sec_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 33.33333%;
+            }
+
+            #transfer_card_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+            border: 1px solid #d5d5d5;
+            }
+
+            #transfer_deatils_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #transfer_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            }
+
+            .header-count-number-error{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #c83c36;
+            }
+
+            #transfer_stock_acount_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.42857;
+            text-align: center;
+            color: #c83c36;
+            box-sizing: border-box;
+            font-size: 40px;
+            font-family: inherit;
+            font-weight: 400;
+            }
+
+            #transfer_order_section_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            }
+            #transfer_order_action_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            font: inherit;
+            margin: 0;
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            font-family: inherit;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 9px;
+            font-size: 13px;
+            line-height: 1.42857;
+            border-radius: 3px;
+            user-select: none;
+            width: 80%;
+            word-wrap: break-word;
+            white-space: normal !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            background-color: #e6e9eb;
+            border-color: #cbcbcb;
+            color: #4a4a4a;
+            opacity: 0.3;
+            }
+
+
+            #purchase_sec_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 33.33333%;
+            }
+
+            #purchase_card_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+            border: 1px solid #d5d5d5;
+            }
+
+
+            #purchase_deatils_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #purchase_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            }
+
+            .text-center{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            }
+
+            #purchase_acount_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 40px;
+            font-family: inherit;
+            font-weight: 400;
+            }
+
+            #purchase_order_section_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            }
+
+            #purchase_order_action_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            font: inherit;
+            margin: 0;
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            font-family: inherit;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 9px;
+            font-size: 13px;
+            line-height: 1.42857;
+            border-radius: 3px;
+            user-select: none;
+            color: #ffffff;
+            background-color: #1f8476;
+            border-color: #10463f;
+            width: 80%;
+            word-wrap: break-word;
+            white-space: normal !important;
+            }
+            #allContainerDiv{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+
+            #main-container{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            min-width: 850px;
+            overflow: hidden;
+            min-height: 100%;
+            }
+
+            #navigation-container{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+            width: 100%;
+            left: 0;
+            }
+
+            .navbar, navbar-default{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            display: block;
+            position: relative;
+            border: 1px solid transparent;
+            background-color: #e6e9eb;
+            border-color: #d4d9dc;
+            min-height: initial;
+            margin-bottom: 5px;
+            padding: 6px 0;
+            border-radius: 0;
+            border-bottom: 1px solid #cbcbcb;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 2px;
+            }
+
+            .container-fluid{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 5px;
+            padding-right: 5px;
+            }
+
+            .navbar-header{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            float: left;
+            margin-right: 0;
+            margin-left: 0;
+            }
+
+            .icon-chevron-left, .navbar-btn{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            font: inherit;
+            margin: 0;
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            font-family: inherit;
+            display: inline-block;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 6px 9px;
+            font-size: 13px;
+            line-height: 1.42857;
+            border-radius: 3px;
+            user-select: none;
+            color: #2e2e2e;
+            background-color: rgba(255, 255, 255, 0.45);
+            border-color: #cbcbcb;
+            margin-top: 0;
+            margin-bottom: 0;
+            min-width: 32px;
+            margin-left: 0;
+            }
+
+            .sr-only{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font: inherit;
+            text-transform: none;
+            font-family: inherit;
+            font-weight: normal;
+            text-align: center;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 1.42857;
+            user-select: none;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+            }
+
+            .navbar-title{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            font-family: inherit;
+            line-height: 1.1;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 9px 0 9px 5px;
+            vertical-align: middle;
+            color: #2e2e2e;
+            display: inline;
+            border-bottom: 0px;
+            padding: 0px;
+            }
+
+            .pointerhand{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: inherit;
+            line-height: 1.1;
+            font-weight: bold;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            font-size: 115%;
+            }
+
+            .navbar-right{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            float: right !important;
+            }
+
+            #submit_button{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            list-style: none;
+            box-sizing: border-box;
+            font: inherit;
+            margin: 0;
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            font-family: inherit;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 6px 9px;
+            font-size: 13px;
+            line-height: 1.42857;
+            border-radius: 3px;
+            user-select: none;
+            color: #ffffff;
+            background-color: #1f8476;
+            border-color: #10463f;
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 10px;
+            }
+
+            #options_container{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            margin: 75px 20px 20px 20px;
+            overflow: inherit;
+            color: #666666;
+            }
+
+            .form-group{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #666666;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+            }
+
+            .pull-right{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #666666;
+            box-sizing: border-box;
+            float: right !important;
+            }
+
+            #consolidate_po{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            color: inherit;
+            font: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            display: block;
+            min-height: 18px;
+            box-sizing: border-box;
+            line-height: normal;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+            }
+
+            #notification_container{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: 20px 20px 20px 20px;
+            }
+
+
+            .notification-error{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            background-color: #ffdadc;
+            border-color: #c83c36;
+            color: #64201a;
+            display: none !important;
+            }
+
+            #cards_container{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: 20px 20px 20px 20px;
+            }
+
+
+            #orders_container_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin: 20px;
+            margin-top: 20px;
+            }
+
+            #local_order_lines_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            display: none !important;
+            }
+
+            #lo_line_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            background-color: rgba(231, 233, 235, 0.5);
+            padding: 10px;
+            padding-left: 15px;
+            border: rgb(231,233,235) solid 1px;
+            color: #666666;
+            }
+
+            #lo_line_table_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin-left: -15px;
+            margin-right: -15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            }
+
+            #lo_source_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #lo_instock_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #lo_quantity_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #lo_reserved_for_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-right: lightgrey solid 1px;
+            }
+
+            #lo_line_table_body_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #transfer_order_lines_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            display: none !important;
+            }
+
+            #to_line_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            background-color: rgba(231, 233, 235, 0.5);
+            padding: 10px;
+            padding-left: 15px;
+            border: rgb(231,233,235) solid 1px;
+            color: #666666;
+            }
+
+            #to_line_table_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            margin-left: -15px;
+            margin-right: -15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            }
+
+            #to_source_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #to_instock_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #to_quantity_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #to_destination_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-right: lightgrey solid 1px;
+            }
+
+            #to_line_table_body_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #purchase_order_lines_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #po_line_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            background-color: rgba(231, 233, 235, 0.5);
+            padding: 10px;
+            padding-left: 15px;
+            border: rgb(231,233,235) solid 1px;
+            color: #666666;
+            }
+
+            #po_line_table_header_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            #po_vendor_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+
+            #po_outstock_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #po_quantity_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 16.66667%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            }
+
+            #po_destination_label_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            box-sizing: border-box;
+            display: inline-block;
+            max-width: 100%;
+            position: relative;
+            min-height: 1px;
+            float: left;
+            width: 33.33333%;
+            border-left: lightgrey solid 1px;
+            border-bottom: lightgrey solid 1px;
+            padding: 5px;
+            padding-left: 15px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-right: lightgrey solid 1px;
+            }
+
+
+            #po_line_table_body_1702383577413{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            box-sizing: border-box;
+            }
+
+            .row-remove-icon{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            line-height: 1.42857;
+            font-weight: 300;
+            white-space: nowrap;
+            box-sizing: border-box;
+            font-size: medium;
+            color: #c83c36;
+            padding-right: 10px;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+            }
+
+            #vendor_1702383622783{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            font-weight: 300;
+            color: #000000;
+            white-space: nowrap;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: middle;
+            width: 90%;
+            }
+
+            #vendor_1702383622783_select_text{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-size: 13px;
+            line-height: 1.42857;
+            font-weight: 300;
+            color: #000000;
+            white-space: nowrap;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: none !important;
+            }
+
+            #s2id_vendor_1702383622783_select{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-weight: 300;
+            white-space: nowrap;
+            cursor: pointer;
+            height: 32px;
+            font-size: 13px;
+            line-height: 1.42857;
+            color: #2e2e2e;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            margin: 0;
+            vertical-align: middle;
+            border: none;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+            float: left;
+            width: 100%;
+            margin-bottom: 0;
+            display: table;
+            table-layout: fixed;
+            transition-delay: -0.15s;
+            }
+
+            #s2id_autogen1{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+            box-sizing: border-box;
+            color: inherit;
+            font: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            clip: rect(0 0 0 0) !important;
+            width: 1px !important;
+            height: 1px !important;
+            border: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            outline: 0 !important;
+            left: 0px !important;
+            top: 0px !important;
+            }
+
+            #select2-chosen-1{
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: SourceSansPro, "Helvetica Neue", Arial;
+            font-weight: 300;
+            font-size: 13px;
+            color: #666666 !important;
+            line-height: 30px;
+            user-select: none;
+            box-sizing: border-box;
+            margin-right: 26px;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: left;
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <table width="100%">
+        <input type="hidden" name="cancel_or_submit" id="cancel_or_submit" value="" />
+        <input type="hidden" name="req_sys_id" id="req_sys_id" value="${jvar_sys_id}" />
+        <input type="hidden" name="task_sys_id" id="task_sys_id" value="${jvar_task_id}" />
+
+        <g2:evaluate var="jvar_request">
+            var item = new GlideRecord("sc_req_item");
+            <!-- item.addQuery("request", "${jvar_sys_id}"); -->
+            item.addQuery("request", "98518bb54787791015bccbf3836d43a2");
+            item.query();
+            if(item.next()){
+                var itemQuantity = item.quantity;
+                var itemRequestedFor = item.requested_for;
+                var itemNumber = item.number;
+                var tobeSourced = itemRequestedFor;
+            }
+            
+            item;
+            var jvar_i = 0;
+
+        </g2:evaluate>
+        <g2:evaluate var="jvar_modelId">
+            var findModelId = new GlideRecord("sc_req_item");
+            findModelId.addQuery("request", "${jvar_sys_id}");
+            findModelId.query();
+            findModelId.next();
+            findModelId.cat_item.model;
+        </g2:evaluate>
+
+
+        <div class="main-container" id="main-container">
+            <div class="navigation-container" id="navigation-container">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button id="back" title=""
+                                class="btn btn-default icon-chevron-left navbar-btn"
+                                onclick="window.history.back()" data-original-title="">
+                                <span class="sr-only">Back</span>
+                            </button>
+                            <h1 style="display:inline;border-bottom: 0px;padding: 0px;"
+                                class="form-header navbar-title">
+                                <span style="font-size:115%" class="pointerhand">Source Request</span>
+                            </h1>
+                        </div>
+                        <div class="nav navbar-right">
+                            <button id="submit_button" type="button"
+                                 class="btn btn-primary"
+                                 onclick="return submitChanges();"
+                                style="display:inline-block; margin-left:10px; margin-right:10px">
+                                Submit</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="options_container" class="options-container">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <span class="input-group-checkbox pull-right">
+                           
+                            <!-- HAM Commented <input id="consolidate_po" name="consolidate_po"
+                                class="checkbox ng-pristine ng-untouched ng-valid ng-empty"
+                                type="checkbox" value="false"
+                                aria-invalid="false" /> -->
+                                
+                                <!-- HAM start -->
+                                    <g2:ui_checkbox id="consolidate" name="consolidate" value="false"  class="checkbox" />
+                                <!-- HAM end -->
+
+                            <label for="consolidate_po" class="checkbox-label">Consolidate PO Line
+                                with open POs</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="notification_container" class="notification-container">
+                <div class="notification notification-error ng-binding ng-hide"
+                    ng-show="hasMessages()" aria-hidden="true">
+                    <button ng-click="clearMessages()" class="btn-icon close icon-cross">
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div id="cards_container" style="margin:20px 20px 20px 20px">
+                <!-- ngRepeat: itemRef in
+                requestItems | filter: filterSourcedItems -->
+                
+
+                <!-- HAM start -->
+                <j2:while test="$[item.next()]">
+                    <hardware-item-card item="itemRef"
+                    default-destination="defaultDest" destination-stockrooms="destStockrooms"
+                    class="ng-scope ng-isolate-scope">
+                    <div id="main_card_1702383577413" class="item-card">
+                        <div id="maincard_header_1702383577413" class="main-card-header">
+                            <div id="item_details_col_1702383577413" class="col-sm-5 item-info">
+                                
+                                
+                                <!-- REQUEST ITEM DETAILS -->
+                                <div id="item_details_composite_1702383577413" class="col-sm-8">
+                                    <div style="display:table-row;">
+                                        <div id="item_icon_1702383577413" class="item-image">
+                                            <img
+                                                src="https://dengenetechnologysolutionsusllcdemo3.service-now.com/images/hardware_icon.png"
+                                                style="vertical-align: initial;"
+                                                alt="Hardware Model" />
+                                        </div>
+                                        <div id="item_details_1702383577413"
+                                            class="item-details">
+                                            <div id="item_label_1702383577413"
+                                                class="req-item-label ng-binding" role="heading">
+                                                $[item.cat_item.getDisplayValue()]</div>
+                                            <div id="item_number_1702383577413"
+                                                class="req-item-more-details ng-binding">
+                                                $[item.number]</div>
+                                            <div id="total_requested_count_1702383577413"
+                                                class="req-item-more-details ng-binding">
+                                                $[item.quantity]</div>
+                                            <div tid="total_requested_for_1702383577413"
+                                                class="req-item-more-details ng-binding"
+                                                ng-show="hasRequestedFor()" aria-hidden="false">
+                                                $[item.requested_for.getDisplayValue()]</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TO BE SOURCED -->
+                                <div id="remain_quant_sec_1702383577413" class="col-sm-4">
+                                    <div id="source_label_1702383577413"
+                                        class="text-center ng-binding" title=""
+                                        data-html="false"
+                                        data-original-title="Requested quantity to be sourced"> To
+                                        be Sourced</div>
+                                    <div class="header-count-number text-center">
+                                        <span id="remain_quantity_1702383577413"
+                                            class="count_nums ng-binding">$[item.quantity]</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="order_options_1702383577413" class="col-sm-7 left-divider">
+                                <!-- LOCAL ORDER -->
+                                <div id="local_sec_1702383577413" class="col-sm-4">
+                                    <div id="local_card_1702383577413" class="order-card"
+                                        ng-show="true" aria-hidden="false">
+                                        <div id="local_deatils_1702383577413">
+                                            <div id="local_label_1702383577413"
+                                                class="text-center ng-binding" title=""
+                                                data-html="false"
+                                                data-original-title="Local stock available">Local
+                                                Stock</div>
+                                            <div class="text-center header-count-number-error"
+                                                ng-class="{true:'header-count-number', false:'header-count-number-error'} [enoughLocalStock()]"
+                                                style="">
+                                                <span id="local_stock_acount_1702383577413"
+                                                    class="count_nums ng-binding">0</span>
+                                            </div>
+                                        </div>
+                                        <div id="local_order_section_1702383577413"
+                                            class="dropdown text-center">
+                                            <button type="button"
+                                                id="local_order_action_1702383577413"
+                                                ng-disabled="!hasLocalStocks()"
+                                                class="btn btn-primary action_button ng-binding"
+                                                aria-description="Upon clicking the consume button of local stock a new row in stock order table will appear"
+                                                ng-click="addLocalOrder()" disabled="disabled">
+                                                Consume</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- TRANSFER ORDERS -->
+                                <div id="transfer_sec_1702383577413" class="col-sm-4">
+                                    <div id="transfer_card_1702383577413" class="order-card"
+                                        ng-show="true" aria-hidden="false">
+                                        <div id="transfer_deatils_1702383577413">
+                                            <div id="transfer_label_1702383577413"
+                                                class="text-center ng-binding" title=""
+                                                data-html="false"
+                                                data-original-title="Stock available for transfer">Transferable
+                                                Stock</div>
+                                            <div class="text-center header-count-number-error"
+                                                ng-class="{true:'header-count-number', false:'header-count-number-error'} [enoughTransferStock()]"
+                                                style="">
+                                                <span id="transfer_stock_acount_1702383577413"
+                                                    class="count_nums ng-binding">0</span>
+                                            </div>
+                                        </div>
+                                        <div id="transfer_order_section_1702383577413"
+                                            class="dropdown text-center">
+                                            <button type="button"
+                                                id="transfer_order_action_1702383577413"
+                                                ng-disabled="!hasTransferStocks()"
+                                                class="btn btn-primary action_button ng-binding"
+                                                aria-description="Upon clicking the transfer button a new row in transfer order table will appear"
+                                                ng-click="addTransferOrder()"
+                                                disabled="disabled">Transfer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- PURCHASE ORDERS -->
+                                <div id="purchase_sec_1702383577413" class="col-sm-4">
+                                    <div id="purchase_card_1702383577413" class="order-card"
+                                        ng-show="true" aria-hidden="false">
+                                        <div id="purchase_deatils_1702383577413">
+                                            <div id="purchase_label_1702383577413"
+                                                class="text-center ng-binding" title=""
+                                                data-html="false"
+                                                data-original-title="Purchase requested items">Vendor
+                                                Purchase</div>
+                                            <div class="header-count-number text-center">
+                                                <span id="purchase_acount_1702383577413"
+                                                    class="count_nums ng-binding">2</span>
+                                            </div>
+                                        </div>
+                                        <div id="purchase_order_section_1702383577413"
+                                            class="dropdown text-center">
+                                            <!-- HAM Commented <button type="button"
+                                                id="purchase_order_action_1702383577413"
+                                                ng-disabled="!hasVendors()"
+                                                class="btn btn-primary action_button ng-binding"
+                                                aria-description="Upon clicking the purchase button a new row in purchase order table will appear"
+                                                ng-click="addPurchaseOrder()">Purchase</button> -->
+                                                <g2:ui_checkbox id="consolidate" name="consolidate" value="false"  class="checkbox" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div id="orders_container_1702383577413" class="order-container">
+                            <!-- LOCAL ORDER -->
+                            <div id="local_order_lines_1702383577413" ng-show="hasLocalOrders()"
+                                role="table" aria-hidden="true" class="ng-hide" style="">
+                                <div id="lo_line_header_1702383577413"
+                                    class="table-title-header ng-binding" role="rowgroup">
+                                    Local Order (0)
+                                </div>
+                                <div id="lo_line_table_header_1702383577413"
+                                    class="row table-line" role="row">
+                                    <label id="lo_source_label_1702383577413"
+                                        class="col-sm-4 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="1">Source Stockroom</label>
+                                    <label id="lo_instock_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="2">In Stock</label>
+                                    <label id="lo_quantity_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="3">Consume Quantity</label>
+                                    <label id="lo_reserved_for_label_1702383577413"
+                                        class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                                        role="columnheader" aria-colindex="4">Reserved for</label>
+                                </div>
+                                <div id="lo_line_table_body_1702383577413">
+                                    <!-- ngRepeat: lo in item.localOrders -->
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <!-- TRANSFER ORDERS -->
+                            <div id="transfer_order_lines_1702383577413"
+                                ng-show="hasTransferOrders()" role="table" aria-hidden="true"
+                                class="ng-hide">
+                                <div id="to_line_header_1702383577413"
+                                    class="table-title-header ng-binding" role="rowgroup">
+                                    Transfer Order (0)
+                                </div>
+                                <div id="to_line_table_header_1702383577413"
+                                    class="row table-line" role="row">
+                                    <label id="to_source_label_1702383577413"
+                                        class="col-sm-4 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="1">Source Stockroom</label>
+                                    <label id="to_instock_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="2">In Stock</label>
+                                    <label id="to_quantity_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="3">Transfer Quantity</label>
+                                    <label id="to_destination_label_1702383577413"
+                                        class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                                        role="columnheader" aria-colindex="4">Destination
+                                        Stockroom</label>
+                                </div>
+                                <div id="to_line_table_body_1702383577413">
+                                    <!-- ngRepeat: to in item.transferOrders -->
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+
+
+                            <!-- PURCHASE ORDERS -->
+                            <div id="purchase_order_lines_1702383577413"
+                                ng-show="hasPurchaseOrders()" role="table" aria-hidden="false"
+                                class="" style="">
+                                <div id="po_line_header_1702383577413"
+                                    class="table-title-header ng-binding" role="rowgroup">
+                                    Purchase Order (0)
+                                </div>
+                                <div id="po_line_table_header_1702383577413" role="row">
+                                    <label id="po_vendor_label_1702383577413"
+                                        class="col-sm-4 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="1">Vendor</label>
+                                    <label id="po_outstock_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="2">Out Of Stock</label>
+                                    <label id="po_quantity_label_1702383577413"
+                                        class="col-sm-2 to-table-head ng-binding"
+                                        role="columnheader" aria-colindex="3">Quantity</label>
+                                    <label id="po_destination_label_1702383577413"
+                                        class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                                        role="columnheader" aria-colindex="4">Destination
+                                        Stockroom</label>
+                                </div>
+                                <div id="po_line_table_body_1702383577413">
+                                    <!-- ngRepeat: po in item.purchaseOrders -->
+                                    <div aria-label="Purchase order line"
+                                        ng-repeat="po in item.purchaseOrders"
+                                        ng-click="setEditableRow(po)" role="row"
+                                        class="ng-scope" tabindex="0" style="">
+                                        <div class="col-sm-4 to-table-row" role="cell">
+                                            <!-- Vendor -->
+                                            <span aria-label="Delete purchase order line"
+                                                class="icon-delete cell-item row-remove-icon"
+                                                ng-click="removePO(po)" title=""
+                                                data-original-title="Delete purchase order line"
+                                                role="button" tabindex="0"></span>
+                                            <!-- HAM Commented <multimode-select id="vendor_1702383622783"
+                                                aria-labelledby="po_vendor_label_1702383577413"
+                                                options="vendors"
+                                                options-query="vendorQuery(query)" item-model=""
+                                                ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po, item.vendorReadOnly.purchase)]"
+                                                select-value="po.vendor"
+                                                on-select="onPOVendorSelect(po)"
+                                                edit-mode="true" placeholder="Select vendor"
+                                                errors="po.errors['vendor']"
+                                                name-field="display_name" detail-field="cost"
+                                                value-field="catItemSysid"
+                                                detail-message-formatter="vendorOptionFormatter(v)"
+                                                class="ng-isolate-scope cell-item-composite"
+                                                style="">
+                                                <div id="vendor_1702383622783_select_text"
+                                                    ng-show="!isEditMode()"
+                                                    class="clickable ng-hide" aria-hidden="true"
+                                                    style="">
+                                                    <label
+                                                        class="non-editable-element clickable-element ng-binding"></label>
+                                                </div>
+                                                <div class="editable-cell"
+                                                    ng-show="isEditMode()" aria-hidden="false">
+                                                    <div
+                                                        class="select2-container form-control select2 ng-pristine ng-untouched ng-valid ng-empty"
+                                                        id="s2id_vendor_1702383622783_select"
+                                                        style="transition-delay: -0.15s;"
+                                                        role="none">
+                                                        <input
+                                                            class="select2-focusser select2-offscreen"
+                                                            type="text" role="combobox"
+                                                            aria-expanded="false"
+                                                            aria-controls="select2-drop"
+                                                            aria-labelledby="select2-chosen-1"
+                                                            id="s2id_autogen1" />
+                                                        <a href="javascript:void(0)"
+                                                            class="select2-choice select2-default"
+                                                            tabindex="-1" aria-hidden="true"
+                                                            role="button">
+                                                            <span class="select2-chosen"
+                                                                id="select2-chosen-1">Select
+                                                                vendor</span>
+                                                            <span class="select2-arrow"
+                                                                aria-hidden="true">
+                                                                <b></b>
+                                                            </span>
+                                                        </a>
+                                                        <abbr role="button"
+                                                            class="select2-search-choice-close"
+                                                            tabindex="0"></abbr>
+                                                        <div
+                                                            class="select2-drop select2-display-none select2-with-searchbox">
+                                                            <div class="select2-search">
+                                                                <label
+                                                                    for="s2id_autogen1_search"
+                                                                    class="select2-offscreen"></label>
+                                                                <input type="text"
+                                                                    autocomplete="off"
+                                                                    autocorrect="off"
+                                                                    autocapitalize="off"
+                                                                    spellcheck="false"
+                                                                    class="select2-input"
+                                                                    role="combobox"
+                                                                    aria-expanded="true"
+                                                                    aria-autocomplete="list"
+                                                                    aria-owns="select2-results-1"
+                                                                    id="s2id_autogen1_search"
+                                                                    placeholder="" />
+                                                            </div>
+                                                            <ul class="select2-results"
+                                                                role="listbox"
+                                                                aria-label="select2-results"
+                                                                id="select2-results-1"> </ul>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden"
+                                                        id="vendor_1702383622783_select"
+                                                        ng-class="{'has-error': hasErrors()}"
+                                                        class="form-control select2 ng-pristine ng-untouched ng-valid select2-offscreen ng-empty"
+                                                        ng-model="selectedItemSysid"
+                                                        autocomplete="off" aria-invalid="false"
+                                                        style="" tabindex="-1" title=""
+                                                        aria-hidden="true" />
+                                                </div>
+                                                <div class="cell-item" style="">
+                                                    <span
+                                                        id="vendor_1702383622783_error_popover"
+                                                        tabindex="-1"
+                                                        class="icon-alert  ng-hide"
+                                                        data-toggle="popover"
+                                                        data-trigger="hover"
+                                                        data-target="#vendor_1702383622783_error_popover_content"
+                                                        data-placement="top"
+                                                        ng-show="hasErrors()" aria-hidden="true"
+                                                        style="" data-original-title="" title=""></span>
+                                                    <div
+                                                        id="vendor_1702383622783_error_popover_content"
+                                                        class="error-popover"
+                                                        style="display: none;">
+                                                        <span class="ng-binding"></span>
+                                                    </div>
+                                                </div>
+                                            </multimode-select> -->
+                                            <g:ui_reference name="QUERY:name=$[item.cat_item.vendor]" table="core_company" id="QUERY:type=$[item.cat_item.vendor]"/>
+                                        
+                                        </div>
+                                        <div class="col-sm-2 to-table-row" role="cell">
+                                            <!-- Out of Stock -->
+                                            <label
+                                                aria-labelledby="po_outstock_label_1702383577413"
+                                                class="non-editable-element cell-item ng-binding">
+                                                N/A</label>
+                                        </div>
+                                        <div class="col-sm-2  to-table-row"
+                                            id="po_purchase_quant_1702383622783" role="cell">
+                                            <!-- Quantity -->
+                                            <!-- <quantity-input id="1702383622783_quan"
+                                                aria-labelledby="po_quantity_label_1702383577413"
+                                                quantity="po.purchaseQuantity"
+                                                on-change="handlePOQuantityChange(po)"
+                                                ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po)]"
+                                                edit-mode="true"
+                                                errors="po.errors['purchaseQuantity']"
+                                                class="ng-isolate-scope cell-item-composite"
+                                                style="">
+                                                <div ng-show="!isEditMode()" aria-hidden="false">
+                                                    <label
+                                                        class="non-editable-element clickable-element ng-binding">
+                                                        N/A</label>
+                                                
+                                                </div>
+                                                <div class="editable-cell ng-hide"
+                                                    ng-show="isEditMode()" aria-hidden="true"
+                                                    style="">
+                                                    <input
+                                                        class="quantity_input ng-pristine ng-untouched ng-valid editable-element editable-input ng-empty"
+                                                        ng-class="{false:'editable-element editable-input', true:'editable-element editable-input has-error'} [hasErrors()]"
+                                                        ng-blur="onChangeWrapper()"
+                                                        sn-enter="onChangeWrapper()"
+                                                        ng-model="quantity" numbers-only=""
+                                                        aria-label="Quantity"
+                                                        aria-invalid="false" style="" />
+                                                </div>
+                                                <div class="cell-item"
+                                                    style="margin-bottom: 10px;">
+                                                    <span id="1702383622783_quan_error_popover"
+                                                        tabindex="-1"
+                                                        class="icon-alert  ng-hide"
+                                                        data-toggle="popover"
+                                                        data-trigger="hover"
+                                                        data-target="#1702383622783_quan_error_popover_content"
+                                                        data-placement="top"
+                                                        ng-show="hasErrors()" aria-hidden="true"
+                                                        style="" data-original-title="" title=""></span>
+                                                    <div
+                                                        id="1702383622783_quan_error_popover_content"
+                                                        class="error-popover"
+                                                        style="display: none;">
+                                                        <span class="ng-binding"></span>
+                                                    </div>
+                                                </div>
+                                            </quantity-input> -->
+
+                                            <!-- HAM start -->
+                                            <input type="number" value="$[item.quantity]" id="myNumberInput">
+                                            <!-- HAM end -->
+                                            
+                                        </div>
+                                        <div class="col-sm-4 to-table-row to-table-row-last"
+                                            id="po_dest_stockroom_1702383622783" role="cell">
+                                            <!-- Destination -->
+                                            
+                                            <!-- HAM Commented <multimode-reference-picker
+                                                id="1702383622783_dest_stockroom"
+                                                aria-labelledby="po_destination_label_1702383577413"
+                                                ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po, item.destReadOnly.purchase)]"
+                                                select-value="po.destination"
+                                                display-column="name" ref-table="alm_stockroom"
+                                                ed="stockroomPurchaseEd"
+                                                sn-options="stockroomOptions" edit-mode="true"
+                                                errors="po.errors['destination']"
+                                                style="width: 100%;"
+                                                class="ng-isolate-scope cell-item-composite">
+                                                <div
+                                                    id="1702383622783_dest_stockroom_select_text"
+                                                    ng-show="!isEditMode()" aria-hidden="true"
+                                                    class="ng-hide" style="">
+                                                    <label
+                                                        class="non-editable-element clickable-element ng-binding"></label>
+                                                    
+                                                </div>
+                                                <div class="editable-cell"
+                                                    ng-show="isEditMode()" aria-hidden="false">
+                                                    <div
+                                                        class="select2-container select2-reference form-control cell-item ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-form-element"
+                                                        id="s2id_autogen2"
+                                                        style="min-width: 150px; opacity: 1; width: 100%;"
+                                                        role="none">
+                                                        <input
+                                                            class="select2-focusser select2-offscreen"
+                                                            type="text" role="combobox"
+                                                            aria-expanded="false"
+                                                            aria-controls="select2-drop"
+                                                            aria-labelledby="select2-chosen-3"
+                                                            id="s2id_autogen3" />
+                                                        <a href="javascript:void(0)"
+                                                            class="select2-choice select2-default"
+                                                            tabindex="-1" aria-hidden="true"
+                                                            role="button">
+                                                            <span class="select2-chosen"
+                                                                id="select2-chosen-3">Select
+                                                                destination stockroom</span>
+                                                            <span class="select2-arrow"
+                                                                aria-hidden="true">
+                                                                <b></b>
+                                                            </span>
+                                                        </a>
+                                                        <abbr role="button"
+                                                            class="select2-search-choice-close"
+                                                            tabindex="0"></abbr>
+                                                        <div
+                                                            class="select2-drop select2-display-none select2-with-searchbox">
+                                                            <div class="select2-search">
+                                                                <label
+                                                                    for="s2id_autogen3_search"
+                                                                    class="select2-offscreen"></label>
+                                                                <input type="text"
+                                                                    autocomplete="off"
+                                                                    autocorrect="off"
+                                                                    autocapitalize="off"
+                                                                    spellcheck="false"
+                                                                    class="select2-input"
+                                                                    role="combobox"
+                                                                    aria-expanded="true"
+                                                                    aria-autocomplete="list"
+                                                                    aria-owns="select2-results-3"
+                                                                    id="s2id_autogen3_search"
+                                                                    placeholder="" />
+                                                            </div>
+                                                            <ul class="select2-results"
+                                                                role="listbox"
+                                                                aria-label="select2-results"
+                                                                id="select2-results-3"> </ul>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name=""
+                                                        ng-disabled="snDisabled"
+                                                        style="min-width: 150px; opacity: 1;"
+                                                        ng-model="field.displayValue"
+                                                        sn-atf-settable="true"
+                                                        sn-atf-component-value=""
+                                                        sn-atf-data-type="reference"
+                                                        sn-atf-data-type-params="{&quot;reference&quot; : &quot;alm_stockroom&quot;, &quot;reference_qual&quot; : &quot;&quot;, &quot;valueField&quot; : &quot;sys_id&quot;, &quot;displayField&quot; : &quot;name&quot;}"
+                                                        ng-attr-sn-atf-disabled="{{ snDisabled || undefined }}"
+                                                        class="form-control cell-item ng-pristine ng-untouched ng-valid ng-isolate-scope select2-offscreen ng-empty"
+                                                        field="selectValue"
+                                                        display-column="name"
+                                                        ref-table="refTable" ed="ed"
+                                                        sn-options="snOptions"
+                                                        allow-clear="false"
+                                                        sn-on-change="onSelectionChange()"
+                                                        ng-class="{'has-error' : hasErrors()}"
+                                                        ng-change="onSelectChange()"
+                                                        aria-hidden="true" aria-invalid="false"
+                                                        tabindex="-1" title="" />
+                                                </div>
+                                                <div class="cell-item">
+                                                    <span
+                                                        id="1702383622783_dest_stockroom_error_popover"
+                                                        tabindex="-1"
+                                                        class="icon-alert  ng-hide"
+                                                        data-toggle="popover"
+                                                        data-trigger="hover"
+                                                        data-target="#1702383622783_dest_stockroom_error_popover_content"
+                                                        data-placement="top"
+                                                        ng-show="hasErrors()" aria-hidden="true"
+                                                        data-original-title="" title="" style=""></span>
+                                                    <div
+                                                        id="1702383622783_dest_stockroom_error_popover_content"
+                                                        class="error-popover"
+                                                        style="display: none;">
+                                                        <span class="ng-binding"></span>
+                                                    </div>
+                                                </div>
+                                            </multimode-reference-picker> -->
+                                            
+                                            <!-- HAM start -->
+                                                <g:ui_reference name="QUERY:type!=e2aa2b3f3763100044e0bfc8bcbe5dde^ORtypeISEMPTY" table="alm_stockroom" id="QUERY:type==b8e53ae887877510601ab995dabb35ae^ORtypeISEMPTY"/>
+                                            <!-- HAM end -->
+                                        </div>
+                                        <div style="clear: both"></div>
+                                    </div><!--
+                                    end ngRepeat: po in item.purchaseOrders -->
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                        <!--                     <div style="clear: both"></div>-->
+                    </div>
+                </hardware-item-card>
+                
+                </j2:while>
+                <!-- HAM end -->
+                <div ng-repeat="itemRef in requestItems | filter: filterSourcedItems"
+                    class="ng-scope" style=""><!-- ngIf: !isSoftwareItem(itemRef) -->
+                    
+                 
+               
+                    
+                    <!--
+                    end ngIf: !isSoftwareItem(itemRef) --><!--
+                    ngIf: isSoftwareItem(itemRef) -->
+                </div>
+                
+                
+                <!--
+                end ngRepeat: itemRef in requestItems | filter: filterSourcedItems -->
+            </div>
+
+            <div id="src_req_wait_dialog" tabindex="-1" aria-hidden="true" role="dialog"
+                aria-labelledby="wait_dialog_title" class="modal" ng-style="waitDialogStyle"
+                style="display: none;">
+                <div class="modal-dialog modal-sm modal-alert">
+                    <div align="center" class="modal-content">
+                        <header class="modal-header">
+                            <h2 id="wait_dialog_title" class="modal-title ng-binding"
+                                style="font-size: 17px;">Loading data</h2>
+                        </header>
+                        <div class="modal-body" style="margin:25px; height:25px;">
+                            <div>
+                                <i class="icon-loading"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="info_alert" tabindex="-1" aria-hidden="true" class="modal" role="dialog"
+                aria-labelledby="alert_title" ng-style="infoAlertDialogStyle">
+                <div class="modal-dialog modal-sm modal-alert">
+                    <div class="modal-content">
+                        <header class="modal-header">
+                            <h2 id="alert_title" class="modal-title" style="font-size: 17px;">Source
+                                Request</h2>
+                        </header>
+                        <div class="modal-body">
+                            <p class="ng-binding"></p>
+                            <div class="input-group-checkbox pull-right ng-hide"
+                                ng-show="hasLicenseAssignments()" style="margin-top: 15px;"
+                                aria-hidden="true">
+                                <input id="Run_Counter" name="Run_Counter"
+                                    class="checkbox ng-pristine ng-untouched ng-valid ng-empty"
+                                    type="checkbox" ng-model="runCounter" value="false"
+                                    aria-invalid="false" />
+                                <label for="Run_Counter" class="checkbox-label">Run the software
+                                    counters for the associated software models.</label>
+                            </div>
+                        </div>
+                        <footer class="modal-footer flex">
+                            <button data-dismiss="modal" class="btn btn-primary"
+                                ng-click="confirmAlert()">OK</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <hardware-item-card ng-if="!isSoftwareItem(itemRef)" item="itemRef"
+default-destination="defaultDest" destination-stockrooms="destStockrooms"
+po-validator="validatePO(po)" to-validator="validateTO(to)"
+class="ng-scope ng-isolate-scope">
+<div id="main_card_1702383577413" class="item-card">
+    <div id="maincard_header_1702383577413" class="main-card-header">
+        <div id="item_details_col_1702383577413" class="col-sm-5 item-info">
+            <!-- REQUEST ITEM DETAILS -->
+            <div id="item_details_composite_1702383577413" class="col-sm-8">
+                <div style="display:table-row;">
+                    <div id="item_icon_1702383577413" class="item-image">
+                        <img
+                            src="https://dengenetechnologysolutionsusllcdemo3.service-now.com/images/hardware_icon.png"
+                            style="vertical-align: initial;"
+                            alt="Hardware Model" />
+                    </div>
+                    <div id="item_details_1702383577413"
+                        class="item-details">
+                        <div id="item_label_1702383577413"
+                            class="req-item-label ng-binding" role="heading">
+                            InfrastructureHP-PC</div>
+                        <div id="item_number_1702383577413"
+                            class="req-item-more-details ng-binding">
+                            RITM0010110</div>
+                        <div id="total_requested_count_1702383577413"
+                            class="req-item-more-details ng-binding">
+                            Total Requested 2</div>
+                        <div tid="total_requested_for_1702383577413"
+                            class="req-item-more-details ng-binding"
+                            ng-show="hasRequestedFor()" aria-hidden="false">
+                            Requested for Yohanes Debebe</div>
+                    </div>
+                </div>
+            </div>
+            <!-- TO BE SOURCED -->
+            <div id="remain_quant_sec_1702383577413" class="col-sm-4">
+                <div id="source_label_1702383577413"
+                    class="text-center ng-binding" title=""
+                    data-html="false"
+                    data-original-title="Requested quantity to be sourced"> To
+                    be Sourced</div>
+                <div class="header-count-number text-center">
+                    <span id="remain_quantity_1702383577413"
+                        class="count_nums ng-binding">2</span>
+                </div>
+            </div>
+        </div>
+        <div id="order_options_1702383577413" class="col-sm-7 left-divider">
+            <!-- LOCAL ORDER -->
+            <div id="local_sec_1702383577413" class="col-sm-4">
+                <div id="local_card_1702383577413" class="order-card"
+                    ng-show="true" aria-hidden="false">
+                    <div id="local_deatils_1702383577413">
+                        <div id="local_label_1702383577413"
+                            class="text-center ng-binding" title=""
+                            data-html="false"
+                            data-original-title="Local stock available">Local
+                            Stock</div>
+                        <div class="text-center header-count-number-error"
+                            ng-class="{true:'header-count-number', false:'header-count-number-error'} [enoughLocalStock()]"
+                            style="">
+                            <span id="local_stock_acount_1702383577413"
+                                class="count_nums ng-binding">0</span>
+                        </div>
+                    </div>
+                    <div id="local_order_section_1702383577413"
+                        class="dropdown text-center">
+                        <button type="button"
+                            id="local_order_action_1702383577413"
+                            ng-disabled="!hasLocalStocks()"
+                            class="btn btn-primary action_button ng-binding"
+                            aria-description="Upon clicking the consume button of local stock a new row in stock order table will appear"
+                            ng-click="addLocalOrder()" disabled="disabled">
+                            Consume</button>
+                    </div>
+                </div>
+            </div>
+            <!-- TRANSFER ORDERS -->
+            <div id="transfer_sec_1702383577413" class="col-sm-4">
+                <div id="transfer_card_1702383577413" class="order-card"
+                    ng-show="true" aria-hidden="false">
+                    <div id="transfer_deatils_1702383577413">
+                        <div id="transfer_label_1702383577413"
+                            class="text-center ng-binding" title=""
+                            data-html="false"
+                            data-original-title="Stock available for transfer">Transferable
+                            Stock</div>
+                        <div class="text-center header-count-number-error"
+                            ng-class="{true:'header-count-number', false:'header-count-number-error'} [enoughTransferStock()]"
+                            style="">
+                            <span id="transfer_stock_acount_1702383577413"
+                                class="count_nums ng-binding">0</span>
+                        </div>
+                    </div>
+                    <div id="transfer_order_section_1702383577413"
+                        class="dropdown text-center">
+                        <button type="button"
+                            id="transfer_order_action_1702383577413"
+                            ng-disabled="!hasTransferStocks()"
+                            class="btn btn-primary action_button ng-binding"
+                            aria-description="Upon clicking the transfer button a new row in transfer order table will appear"
+                            ng-click="addTransferOrder()"
+                            disabled="disabled">Transfer</button>
+                    </div>
+                </div>
+            </div>
+            <!-- PURCHASE ORDERS -->
+            <div id="purchase_sec_1702383577413" class="col-sm-4">
+                <div id="purchase_card_1702383577413" class="order-card"
+                    ng-show="true" aria-hidden="false">
+                    <div id="purchase_deatils_1702383577413">
+                        <div id="purchase_label_1702383577413"
+                            class="text-center ng-binding" title=""
+                            data-html="false"
+                            data-original-title="Purchase requested items">Vendor
+                            Purchase</div>
+                        <div class="header-count-number text-center">
+                            <span id="purchase_acount_1702383577413"
+                                class="count_nums ng-binding">2</span>
+                        </div>
+                    </div>
+                    <div id="purchase_order_section_1702383577413"
+                        class="dropdown text-center">
+                        <!-- HAM Commented <button type="button"
+                            id="purchase_order_action_1702383577413"
+                            ng-disabled="!hasVendors()"
+                            class="btn btn-primary action_button ng-binding"
+                            aria-description="Upon clicking the purchase button a new row in purchase order table will appear"
+                            ng-click="addPurchaseOrder()">Purchase</button> -->
+                            <g2:ui_checkbox id="consolidate" name="consolidate" value="false"  class="checkbox" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div id="orders_container_1702383577413" class="order-container">
+        <!-- LOCAL ORDER -->
+        <div id="local_order_lines_1702383577413" ng-show="hasLocalOrders()"
+            role="table" aria-hidden="true" class="ng-hide" style="">
+            <div id="lo_line_header_1702383577413"
+                class="table-title-header ng-binding" role="rowgroup">
+                Local Order (0)
+            </div>
+            <div id="lo_line_table_header_1702383577413"
+                class="row table-line" role="row">
+                <label id="lo_source_label_1702383577413"
+                    class="col-sm-4 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="1">Source Stockroom</label>
+                <label id="lo_instock_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="2">In Stock</label>
+                <label id="lo_quantity_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="3">Consume Quantity</label>
+                <label id="lo_reserved_for_label_1702383577413"
+                    class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                    role="columnheader" aria-colindex="4">Reserved for</label>
+            </div>
+            <div id="lo_line_table_body_1702383577413">
+                <!-- ngRepeat: lo in item.localOrders -->
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <!-- TRANSFER ORDERS -->
+        <div id="transfer_order_lines_1702383577413"
+            ng-show="hasTransferOrders()" role="table" aria-hidden="true"
+            class="ng-hide">
+            <div id="to_line_header_1702383577413"
+                class="table-title-header ng-binding" role="rowgroup">
+                Transfer Order (0)
+            </div>
+            <div id="to_line_table_header_1702383577413"
+                class="row table-line" role="row">
+                <label id="to_source_label_1702383577413"
+                    class="col-sm-4 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="1">Source Stockroom</label>
+                <label id="to_instock_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="2">In Stock</label>
+                <label id="to_quantity_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="3">Transfer Quantity</label>
+                <label id="to_destination_label_1702383577413"
+                    class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                    role="columnheader" aria-colindex="4">Destination
+                    Stockroom</label>
+            </div>
+            <div id="to_line_table_body_1702383577413">
+                <!-- ngRepeat: to in item.transferOrders -->
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <!-- PURCHASE ORDERS -->
+        <div id="purchase_order_lines_1702383577413"
+            ng-show="hasPurchaseOrders()" role="table" aria-hidden="false"
+            class="" style="">
+            <div id="po_line_header_1702383577413"
+                class="table-title-header ng-binding" role="rowgroup">
+                Purchase Order (0)
+            </div>
+            <div id="po_line_table_header_1702383577413" role="row">
+                <label id="po_vendor_label_1702383577413"
+                    class="col-sm-4 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="1">Vendor</label>
+                <label id="po_outstock_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="2">Out Of Stock</label>
+                <label id="po_quantity_label_1702383577413"
+                    class="col-sm-2 to-table-head ng-binding"
+                    role="columnheader" aria-colindex="3">Quantity</label>
+                <label id="po_destination_label_1702383577413"
+                    class="col-sm-4 to-table-head to-table-head-last ng-binding"
+                    role="columnheader" aria-colindex="4">Destination
+                    Stockroom</label>
+            </div>
+            <div id="po_line_table_body_1702383577413">
+                <!-- ngRepeat: po in item.purchaseOrders -->
+                <div aria-label="Purchase order line"
+                    ng-repeat="po in item.purchaseOrders"
+                    ng-click="setEditableRow(po)" role="row"
+                    class="ng-scope" tabindex="0" style="">
+                    <div class="col-sm-4 to-table-row" role="cell">
+                        <!-- Vendor -->
+                        <span aria-label="Delete purchase order line"
+                            class="icon-delete cell-item row-remove-icon"
+                            ng-click="removePO(po)" title=""
+                            data-original-title="Delete purchase order line"
+                            role="button" tabindex="0"></span>
+                        <!-- HAM Commented <multimode-select id="vendor_1702383622783"
+                            aria-labelledby="po_vendor_label_1702383577413"
+                            options="vendors"
+                            options-query="vendorQuery(query)" item-model=""
+                            ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po, item.vendorReadOnly.purchase)]"
+                            select-value="po.vendor"
+                            on-select="onPOVendorSelect(po)"
+                            edit-mode="true" placeholder="Select vendor"
+                            errors="po.errors['vendor']"
+                            name-field="display_name" detail-field="cost"
+                            value-field="catItemSysid"
+                            detail-message-formatter="vendorOptionFormatter(v)"
+                            class="ng-isolate-scope cell-item-composite"
+                            style="">
+                            <div id="vendor_1702383622783_select_text"
+                                ng-show="!isEditMode()"
+                                class="clickable ng-hide" aria-hidden="true"
+                                style="">
+                                <label
+                                    class="non-editable-element clickable-element ng-binding"></label>
+                            </div>
+                            <div class="editable-cell"
+                                ng-show="isEditMode()" aria-hidden="false">
+                                <div
+                                    class="select2-container form-control select2 ng-pristine ng-untouched ng-valid ng-empty"
+                                    id="s2id_vendor_1702383622783_select"
+                                    style="transition-delay: -0.15s;"
+                                    role="none">
+                                    <input
+                                        class="select2-focusser select2-offscreen"
+                                        type="text" role="combobox"
+                                        aria-expanded="false"
+                                        aria-controls="select2-drop"
+                                        aria-labelledby="select2-chosen-1"
+                                        id="s2id_autogen1" />
+                                    <a href="javascript:void(0)"
+                                        class="select2-choice select2-default"
+                                        tabindex="-1" aria-hidden="true"
+                                        role="button">
+                                        <span class="select2-chosen"
+                                            id="select2-chosen-1">Select
+                                            vendor</span>
+                                        <span class="select2-arrow"
+                                            aria-hidden="true">
+                                            <b></b>
+                                        </span>
+                                    </a>
+                                    <abbr role="button"
+                                        class="select2-search-choice-close"
+                                        tabindex="0"></abbr>
+                                    <div
+                                        class="select2-drop select2-display-none select2-with-searchbox">
+                                        <div class="select2-search">
+                                            <label
+                                                for="s2id_autogen1_search"
+                                                class="select2-offscreen"></label>
+                                            <input type="text"
+                                                autocomplete="off"
+                                                autocorrect="off"
+                                                autocapitalize="off"
+                                                spellcheck="false"
+                                                class="select2-input"
+                                                role="combobox"
+                                                aria-expanded="true"
+                                                aria-autocomplete="list"
+                                                aria-owns="select2-results-1"
+                                                id="s2id_autogen1_search"
+                                                placeholder="" />
+                                        </div>
+                                        <ul class="select2-results"
+                                            role="listbox"
+                                            aria-label="select2-results"
+                                            id="select2-results-1"> </ul>
+                                    </div>
+                                </div>
+                                <input type="hidden"
+                                    id="vendor_1702383622783_select"
+                                    ng-class="{'has-error': hasErrors()}"
+                                    class="form-control select2 ng-pristine ng-untouched ng-valid select2-offscreen ng-empty"
+                                    ng-model="selectedItemSysid"
+                                    autocomplete="off" aria-invalid="false"
+                                    style="" tabindex="-1" title=""
+                                    aria-hidden="true" />
+                            </div>
+                            <div class="cell-item" style="">
+                                <span
+                                    id="vendor_1702383622783_error_popover"
+                                    tabindex="-1"
+                                    class="icon-alert  ng-hide"
+                                    data-toggle="popover"
+                                    data-trigger="hover"
+                                    data-target="#vendor_1702383622783_error_popover_content"
+                                    data-placement="top"
+                                    ng-show="hasErrors()" aria-hidden="true"
+                                    style="" data-original-title="" title=""></span>
+                                <div
+                                    id="vendor_1702383622783_error_popover_content"
+                                    class="error-popover"
+                                    style="display: none;">
+                                    <span class="ng-binding"></span>
+                                </div>
+                            </div>
+                        </multimode-select> -->
+
+                    </div>
+                    <div class="col-sm-2 to-table-row" role="cell">
+                        <!-- Out of Stock -->
+                        <label
+                            aria-labelledby="po_outstock_label_1702383577413"
+                            class="non-editable-element cell-item ng-binding">
+                            N/A</label>
+                    </div>
+                    <div class="col-sm-2  to-table-row"
+                        id="po_purchase_quant_1702383622783" role="cell">
+                        <!-- Quantity -->
+                        <quantity-input id="1702383622783_quan"
+                            aria-labelledby="po_quantity_label_1702383577413"
+                            quantity="po.purchaseQuantity"
+                            on-change="handlePOQuantityChange(po)"
+                            ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po)]"
+                            edit-mode="true"
+                            errors="po.errors['purchaseQuantity']"
+                            class="ng-isolate-scope cell-item-composite"
+                            style="">
+                            <div ng-show="!isEditMode()" aria-hidden="false">
+                                <label
+                                    class="non-editable-element clickable-element ng-binding">
+                                    N/A</label>
+                                <!--    <i class="icon-arrow-down-triangle
+                                read-only-caret"
+                                ng-show="isSelect()"></i>-->
+                            </div>
+                            <div class="editable-cell ng-hide"
+                                ng-show="isEditMode()" aria-hidden="true"
+                                style="">
+                                <input
+                                    class="quantity_input ng-pristine ng-untouched ng-valid editable-element editable-input ng-empty"
+                                    ng-class="{false:'editable-element editable-input', true:'editable-element editable-input has-error'} [hasErrors()]"
+                                    ng-blur="onChangeWrapper()"
+                                    sn-enter="onChangeWrapper()"
+                                    ng-model="quantity" numbers-only=""
+                                    aria-label="Quantity"
+                                    aria-invalid="false" style="" />
+                            </div>
+                            <div class="cell-item"
+                                style="margin-bottom: 10px;">
+                                <span id="1702383622783_quan_error_popover"
+                                    tabindex="-1"
+                                    class="icon-alert  ng-hide"
+                                    data-toggle="popover"
+                                    data-trigger="hover"
+                                    data-target="#1702383622783_quan_error_popover_content"
+                                    data-placement="top"
+                                    ng-show="hasErrors()" aria-hidden="true"
+                                    style="" data-original-title="" title=""></span>
+                                <div
+                                    id="1702383622783_quan_error_popover_content"
+                                    class="error-popover"
+                                    style="display: none;">
+                                    <span class="ng-binding"></span>
+                                </div>
+                            </div>
+                        </quantity-input>
+                    </div>
+                    <div class="col-sm-4 to-table-row to-table-row-last"
+                        id="po_dest_stockroom_1702383622783" role="cell">
+                        <!-- Destination -->
+                        
+                        <!-- HAM Commented <multimode-reference-picker
+                            id="1702383622783_dest_stockroom"
+                            aria-labelledby="po_destination_label_1702383577413"
+                            ng-class="{true:'cell-item-composite', false:'cell-item-composite clickable'} [isEditMode(po, item.destReadOnly.purchase)]"
+                            select-value="po.destination"
+                            display-column="name" ref-table="alm_stockroom"
+                            ed="stockroomPurchaseEd"
+                            sn-options="stockroomOptions" edit-mode="true"
+                            errors="po.errors['destination']"
+                            style="width: 100%;"
+                            class="ng-isolate-scope cell-item-composite">
+                            <div
+                                id="1702383622783_dest_stockroom_select_text"
+                                ng-show="!isEditMode()" aria-hidden="true"
+                                class="ng-hide" style="">
+                                <label
+                                    class="non-editable-element clickable-element ng-binding"></label>
+                                
+                            </div>
+                            <div class="editable-cell"
+                                ng-show="isEditMode()" aria-hidden="false">
+                                <div
+                                    class="select2-container select2-reference form-control cell-item ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-form-element"
+                                    id="s2id_autogen2"
+                                    style="min-width: 150px; opacity: 1; width: 100%;"
+                                    role="none">
+                                    <input
+                                        class="select2-focusser select2-offscreen"
+                                        type="text" role="combobox"
+                                        aria-expanded="false"
+                                        aria-controls="select2-drop"
+                                        aria-labelledby="select2-chosen-3"
+                                        id="s2id_autogen3" />
+                                    <a href="javascript:void(0)"
+                                        class="select2-choice select2-default"
+                                        tabindex="-1" aria-hidden="true"
+                                        role="button">
+                                        <span class="select2-chosen"
+                                            id="select2-chosen-3">Select
+                                            destination stockroom</span>
+                                        <span class="select2-arrow"
+                                            aria-hidden="true">
+                                            <b></b>
+                                        </span>
+                                    </a>
+                                    <abbr role="button"
+                                        class="select2-search-choice-close"
+                                        tabindex="0"></abbr>
+                                    <div
+                                        class="select2-drop select2-display-none select2-with-searchbox">
+                                        <div class="select2-search">
+                                            <label
+                                                for="s2id_autogen3_search"
+                                                class="select2-offscreen"></label>
+                                            <input type="text"
+                                                autocomplete="off"
+                                                autocorrect="off"
+                                                autocapitalize="off"
+                                                spellcheck="false"
+                                                class="select2-input"
+                                                role="combobox"
+                                                aria-expanded="true"
+                                                aria-autocomplete="list"
+                                                aria-owns="select2-results-3"
+                                                id="s2id_autogen3_search"
+                                                placeholder="" />
+                                        </div>
+                                        <ul class="select2-results"
+                                            role="listbox"
+                                            aria-label="select2-results"
+                                            id="select2-results-3"> </ul>
+                                    </div>
+                                </div>
+                                <input type="text" name=""
+                                    ng-disabled="snDisabled"
+                                    style="min-width: 150px; opacity: 1;"
+                                    ng-model="field.displayValue"
+                                    sn-atf-settable="true"
+                                    sn-atf-component-value=""
+                                    sn-atf-data-type="reference"
+                                    sn-atf-data-type-params="{&quot;reference&quot; : &quot;alm_stockroom&quot;, &quot;reference_qual&quot; : &quot;&quot;, &quot;valueField&quot; : &quot;sys_id&quot;, &quot;displayField&quot; : &quot;name&quot;}"
+                                    ng-attr-sn-atf-disabled="{{ snDisabled || undefined }}"
+                                    class="form-control cell-item ng-pristine ng-untouched ng-valid ng-isolate-scope select2-offscreen ng-empty"
+                                    field="selectValue"
+                                    display-column="name"
+                                    ref-table="refTable" ed="ed"
+                                    sn-options="snOptions"
+                                    allow-clear="false"
+                                    sn-on-change="onSelectionChange()"
+                                    ng-class="{'has-error' : hasErrors()}"
+                                    ng-change="onSelectChange()"
+                                    aria-hidden="true" aria-invalid="false"
+                                    tabindex="-1" title="" />
+                            </div>
+                            <div class="cell-item">
+                                <span
+                                    id="1702383622783_dest_stockroom_error_popover"
+                                    tabindex="-1"
+                                    class="icon-alert  ng-hide"
+                                    data-toggle="popover"
+                                    data-trigger="hover"
+                                    data-target="#1702383622783_dest_stockroom_error_popover_content"
+                                    data-placement="top"
+                                    ng-show="hasErrors()" aria-hidden="true"
+                                    data-original-title="" title="" style=""></span>
+                                <div
+                                    id="1702383622783_dest_stockroom_error_popover_content"
+                                    class="error-popover"
+                                    style="display: none;">
+                                    <span class="ng-binding"></span>
+                                </div>
+                            </div>
+                        </multimode-reference-picker> -->
+                        
+                        <!-- HAM start -->
+                            <g:ui_reference name="QUERY:type!=e2aa2b3f3763100044e0bfc8bcbe5dde^ORtypeISEMPTY" table="alm_stockroom" id="QUERY:type==b8e53ae887877510601ab995dabb35ae^ORtypeISEMPTY"/>
+                        <!-- HAM end -->
+                    </div>
+                    <div style="clear: both"></div>
+                </div><!--
+                end ngRepeat: po in item.purchaseOrders -->
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <!--                     <div style="clear: both"></div>-->
+</div>
+</hardware-item-card> -->

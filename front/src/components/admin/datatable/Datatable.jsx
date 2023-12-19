@@ -55,8 +55,7 @@ export default function Datatable({headers, rows, title}) {
             width: "fit-content",
           }
          }
-        rows={rows
-        }
+        rows={rows}
       
         columns={headers}
         // columns={headers.concat(actionColumn)}

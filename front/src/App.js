@@ -38,6 +38,8 @@ import AuthProvider , { useAuth } from "./utility/context/auth";
 
 import CartProvider , { useCart } from "./utility/context/cart";
 import DarkModeProvider from "./utility/context/darkMode";
+import TableProvider , { useTable } from "./utility/context/table";
+
 
 function App() {
 
@@ -57,6 +59,9 @@ function App() {
      <AuthProvider>
       <CartProvider>
         <DarkModeProvider>
+          <TableProvider>
+
+        
       <Routes>
         <Route path="/" element={ <Home />} /> 
         <Route  path="/products/:category" element={<ProductList />} /> 
@@ -87,6 +92,7 @@ function App() {
             </Route>
         </Route>
       </Routes>
+      </TableProvider>
       </DarkModeProvider>
 
       </CartProvider>
