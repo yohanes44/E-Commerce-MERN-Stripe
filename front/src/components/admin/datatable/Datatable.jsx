@@ -66,6 +66,9 @@ export default function Datatable({headers, rows, title}) {
             paginationModel: { page: 0, pageSize: 9 },
           },
         }}
+        onRowClick={(event) => {
+          console.log({event});
+        }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
       />

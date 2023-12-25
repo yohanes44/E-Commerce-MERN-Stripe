@@ -92,115 +92,6 @@ function Product() {
             try{
 
 
-    //                 let productQuery = gql`
-    //                 query product($id: Int!) {
-    //                     product(id: $id) {
-    //                            id, 
-    //                            name,
-    //                            desc,
-    //                            img,
-    //                            brand,
-    //                            isActive,
-    //                            price,
-    //                            variation{
-    //                             id,
-    //                             color,
-    //                             size
-    //                            },
-    //                            category{
-    //                             id,
-    //                             name
-    //                            }
-
-    //                 }}
-    //               `;
-
-    //               let productVariables = { id: productId }; // Define your variable object
-    //             //    dotWalkField = "products";
-    //                let productResponse =   await request(backEndGraphQLURL, productQuery, productVariables);
-    //             //   console.log({response});
-    //                setProduct(productResponse.product);
-
-    //                   setHeaders([
-    //     {
-    //         field: 'id',
-    //         numeric: true,
-    //         headerName: "Id",
-    //     },
-    //       {
-    //         field: 'color',
-    //         numeric: false,
-    //         width: 150,
-    //         disablePadding: false,
-    //         headerName: 'Color',
-           
-    //       },
-    //       {
-    //         field: 'quantity',
-    //         numeric: false,
-    //         width: 200,
-    //         disablePadding: false,
-    //         headerName: 'Quantity',
-    //       },
-    //       {
-    //         field: 'img',
-    //         numeric: false,
-    //         disablePadding: false,
-    //         label: 'Image',
-    //         renderCell: (params) => <div style={{
-    //             // border: "2px solid red"
-    //         }} >
-    //             <img style={{
-    //                 display: "flex",
-    //                 justifyContent: "center",
-    //                 alignItems: "center",
-    //                 width: "40px",
-    //                 height: "40px",
-    //                 borderRadius: "50%"
-    //             }} src={params.value}/>
-    //         </div>,
-
-    //       },
-    // ])
-
-
-    //                let productVariationQuery = gql`
-    //                query productVariation($id: Int!) {
-    //                 productVariation(id: $id) {
-    //                     id,
-    //                     color,
-    //                     img,
-    //                     quantity
-    //                }}
-    //              `;
-
-                 
-    //              let productVariationVariables = { id: productId }; // Define your variable object
-    //              //    dotWalkField = "products";
-    //                 let productVariationResponse =   await request(backEndGraphQLURL, productVariationQuery, productVariationVariables);
-    //              //   console.log({response});
-    //              setProductVariations(productVariationResponse.productVariation);
-                
-
-    //  let temp = productVariationResponse.productVariation.map( (obj) => {
-    //    let newObj = {};
-       
-    //    newObj.id = obj.id;
-    //    newObj.color = obj.color;
-    //    newObj.img = obj.img;
-    //    newObj.quantity = obj.quantity
-    //    // newObj.user = `${obj.user.email}`;
-    //    return newObj;
-    // })
-
-    // productVariationResponse.productVariation =  temp;
-    // setRows(temp);
-
-    //     console.log({temp});
-
-            
-
-
              let productQuery = gql`
                     query orderedCartItemsOrderedByOrderId{
                         orderedCartItemsOrderedByOrderId{
@@ -211,8 +102,7 @@ function Product() {
                              orderId,
                              state,
                              quantity,
-                            ,
-                         user{
+                             user{
                            id, 
                            firstName,
                            lastName,
@@ -249,9 +139,9 @@ function Product() {
                     }}
                   `;
 
-                //   let productVariables = { id: productId }; // Define your variable object
-                //    dotWalkField = "products";
-                   let response =   await request(backEndGraphQLURL, productQuery);
+            let response =   await request(backEndGraphQLURL, productQuery);
+            
+      
 
                    const groupByArray = (array, key) => {
                     return Object.entries(array.reduce((result, item) => {
@@ -264,7 +154,7 @@ function Product() {
 
 
                   const groupedData = groupByArray(response.orderedCartItemsOrderedByOrderId, 'orderId');
-                  console.log({groupedData});
+                
                   setOrders(groupedData);
                 //    setProduct(productResponse.product);
 
@@ -272,12 +162,12 @@ function Product() {
 
 }
             catch(err){
-                console.log(err.message);
+                console.log(err);
             }
         }
 
         fetchData();
-    }, [productId])
+    }, [])
 
 
     return (
@@ -285,6 +175,10 @@ function Product() {
             <Sidebar />
             <div className="productContainer2">
                 <Navbar />
+                <h1>Orders here</h1>
+                {/* {
+                <h1>${orders}</h1>
+                } */}
                 <div className="orders">
 
                     {

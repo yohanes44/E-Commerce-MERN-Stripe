@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./sidebar.scss";
 
@@ -19,16 +19,27 @@ import {
 
 import { Link } from "react-router-dom";
 import { useDarkMode } from "../../../utility/context/darkMode"
-
+import { useLocation, useHistory, useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
 
   const {darkMode, setDarkMode} = useDarkMode();
+  const navigate = useNavigate();
+
+  // const [currentRoute, setCurrentRoute] = useState("");
+
+  const location = useLocation();
 
   return (
     <div className="sidebar" >
       <div className="wrapper">
         <div className="top">
+          {/* <div onClick={(e)=> {
+            location.history.push('/new-route');
+          } }>
+              Admin Panel
+          </div> */}
           <Link to="/adminPanel" style={{textDecoration: "none"}}>
           <div className="logo">Admin Panel</div>
         
@@ -46,12 +57,20 @@ function Sidebar() {
             </Link>
 
             <p className="title">Lists</p>
-            <Link to="/adminPanel/users" style={{textDecoration: "none"}}>
+            {/* <Link to="/adminPanel/users" style={{textDecoration: "none"}}>
               <li>
                 <PersonOutline className="icon" />
                 <span>Users</span>
               </li>
-            </Link>
+            </Link> */}
+            {/* <Link to="/adminPanel/users" style={{textDecoration: "none"}}> */}
+              <li onClick={(e)=> {
+             navigate('/adminPanel/users');
+          } }>
+                <PersonOutline className="icon" />
+                <span>Users</span>
+              </li>
+            {/* </Link> */}
 
             <Link to="/adminPanel/products" style={{textDecoration: "none"}}>
               <li>

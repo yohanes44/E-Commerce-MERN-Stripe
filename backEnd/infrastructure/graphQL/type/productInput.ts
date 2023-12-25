@@ -19,7 +19,7 @@ import  graphql, {
 import { GraphQLJSON } from 'graphql-type-json'; // Import the JSON type
 
 export default new GraphQLInputObjectType({
-    name: 'ProductInput',
+    name: 'ProductInputType',
     fields: {
         name: { type: GraphQLString },
         desc: { type: GraphQLString },

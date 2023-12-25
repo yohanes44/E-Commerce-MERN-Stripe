@@ -55,78 +55,35 @@ export default function ListAdmin() {
    const [headers, setHeaders] = useState([]);
 
    const [rows, setRows] = useState([]);
+   const [rowsBackUp, setRowsBackUp] = useState([]);
+
 
   const navigate = useNavigate();
 
   const location = useLocation();
-  const listType = location.pathname.split("/")[2]
+  
 
   // const [headers, setHeaders] = useState([]);
   const [refetcher, setRefetcher] = useState(false);
   const [customRows, setCustomRows] = useState([]);
 
-  async function deleteUser(id) {
-    try {
-      const deleteUserMutation = gql`
-        mutation deleteUser($id: Int!) {
-          deleteUser(id: $id) {
-            id
-          }
-        }
-      `;
-      const variables = { id: parseInt(id) };
-      let responseLogin = await request(backEndGraphQLURL, deleteUserMutation, variables);
+  let listType = location.pathname.split("/")[2];
+  
 
-      setRefetcher(true);
-    }
-    catch (err) {
-      console.log(err.message);
-    }
-  }
-
-
-  async function deleteProduct(id) {
-
-
-    try {
-      console.log({ deleteProductId: id });
-
-      const deleteProductMutation = gql`
-        mutation deleteProduct($id: Int!) {
-          deleteProduct(id: $id) {
-            id
-          }
-        }
-      `;
-      const variables = { id: parseInt(id) };
-      let responseLogin = await request(backEndGraphQLURL, deleteProductMutation, variables);
-      console.log({ responseLogin });
-
-      setRefetcher(true);
-    }
-    catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  // const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    console.log("test 112233");
+
+
+    // alert("listType == "+ listType);
 
     const fetchData = async () => {
-      // console.log({listType});
-
       try {
 
-        let query = null;
-        let variables = null;
-        let dotWalkField = null;
-        let response = null;
+    
 
         if (listType == "users") {
 
-          query = gql`
+          let query = gql`
                 {
                   users{
                     id,
@@ -136,9 +93,9 @@ export default function ListAdmin() {
                   }
                 }
               `
-          dotWalkField = "users";
+          let dotWalkField = "users";
 
-          response = await request(backEndGraphQLURL, query);
+          let response = await request(backEndGraphQLURL, query);
 
           let customRw = [];
           
@@ -150,21 +107,26 @@ export default function ListAdmin() {
                 {
                   name: "id",
                   value: row.id,
+                  editable: false
                 },
                 {
                   name: "email",
                   value: row.email,
+                  editable: true
                 },
                 {
                   name: "firstName",
                   value: row.firstName,
+                  editable: true
                 },
                 {
                   name: "lastName",
                   value: row.lastName,
+                  editable: true
                 },
               ],
             };
+
             customRw.push(arr);
           });
           
@@ -173,59 +135,10 @@ export default function ListAdmin() {
         }
 
         if (listType == "products") {
-          // setHeaders([
-          //   {
-          //     field: 'id',
-          //     numeric: true,
-          //     headerName: "Id",
-
-          //   },
-          //   {
-          //     field: 'name',
-          //     numeric: false,
-          //     disablePadding: false,
-          //     headerName: 'Name',
-
-          //   },
-          //   {
-          //     field: 'desc',
-          //     numeric: false,
-          //     disablePadding: false,
-          //     headerName: 'Description',
-          //   },
-          //   {
-          //     field: 'brand',
-          //     numeric: false,
-          //     disablePadding: false,
-          //     width: 250,
-          //     label: 'Brand',
-          //   },
-          //   {
-          //     field: "action",
-          //     headerName: "Action",
-          //     width: 200,
-          //     renderCell: (params) => {
-          //       return (<div className="cellAction">
-          //         <Link to={`/adminPanel/products/${params.row.id}`} style={{ textDecoration: "none" }}>
-          //           {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
-
-          //           <div className="viewButton">
-          //             View
-          //           </div>
-          //         </Link>
-          //         <div className="deleteButton" onClick={(e) => {
-          //           deleteProduct(params.row.id)
-          //         }}>
-          //           Delete
-          //         </div>
-          //       </div>)
-          //     }
-          //   }
-          // ])
           let selectedFilter = {};
           let category = "";
 
-          query = gql`
+          let query = gql`
               query products($category: String!, $selectedFilter: ProductFilterInput!) {
                   products(category: $category, selectedFilter: $selectedFilter) {
                          id, 
@@ -245,19 +158,10 @@ export default function ListAdmin() {
                           }
               }}
             `;
-          variables = { category, selectedFilter }; // Define your variable object
-          dotWalkField = "products";
-          response = await request(backEndGraphQLURL, query, variables);
-          console.log({response});
-    
-          // let newResponse = response[dotWalkField].map((obj) => {
-          //   obj.id = parseInt(obj.id);
-          //   return obj
-          //   // console.log({obj});
-          // })
-          // //  console.log({newResponse});
-          // setRows(newResponse);
-
+          let variables = { category, selectedFilter }; // Define your variable object
+          let dotWalkField = "products";
+          let response = await request(backEndGraphQLURL, query, variables);
+  
           let customRw = [];
           
           response[dotWalkField].map((row, id) => {
@@ -268,59 +172,72 @@ export default function ListAdmin() {
                 {
                   name: "id",
                   value: row.id,
+                  editable: false
                 },
                 {
                   name: "name",
                   value: row.name,
+                  editable: true
                 },
                 {
                   name: "desc",
                   value: row.desc,
+                  editable: true
+
                 },
                 {
                   name: "price",
                   value: row.price,
+                  editable: true
                 },
                 {
                   name: "category",
                   value: row.category.name,
+                  editable: false
                 },
               ],
             };
             customRw.push(arr);
           });
           
-          console.log({customRw});
+    
 
           setRows(customRw);
+        
         }
 
       }
       catch (err) {
-        console.log(err.message);
+        console.log(err);
       }
 
     }
 
     fetchData();
 
-  }, [])
+  }, [listType])
+
+ 
+
 
 useEffect(()=>{
   
   let dynamicHeaders = (rows.length > 0) ? rows[0].content.map( (rw) => {
-   
+    
     return {
       field: rw.name,
       headerName: rw.name,
       width: 230,
       renderCell: (params) => {
+
        const foundRow = rows.find((row) => row.id == params.row.id);
-        const foundField = foundRow.content.find((field) => field.name == params.field);
+
+       const foundField = foundRow?.content.find((field) => field.name == params.field);
+
        return (
           <div className="cellAction" style={{ display: "flex", flexDirection: "column" }}>
-            {foundRow.visibility ? null: <div>{foundField.value}</div> }
-            {foundRow.visibility ? <input type='text' value={foundField.value} 
+            {foundRow?.visibility ? null: <div>{foundField?.value}</div> }
+            {foundRow?.visibility ? <input type='text' value={foundField?.value} disabled={!foundField?.editable} 
             onChange={(e) => {
                handleChange(e.target.value, params.row.id, params.field)
             }} /> : null}
@@ -340,7 +257,7 @@ useEffect(()=>{
           {/* <Link to={`/adminPanel/${listType}/${params.row.id}`} style={{textDecoration: "none"}}> */}
           {
             (!params.row.visibility) ? 
-            <><Link to={`/adminPanel/users/${params.row.id}`} style={{ textDecoration: "none" }}>
+            <><Link to={`/adminPanel/${listType}/${params.row.id}`} style={{ textDecoration: "none" }}>
             <div style={{
               // color: "red",
               cursor: "pointer"
@@ -393,37 +310,236 @@ useEffect(()=>{
 
 }, [rows])
 
+  const fetchOriginal = async ()=>{
+    try{
+      let selectedFilter = {};
+      let category = "";
+
+      let query = gql`
+          query products($category: String!, $selectedFilter: ProductFilterInput!) {
+              products(category: $category, selectedFilter: $selectedFilter) {
+                     id, 
+                     name, 
+                     desc,
+                     brand,
+                     price,
+                     category{
+                      id, 
+                      name
+                     },
+                     variation{
+                          id,
+                          img, 
+                          color,
+                          size
+                      }
+          }}
+        `;
+        let variables = { category, selectedFilter }; // Define your variable object
+        let dotWalkField = "products";
+        let response = await request(backEndGraphQLURL, query, variables);
+  
+
+      let customRw = [];
+      
+      response[dotWalkField].map((row, id) => {
+        let arr = {
+          id: row.id,
+          visibility: false,
+          content: [
+            {
+              name: "id",
+              value: row.id,
+              editable: false
+            },
+            {
+              name: "name",
+              value: row.name,
+              editable: true
+            },
+            {
+              name: "desc",
+              value: row.desc,
+              editable: true
+            },
+            {
+              name: "price",
+              value: row.price,
+              editable: true
+            },
+            {
+              name: "category",
+              value: row.category.name,
+              editable: false
+            },
+          ],
+        };
+        customRw.push(arr);
+      });
+      
+
+      // setRows(customRw);
+      // setRowsBackUp(customRw);
+
+      return customRw;
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  const updateRow = async (type, rowId, rowContent) => {
+    rowId = parseInt(rowId);
+    try{
+
+      if(type == "users"){
+        let input = {};
 
 
-  const handleVisibility = (action, rowId)=>{
+        input.firstName = rowContent.firstName;
+        input.lastName = rowContent.lastName;
+        input.email = rowContent.email;
+
+        const updateUserMutation = gql`
+         mutation updateUser($id: Int!, $input: UserInput) {
+          updateUser(id: $id, input: $input
+          ) {
+            firstName,
+            lastName,
+            email 
+        }
+      }
+    `;
+
+      const variables = { id: parseInt(rowId), input};
+
+      
+
+      let responseLogin =  await request(backEndGraphQLURL,updateUserMutation,variables);
+
+       return responseLogin;
+      }
+      if(type == "products"){
+        let input = {};
+        input.name = rowContent.name;
+        input.desc = rowContent.desc;
+        input.brand = rowContent.brand;
+        input.price = parseInt(rowContent.price);
+
+        const updateProductMutation = gql`
+         mutation updateProduct($id: Int!, $input: ProductInputType) {
+          updateProduct(id: $id, input: $input
+          ) {
+              name,
+              desc,
+              price 
+        }
+      }
+    `;
+
+      const variables = { id: parseInt(rowId), input};
+
+
+
+      let responseLogin =  await request(backEndGraphQLURL,updateProductMutation,variables);
+
+       return responseLogin;
+      }
+      if(type == "order"){
+
+      }
+
+      
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+
+  const handleVisibility = async (action, rowId)=>{
     try{
       let previousRowsState = [...rows];
       let newArr = [...rows];
       let changed;
       if(action == "update"){
+
+        let inputs = {};
+        
         changed = newArr.map( (rw)=>{
-          console.log({rw});
           if(rw.id === rowId){
-            rw.visibility = false;
+            
+            let updatedRw = rw.content.map((re) => {
+              inputs[re.name] = re.value;
+            });
+              rw.visibility = false;
           }
+        
           return rw
         } )
+
+        let up = await updateRow(listType, inputs.id, inputs);
+
+        setRows(changed);
       }
-      if(action == "cancel"){
-        changed = previousRowsState;
+      if(action == "cancel"){        
+        setRows(await fetchOriginal());
       } 
       if(action == "edit"){
         changed = newArr.map( (rw)=>{
-          console.log({rw});
+
           if(rw.id === rowId){
             rw.visibility = true;
           }
           return rw
         } )
+        setRows(changed);
       } 
-      setRows(changed);
+      
     }
     catch(err){
+      console.log(err);
+    }
+  }
+ 
+  async function deleteUser(id) {
+    try {
+      const deleteUserMutation = gql`
+        mutation deleteUser($id: Int!) {
+          deleteUser(id: $id) {
+            id
+          }
+        }
+      `;
+      const variables = { id: parseInt(id) };
+      let responseLogin = await request(backEndGraphQLURL, deleteUserMutation, variables);
+
+      setRefetcher(true);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+
+  async function deleteProduct(id) {
+
+
+    try {
+
+      const deleteProductMutation = gql`
+        mutation deleteProduct($id: Int!) {
+          deleteProduct(id: $id) {
+            id
+          }
+        }
+      `;
+      const variables = { id: parseInt(id) };
+      let responseLogin = await request(backEndGraphQLURL, deleteProductMutation, variables);
+ 
+      setRefetcher(true);
+    }
+    catch (err) {
       console.log(err);
     }
   }
@@ -445,25 +561,8 @@ useEffect(()=>{
       return rw;
     });
 
-
-
-    // console.log({changed});
-    // Find the row in the copied state
     setRows(changed);
-    // const foundRow = newRows.find((row) => row.id === rowId);
-  
-    // // Find the exact field in the row and update its value
-    // const foundField = foundRow.content.find((field) => field.name === fieldName);
-    // Object.defineProperty(foundField, 'myProperty', {
-    //   value: 'initialValue',   // Initial value
-    //   writable: true,           // Allow the property to be written (changed)
-    //   enumerable: true,         // Allow the property to be enumerated
-    //   configurable: true        // Allow the property to be redefined or deleted
-    // });
-    // foundField.value = e.target.value;
-  
-    // Set the state with the updated rows
-    // setRows(newRows);
+
   };
 
   

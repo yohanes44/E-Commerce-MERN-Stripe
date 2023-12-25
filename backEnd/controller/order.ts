@@ -214,16 +214,6 @@ export default class OrderController{
 
     async orderedCartItemsOrderedByOrderId(){
         try{
-            // const order =  await db.cart.groupBy({
-            //     by: ["orderId"],
-            //   });
-
-            //   let allOrders : any = [];
-
-            //   for (const orderGroup of order) {
-            //     const orderId = orderGroup.orderId; // Get the orderId for this group
-            //     // const itemsInOrder = orderGroup.items; // Array of items in this order group
-               
 
                 return await db.cart.findMany({
                     where: {
@@ -234,12 +224,6 @@ export default class OrderController{
                     }
                 });
                 
-            //     //   console.log(or);
-            //       allOrders.push(or);
-            //     }
-            //   console.log(allOrders);
-                
-            //   return allOrders;
         }
         catch(err: any){
             console.log(err);
