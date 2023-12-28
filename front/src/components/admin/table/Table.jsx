@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,7 +16,22 @@ import {
 } from "react-router-dom"
 
 
+import EditIcon from '@mui/icons-material/Edit';
+import BeenhereOutlinedIcon from '@mui/icons-material/BeenhereOutlined';
+  import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+
+import PreviewIcon from '@mui/icons-material/Preview';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
+import { Delete } from '@mui/icons-material'
+import { useGraphQL } from "../../../utility/context/graphQL";
+
 function List( {columns, rows, page} ) {
+  
+  const [rowsLocal, setRowsLocal] = useState([]);
+   
+
+  const { updateRecord, deleteRecord } = useGraphQL();
 
    if(rows.length === 0){
       return null;
@@ -24,6 +39,16 @@ function List( {columns, rows, page} ) {
 
    const keys = Object.keys(rows[0]);
 
+   const updateUser = async (row)=>{
+      try{
+
+        let updated =  await updateRecord("orders", row)
+          
+      }
+      catch(err){
+        console.log(err);
+      }
+  }
 
 
     return (
@@ -36,13 +61,14 @@ function List( {columns, rows, page} ) {
                   return <TableCell className='tableCell'>{col}</TableCell>
                 } )
               }
+
        
               {/* <TableCell className='tableCell'>Product</TableCell>
               <TableCell className='tableCell'>Product Variation</TableCell>
               <TableCell className='tableCell'>Quantity</TableCell>
               <TableCell className='tableCell'>Status</TableCell>
               <TableCell className='tableCell'>Payment method</TableCell> */}
-              {/* <TableCell className='tableCell'>Actions</TableCell> */}
+              <TableCell className='tableCell'>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -62,36 +88,79 @@ function List( {columns, rows, page} ) {
                       </div>
                   </TableCell>
                     }else{
-                     return <TableCell className='tableCell'> {row[key]}</TableCell>
+                     return  false ? <TableCell className='tableCell'> {row[key]}</TableCell>: <TableCell className='tableCell'> <input type='text' value={row[key]} /></TableCell>
+
+                     
                     }
                     } )
                 }
-                   {/* <TableCell className='tableCell'>
-                    <div style={{
-                      display: "flex",
-                      gap: "5%"
-                    }}>
-                        <button style={{
-                          border: "none",
-                          color: "green",
-                          cursor: "pointer"
-                        }}> <Link to={`/adminPanel/${page}/${row.id}`}>View</Link></button>
-                        <button onClick={(e)} style={{
-                          border: "none",
-                          color: "red",
-                          cursor: "pointer"
-                        }}><Link to={`/adminPanel/${page}/${row.id}`}>Delete</Link></button>
-                    </div>
-                </TableCell>  */}
-              
-                
-                {/* <TableCell className='tableCell'>
-                    <div className="cellWrapper">
-                        <img src={row.img} alt="" className="image" />
-                        {row.product}
-                    </div>
+
+
+                <TableCell className='tableCell'> 
+          
+          
+                <div className="cellAction">
+          
+          {
+            true ?  <div className='topAction' style={{display: "flex"}}>
+            <Link to={`/adminPanel/`} style={{ textDecoration: "none" }}>
+              <div style={{
+                // color: "red",
+                cursor: "pointer"
+              }}>
+                <VisibilityIcon />
+              </div>
+            </Link>
+
+          <div style={{
+            cursor: "pointer"
+          }} onClick={(e) => {
+
+          }}>
+
+            <EditIcon />
+          </div>
+
+
+          <div onClick={(e) => {
+          }} style={{
+            color: "red",
+            cursor: "pointer"
+          }}>
+            <Delete />
+          </div>
+          </div> : null
+          }      
+         
+          
+          {
+            false ? <div className='bottomAction'  style={{display: "flex"}}>
+            <div style={{
+              // color: "red",
+              cursor: "pointer"
+            }} onClick={(e) => {
+            }}>
+              <CancelOutlinedIcon />
+            </div>
+            <div onClick={(e) => {
+  
+            }} style={{
+              color: "red",
+              cursor: "pointer"
+            }}>
+                  <BeenhereOutlinedIcon />
+            </div>
+            </div>: null
+          }
+          
+
+
+        </div>
+        <button type='button' onClick={(e) => {
+            updateUser(row); 
+        }}>Save</button>
                 </TableCell>
-                */}
+                   
               </TableRow>
             ))}
           </TableBody>

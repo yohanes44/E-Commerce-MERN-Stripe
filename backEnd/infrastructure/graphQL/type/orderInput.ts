@@ -21,6 +21,7 @@ export default new GraphQLInputObjectType({
     name: 'OrderInput',
     fields: {
         state: { type: GraphQLString },
+        quantity: { type: GraphQLInt },
         userId: { type: GraphQLInt },
         city: { type: GraphQLString },
         sub_city: { type: GraphQLString },

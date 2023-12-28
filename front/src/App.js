@@ -40,6 +40,9 @@ import CartProvider , { useCart } from "./utility/context/cart";
 import DarkModeProvider from "./utility/context/darkMode";
 import TableProvider , { useTable } from "./utility/context/table";
 
+import GraphQLProvider , { updateRecord } from "./utility/context/graphQL";
+
+
 
 function App() {
 
@@ -60,7 +63,7 @@ function App() {
       <CartProvider>
         <DarkModeProvider>
           <TableProvider>
-
+           <GraphQLProvider>
         
       <Routes>
         <Route path="/" element={ <Home />} /> 
@@ -92,6 +95,7 @@ function App() {
             </Route>
         </Route>
       </Routes>
+      </GraphQLProvider>
       </TableProvider>
       </DarkModeProvider>
 

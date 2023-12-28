@@ -178,6 +178,20 @@ useEffect( ()=>{
 }, [userId, refetcher] )
 
 
+
+const mutation = {
+    update: (table, row)=>{
+
+    },
+    delete: (table, row)=>{
+
+    },
+}
+
+
+
+
+
 // console.log({user})
    
   let columns = [
@@ -189,6 +203,7 @@ useEffect( ()=>{
     "Quantity",
     "Date"
   ];
+
 
 
 return (
